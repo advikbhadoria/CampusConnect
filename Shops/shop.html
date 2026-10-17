@@ -19,6 +19,53 @@
 </head>
 <body>
 
+  <!-- ==========================================================================
+       CAMPUS CONNECT GLOBAL NAVIGATION BAR
+       ========================================================================== -->
+  <header style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(226, 232, 240, 0.85); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 0.65rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+      
+      <!-- Brand & Back Action -->
+      <div style="display: flex; align-items: center; gap: 0.85rem;">
+        <button onclick="if(window.history.length>1){window.history.back();}else{window.location.href='../homepage/homepage.html';}" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; border-radius: 9999px; font-size: 12.5px; font-weight: 700; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='#dbeafe'" onmouseout="this.style.background='#eff6ff'">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Back</span>
+        </button>
+
+        <a href="../homepage/homepage.html" style="text-decoration: none; display: flex; align-items: center; gap: 8px;">
+          <div style="width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, #1d4ed8, #2563eb); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px; box-shadow: 0 4px 12px rgba(37,99,235,0.25);">🎓</div>
+          <div>
+            <div style="font-weight: 800; font-size: 15px; color: #0f172a; line-height: 1.2; font-family: 'Plus Jakarta Sans', sans-serif;">Campus Connect</div>
+            <div style="font-size: 10px; font-weight: 700; color: #2563eb; letter-spacing: 0.04em;">AIT PUNE</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav style="display: flex; align-items: center; gap: 4px; overflow-x: auto; scrollbar-width: none; max-width: 65%;">
+        <a href="../homepage/homepage.html" style="text-decoration: none; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; color: #475569; white-space: nowrap;">Home</a>
+        <a href="../Feed/feed.html" style="text-decoration: none; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; color: #475569; white-space: nowrap;">Feeds</a>
+        <a href="../Student-details/student-details.html" style="text-decoration: none; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; color: #475569; white-space: nowrap;">Students</a>
+        <a href="../Faculty directory/faculty-directory.html" style="text-decoration: none; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; color: #475569; white-space: nowrap;">Faculty</a>
+        <a href="../alumini directory/alumini.html" style="text-decoration: none; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; color: #475569; white-space: nowrap;">Alumni</a>
+        <a href="../Clubs/dist/index.html" style="text-decoration: none; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; color: #475569; white-space: nowrap;">Clubs</a>
+        <a href="../Aakriti/aakriti.html" style="text-decoration: none; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; color: #2563eb; white-space: nowrap;">🏆 Aakriti</a>
+        <a href="../Outpass/outpass.html" style="text-decoration: none; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; color: #1d4ed8; white-space: nowrap;">📝 Applications</a>
+        <a href="../Complain/dist/index.html" style="text-decoration: none; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; color: #b45309; white-space: nowrap;">📢 Complaints</a>
+        <span style="padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight: 700; background: #059669; color: #fff; white-space: nowrap; box-shadow: 0 2px 8px rgba(5,150,105,0.25);">🏬 Campus Shops</span>
+        <a href="../Borrow/dist/index.html" style="text-decoration: none; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; color: #1d4ed8; white-space: nowrap;">🤝 Borrow &amp; Share</a>
+      </nav>
+
+      <!-- Right User Session Badge -->
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <div id="shopUserChip" style="display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 9999px; font-size: 12px; font-weight: 600; color: #0f172a;">
+          <span style="width: 7px; height: 7px; border-radius: 50%; background: #10b981;"></span>
+          <span id="shopUserLabel">Snehangshu (22045)</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
   <!-- Ambient Light-Blue Glow Blobs -->
   <div class="ambient-glow-1"></div>
   <div class="ambient-glow-2"></div>

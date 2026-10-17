@@ -59,10 +59,10 @@
   // ─────────────────────────────────────────────────────────────────────────────
   function getPathDepth() {
     const path = window.location.pathname;
-    if (path.includes('/Feed/Profile/') || path.includes('/Clubs/dist/')) {
+    if (path.includes('/Feed/Profile/') || path.includes('/Clubs/dist/') || path.includes('/Complain/dist/') || path.includes('/Borrow/dist/')) {
       return 2;
     }
-    if (path.includes('/Feed/') || path.includes('/Student-details/') || path.includes('/Faculty directory/') || path.includes('/alumini directory/') || path.includes('/homepage/') || path.includes('/Clubs/')) {
+    if (path.includes('/Feed/') || path.includes('/Student-details/') || path.includes('/Faculty directory/') || path.includes('/alumini directory/') || path.includes('/homepage/') || path.includes('/Clubs/') || path.includes('/Complain/') || path.includes('/Borrow/') || path.includes('/Shops/') || path.includes('/Aakriti/') || path.includes('/Outpass/')) {
       return 1;
     }
     return 0;
@@ -70,31 +70,20 @@
 
   function resolveRelPath(target) {
     const depth = getPathDepth();
-    if (depth === 2) {
-      if (target === 'faculty') return '../../Faculty directory/faculty-directory.html';
-      if (target === 'clubs') return '../../Clubs/dist/index.html';
-      if (target === 'student') return '../../Student-details/student-details.html';
-      if (target === 'alumni') return '../../alumini directory/alumini.html';
-      if (target === 'feed') return '../feed.html';
-      if (target === 'profile') return './profile.html';
-      if (target === 'home') return '../../homepage/homepage.html';
-    } else if (depth === 1) {
-      if (target === 'faculty') return '../Faculty directory/faculty-directory.html';
-      if (target === 'clubs') return '../Clubs/dist/index.html';
-      if (target === 'student') return '../Student-details/student-details.html';
-      if (target === 'alumni') return '../alumini directory/alumini.html';
-      if (target === 'feed') return '../Feed/feed.html';
-      if (target === 'profile') return '../Feed/Profile/profile.html';
-      if (target === 'home') return '../homepage/homepage.html';
-    } else {
-      if (target === 'faculty') return './Faculty directory/faculty-directory.html';
-      if (target === 'clubs') return './Clubs/dist/index.html';
-      if (target === 'student') return './Student-details/student-details.html';
-      if (target === 'alumni') return './alumini directory/alumini.html';
-      if (target === 'feed') return './Feed/feed.html';
-      if (target === 'profile') return './Feed/Profile/profile.html';
-      if (target === 'home') return './homepage/homepage.html';
-    }
+    const prefix = depth === 2 ? '../../' : (depth === 1 ? '../' : './');
+    
+    if (target === 'faculty') return prefix + 'Faculty directory/faculty-directory.html';
+    if (target === 'clubs') return prefix + 'Clubs/dist/index.html';
+    if (target === 'student') return prefix + 'Student-details/student-details.html';
+    if (target === 'alumni') return prefix + 'alumini directory/alumini.html';
+    if (target === 'feed') return prefix + 'Feed/feed.html';
+    if (target === 'profile') return prefix + 'Feed/Profile/profile.html';
+    if (target === 'home') return prefix + 'homepage/homepage.html';
+    if (target === 'aakriti') return prefix + 'Aakriti/aakriti.html';
+    if (target === 'outpass') return prefix + 'Outpass/outpass.html';
+    if (target === 'complain') return prefix + 'Complain/dist/index.html';
+    if (target === 'shops') return prefix + 'Shops/index.html';
+    if (target === 'borrow') return prefix + 'Borrow/dist/index.html';
     return '#';
   }
 

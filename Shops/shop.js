@@ -19,7 +19,19 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(updateLiveClock, 1000); // Ticking clock
   renderShops();
   setupToolbarListeners();
+  initUserSession();
 });
+
+function initUserSession() {
+  try {
+    const rawUser = localStorage.getItem('campusConnectUser');
+    const chip = document.getElementById("shopUserLabel");
+    if (rawUser && chip) {
+      const u = JSON.parse(rawUser);
+      if (u.name) chip.textContent = `${u.name} (${u.regNo || '22045'})`;
+    }
+  } catch(e) {}
+}
 
 /**
  * Updates the live clock in header
@@ -348,9 +360,19 @@ function proceedToPayment() {
     };
   }
 
-  // Reset form inputs
-  document.getElementById("custNameInput").value = "";
-  document.getElementById("custPhoneInput").value = "";
+  // Pre-fill form inputs from active session
+  let defaultName = "";
+  let defaultPhone = "";
+  try {
+    const rawUser = localStorage.getItem('campusConnectUser');
+    if (rawUser) {
+      const u = JSON.parse(rawUser);
+      defaultName = u.name || "";
+      defaultPhone = u.phone || "9876543210";
+    }
+  } catch(e) {}
+  document.getElementById("custNameInput").value = defaultName || "Snehangshu Das";
+  document.getElementById("custPhoneInput").value = defaultPhone || "9876543210";
   document.getElementById("upiRefInput").value = "";
 
   paymentModal.classList.add("active");
@@ -422,6 +444,13 @@ function handlePaymentSubmit(event) {
     items: itemSummaries,
     placedAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
   };
+
+  // Dispatch to backend API
+  fetch('/api/shops/order', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(lastPlacedOrder)
+  }).catch(err => console.log('Offline mode:', err));
 
   closePaymentModal();
   showOrderTokenModal(lastPlacedOrder);
