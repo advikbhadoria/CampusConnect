@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Faculty Directory — Campus Connect | Army Institute of Technology (AIT Pune)</title>
+  
+  <!-- Modern Google Fonts: Plus Jakarta Sans, Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  
+  <!-- Font Awesome 6 Pro Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Main Faculty Directory Stylesheet -->
+  <link rel="stylesheet" href="./faculty-directory.css" />
+  <link rel="stylesheet" href="../shared/campus-ai.css" />
+</head>
+<body>
+
+  <!-- ==========================================================================
+       1. Background Creative Animation Canvas (Academic Constellation & Aura Mesh)
+       ========================================================================== -->
+  <div class="ambient-aura-container">
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+  </div>
+  <canvas id="constellationCanvas" class="constellation-canvas"></canvas>
+
+  <!-- ==========================================================================
+       2. Top Navigation Bar (Matching Reference Layout)
+       ========================================================================== -->
+  <header class="top-navbar">
+    <div class="nav-container">
+      
+      <!-- Brand Logo -->
+      <a href="../homepage/homepage.html" class="nav-brand" aria-label="Campus Connect Homepage">
+        <div class="brand-badge">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">Campus Connect</span>
+          <span class="brand-sub">AIT Pune • Autonomous</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="nav-menu" aria-label="Main Navigation">
+        <a href="../homepage/homepage.html" class="nav-link">Home</a>
+        <a href="../Feed/feed.html" class="nav-link">Feeds</a>
+        <a href="../Student-details/student-details.html" class="nav-link">Students</a>
+        <a href="./faculty-directory.html" class="nav-link active-pill">Faculty</a>
+        <a href="../alumini directory/alumini.html" class="nav-link">Alumni</a>
+        <a href="../Clubs/dist/index.html" class="nav-link">Clubs</a>
+        <a href="../Aakriti/aakriti.html" class="nav-link" style="color: #2563eb; font-weight: 700;"><i class="fa-solid fa-trophy" style="color: #f59e0b; margin-right: 4px;"></i> Aakriti</a>
+        <a href="../Outpass/outpass.html" class="nav-link" style="color: #1d4ed8; font-weight: 700;"><i class="fa-solid fa-file-signature" style="color: #6366f1; margin-right: 4px;"></i> Applications</a>
+        <a href="../Complain/dist/index.html" class="nav-link" style="color: #b45309; font-weight: 700;"><i class="fa-solid fa-bullhorn" style="color: #d97706; margin-right: 4px;"></i> Complaints</a>
+        <a href="../Shops/index.html" class="nav-link" style="color: #047857; font-weight: 700;"><i class="fa-solid fa-store" style="color: #059669; margin-right: 4px;"></i> Campus Shops</a>
+        <a href="../Borrow/dist/index.html" class="nav-link" style="color: #1d4ed8; font-weight: 700;"><i class="fa-solid fa-handshake" style="color: #2563eb; margin-right: 4px;"></i> Borrow &amp; Share</a>
+        <a href="../Feed/Profile/profile.html" class="nav-link">Profile</a>
+      </nav>
+
+      <!-- User Session & Quick Return -->
+      <div class="nav-user-actions">
+        <div class="user-status-pill" id="userRoleIndicator" title="Active Campus Session">
+          <span class="status-pulse-dot" id="dirStatusDot"></span>
+          <span id="userRoleLabel">Checking Session...</span>
+        </div>
+        <button class="btn-return-home" id="dirSignOutBtn" style="display: none; border: none; cursor: pointer;" title="Sign Out to Guest Mode">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Sign Out</span>
+        </button>
+        <button class="btn-return-home" id="dirSignInBtn" style="display: none; border: none; cursor: pointer; background: var(--primary-600); color: #ffffff;" title="Sign In to AIT Campus Connect">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          <span>Sign In</span>
+        </button>
+        <a href="../homepage/homepage.html" class="btn-return-home" title="Return to Homepage">
+          <i class="fa-solid fa-house"></i>
+          <span>Home</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       3. Main Directory Content Wrapper
+       ========================================================================== -->
+  <main class="main-directory-wrapper">
+    <div class="site-container">
+
+      <!-- Hero Title Header Area -->
+      <div class="directory-hero-header">
+        <div class="hero-text-col">
+          <h1 class="hero-directory-title">Faculty Directory</h1>
+          <p class="hero-directory-subtitle">
+            Discover esteemed professors, researchers, and department mentors — connect with faculty for academic guidance, research projects, and lab collaborations.
+          </p>
+        </div>
+
+        <div class="faculty-counter-badge" id="totalFacultyBadge">
+          <i class="fa-solid fa-chalkboard-user"></i>
+          <span id="facultyCountNumber">Faculty (48)</span>
+        </div>
+      </div>
+
+      <!-- ======================================================================
+           4. Search Bar & Filter Controls Hub
+           ====================================================================== -->
+      <div class="controls-panel-box">
+        
+        <!-- Search Bar -->
+        <div class="search-input-wrapper">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input 
+            type="text" 
+            id="facultySearchInput" 
+            class="faculty-search-input" 
+            placeholder="Search by faculty name, subject, research domain, qualification, or cabin..." 
+            autocomplete="off"
+          />
+          <button class="search-clear-btn" id="searchClearBtn" aria-label="Clear search query" style="display: none;">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <div class="search-shortcut-hint">
+            <kbd>⌘</kbd> <kbd>K</kbd>
+          </div>
+        </div>
+
+        <!-- Department Filter Pills (Requested in Prompt) -->
+        <div class="filter-group-wrapper">
+          <div class="filter-label">
+            <i class="fa-solid fa-building-columns"></i>
+            <span>Select Department:</span>
+          </div>
+          <div class="department-pills-bar" id="deptPillsContainer">
+            <button class="dept-pill-btn active" data-dept="all">
+              <span>All Departments</span>
+              <span class="pill-count" id="count-all">48</span>
+            </button>
+            <button class="dept-pill-btn" data-dept="comp">
+              <span>Computer Engineering</span>
+              <span class="pill-count" id="count-comp">12</span>
+            </button>
+            <button class="dept-pill-btn" data-dept="it">
+              <span>Information Technology</span>
+              <span class="pill-count" id="count-it">10</span>
+            </button>
+            <button class="dept-pill-btn" data-dept="etc">
+              <span>Electronics & Telecommunication</span>
+              <span class="pill-count" id="count-etc">11</span>
+            </button>
+            <button class="dept-pill-btn" data-dept="mech">
+              <span>Mechanical Engineering</span>
+              <span class="pill-count" id="count-mech">9</span>
+            </button>
+            <button class="dept-pill-btn" data-dept="robotics">
+              <span>Automation & Robotics</span>
+              <span class="pill-count" id="count-robotics">3</span>
+            </button>
+            <button class="dept-pill-btn" data-dept="asge">
+              <span>Applied Science & Humanities</span>
+              <span class="pill-count" id="count-asge">6</span>
+            </button>
+          </div>
+        </div>
+
+
+      </div>
+
+      <!-- ======================================================================
+           5. Faculty Grid (3-Column Layout Matching Reference Image)
+           ====================================================================== -->
+      <div class="faculty-grid" id="facultyGridContainer">
+        <!-- Dynamically rendered via faculty-directory.js -->
+      </div>
+
+      <!-- Empty Search Fallback State -->
+      <div class="empty-state-card" id="emptyStateCard" style="display: none;">
+        <div class="empty-icon-box">
+          <i class="fa-solid fa-user-slash"></i>
+        </div>
+        <h3 class="empty-title">No Faculty Found</h3>
+        <p class="empty-desc">
+          We couldn't find any faculty members matching your current search or filters. Try adjusting your query or resetting filters.
+        </p>
+        <button class="btn-reset-filters" id="resetFiltersBtn">
+          <i class="fa-solid fa-rotate-left"></i>
+          <span>Reset All Filters</span>
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       6. Comprehensive Faculty Profile Modal (Full Details on Subject, Research, Achievements)
+       ========================================================================== -->
+  <div class="profile-modal-overlay" id="profileModalOverlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="profile-modal-box">
+      
+      <!-- Close Button -->
+      <button class="modal-close-btn" id="closeProfileModalBtn" aria-label="Close Profile Modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- Modal Content Body -->
+      <div class="modal-scroll-body" id="modalScrollContent">
+        <!-- Dynamically populated via JavaScript -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       7. Interactive Academic Inquiry & Office Hours Booking Modal
+       ========================================================================== -->
+  <div class="inquiry-modal-overlay" id="inquiryModalOverlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="inquiry-modal-box">
+      <button class="modal-close-btn" id="closeInquiryModalBtn" aria-label="Close Inquiry Modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div id="inquiryModalContent">
+        <!-- Dynamically populated via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       8. Guest Access Login Required Gate Modal
+       ========================================================================== -->
+  <div class="auth-gate-modal-overlay" id="authGateModalOverlay" role="dialog" aria-modal="true" style="display: none;">
+    <div class="auth-gate-box">
+      <div style="text-align: center; margin-bottom: 24px;">
+        <div class="gate-lock-icon">
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.6rem; color: var(--text-dark); margin-bottom: 6px;">
+          Campus Login Required
+        </h2>
+        <p style="font-size: 0.92rem; color: var(--text-muted); max-width: 440px; margin: 0 auto;">
+          The Faculty Directory is an authenticated campus portal. Please sign in with your <strong>Student</strong>, <strong>Faculty</strong>, or <strong>Alumni</strong> account to continue.
+        </p>
+      </div>
+
+      <!-- Quick Role Selection Tabs -->
+      <div class="gate-role-tabs">
+        <button class="gate-tab-btn active" data-role="student">
+          <i class="fa-solid fa-user-graduate"></i> Student
+        </button>
+        <button class="gate-tab-btn" data-role="faculty">
+          <i class="fa-solid fa-chalkboard-user"></i> Faculty
+        </button>
+        <button class="gate-tab-btn" data-role="alumni">
+          <i class="fa-solid fa-user-tie"></i> Alumni
+        </button>
+      </div>
+
+      <!-- Gate Login Form -->
+      <form id="gateLoginForm" onsubmit="handleGateLoginSubmit(event)">
+        <div class="form-group">
+          <label class="form-label" id="gateIdLabel">AIT Roll No / Registration ID</label>
+          <input type="text" id="gateIdInput" class="form-input" placeholder="e.g. 21101 (Comp A)" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">AIT Institutional / Registered Email</label>
+          <input type="email" id="gateEmailInput" class="form-input" placeholder="your_id@aitpune.edu.in" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-input" placeholder="Enter password" required />
+        </div>
+
+        <button type="submit" class="btn-primary-action" id="gateSubmitBtn" style="width: 100%; padding: 12px; margin-top: 10px;">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          <span>Sign In to Unlock Faculty Directory</span>
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-light);">
+        <a href="../homepage/homepage.html" style="text-decoration: none; font-size: 0.86rem; color: var(--text-muted); font-weight: 600;">
+          <i class="fa-solid fa-arrow-left"></i> Return to Homepage as Guest
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       9. Toast Notification System
+       ========================================================================== -->
+  <div id="globalToastNotice" class="global-toast-container" role="alert" aria-live="assertive"></div>
+
+  <!-- Main JavaScript File -->
+  <script src="./faculty-directory.js"></script>
+  <script src="../shared/campus-ai.js"></script>
+</body>
+</html>

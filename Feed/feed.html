@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feeds &amp; Campus Life — Campus Connect · AIT Pune</title>
+  <meta name="description" content="Discover campus announcements, student projects, club events, faculty research, and achievements at Army Institute of Technology, Pune." />
+  <link rel="stylesheet" href="feed.css" />
+  <link rel="stylesheet" href="../shared/campus-ai.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Ambient Glow Background Blobs -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <!-- ───────────── NAVBAR ───────────── -->
+  <navbar>
+    <a class="logo-wrap" href="../homepage/homepage.html" title="Campus Connect Homepage">
+      <div class="logo-icon">🎓</div>
+      <div class="logo-text">Campus Connect</div>
+    </a>
+
+    <div class="nav-links">
+      <a class="nav-item" href="../homepage/homepage.html">Home</a>
+      <a class="nav-item active" href="./feed.html">Feeds</a>
+      <a class="nav-item" href="../Student-details/student-details.html">Students</a>
+      <a class="nav-item" href="../Faculty directory/faculty-directory.html">Faculty</a>
+      <a class="nav-item" href="../alumini directory/alumini.html">Alumni</a>
+      <a class="nav-item" href="../Clubs/dist/index.html">Clubs</a>
+      <a class="nav-item" href="../Aakriti/aakriti.html" style="color: #2563eb; font-weight: 700;"><i class="fa-solid fa-trophy" style="color: #f59e0b; margin-right: 4px;"></i> Aakriti</a>
+      <a class="nav-item" href="../Outpass/outpass.html" style="color: #1d4ed8; font-weight: 700;"><i class="fa-solid fa-file-signature" style="color: #6366f1; margin-right: 4px;"></i> Applications</a>
+      <a class="nav-item" href="../Complain/dist/index.html" style="color: #b45309; font-weight: 700;"><i class="fa-solid fa-bullhorn" style="color: #d97706; margin-right: 4px;"></i> Complaints</a>
+      <a class="nav-item" href="../Shops/index.html" style="color: #047857; font-weight: 700;"><i class="fa-solid fa-store" style="color: #059669; margin-right: 4px;"></i> Campus Shops</a>
+      <a class="nav-item" href="../Borrow/dist/index.html" style="color: #1d4ed8; font-weight: 700;"><i class="fa-solid fa-handshake" style="color: #2563eb; margin-right: 4px;"></i> Borrow &amp; Share</a>
+      <a class="nav-item" href="./Profile/profile.html">Profile</a>
+    </div>
+
+    <div class="nav-right" style="display: flex; align-items: center; gap: 8px;">
+      <!-- Role Switcher (Student vs Faculty vs Admin) -->
+      <div class="role-pill-select" title="Switch viewing perspective to test role permissions">
+        <span class="role-label">Role:</span>
+        <select class="role-select" id="userRoleSelect" onchange="onRoleChanged(this.value)">
+          <option value="student">🎓 Student</option>
+          <option value="faculty">👨‍🏫 Faculty</option>
+          <option value="admin">🛡️ College Admin</option>
+        </select>
+      </div>
+
+      <a class="nav-user-chip" href="./Profile/profile.html" title="View Your Profile">
+        <img class="nav-user-avatar" src="user.png" alt="Profile" />
+        <span class="nav-user-name" id="navUserNameDisplay">Snehangshu</span>
+      </a>
+
+      <button class="btn-secondary" onclick="window.CampusAuth.signOut()" style="padding: 6px 12px; font-size: 11.5px; background: rgba(239,68,68,0.08); color: #ef4444; border: 1px solid rgba(239,68,68,0.25); border-radius: var(--radius-full); font-weight: 700; cursor: pointer;" title="Sign out of Campus Connect">
+        <span>🚪 Sign Out</span>
+      </button>
+    </div>
+  </navbar>
+
+  <!-- ───────────── MAIN FEED CONTAINER ───────────── -->
+  <main class="feed-container">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="left-sidebar">
+      
+      <!-- Mini Profile Widget -->
+      <div class="glass-card mini-profile-card">
+        <div class="mini-avatar-wrap">
+          <img class="mini-avatar" id="miniProfileAvatar" src="user.png" alt="Snehangshu Das" />
+          <div class="mini-online"></div>
+        </div>
+        <h3 class="mini-name" id="miniProfileName">Snehangshu Das</h3>
+        <p class="mini-role" id="miniProfileRole">B.Tech CSE '26 · AIT Pune</p>
+        <div class="mini-status" id="miniProfileStatus">🚀 Open for Collaborations</div>
+
+        <div class="mini-stats">
+          <div>
+            <div class="mini-stat-num">14</div>
+            <div class="mini-stat-lbl">Posts</div>
+          </div>
+          <div>
+            <div class="mini-stat-num">312</div>
+            <div class="mini-stat-lbl">Followers</div>
+          </div>
+          <div>
+            <div class="mini-stat-num">6</div>
+            <div class="mini-stat-lbl">Projects</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feed Filter Navigation Menu -->
+      <div class="glass-card feed-nav-menu">
+        <button class="menu-item active" onclick="filterFeed('all', this)">
+          <span class="menu-item-left">🌐 All Campus Feed</span>
+          <span class="menu-badge" id="countAll">7</span>
+        </button>
+        <button class="menu-item" onclick="filterFeed('college', this)">
+          <span class="menu-item-left">🏆 College Achievements</span>
+          <span class="menu-badge new">New</span>
+        </button>
+        <button class="menu-item" onclick="filterFeed('club', this)">
+          <span class="menu-item-left">🎪 Club Events &amp; News</span>
+          <span class="menu-badge">Live</span>
+        </button>
+        <button class="menu-item" onclick="filterFeed('student', this)">
+          <span class="menu-item-left">💻 Student Works &amp; Collabs</span>
+          <span class="menu-badge">Hot</span>
+        </button>
+        <button class="menu-item" onclick="filterFeed('faculty', this)">
+          <span class="menu-item-left">👨‍🏫 Faculty Updates</span>
+          <span class="menu-badge">2</span>
+        </button>
+        <button class="menu-item" onclick="filterFeed('saved', this)" id="menuSavedBtn">
+          <span class="menu-item-left">🔖 Saved Archive</span>
+          <span class="menu-badge" id="savedCountBadge">0</span>
+        </button>
+        <a class="menu-item" href="../Student-details/student-details.html">
+          <span class="menu-item-left">👥 Student Directory</span>
+          <span>↗</span>
+        </a>
+        <a class="menu-item" href="../Faculty directory/faculty-directory.html">
+          <span class="menu-item-left">👨‍🏫 Faculty Directory</span>
+          <span>↗</span>
+        </a>
+        <a class="menu-item" href="../alumini directory/alumini.html">
+          <span class="menu-item-left">🎓 Alumni Directory</span>
+          <span>↗</span>
+        </a>
+        <a class="menu-item" href="../Aakriti/aakriti.html" style="color: #2563eb; font-weight: 700;">
+          <span class="menu-item-left"><i class="fa-solid fa-trophy" style="color: #f59e0b; margin-right: 6px;"></i> Aakriti Hub</span>
+          <span class="menu-badge" style="background:#eff6ff; color:#2563eb; font-weight:700;">Live</span>
+        </a>
+        <a class="menu-item" href="../Outpass/outpass.html" style="color: #1d4ed8; font-weight: 700;">
+          <span class="menu-item-left"><i class="fa-solid fa-file-signature" style="color: #6366f1; margin-right: 6px;"></i> Applications</span>
+          <span class="menu-badge" style="background:#ecfdf5; color:#059669; font-weight:700;">Active</span>
+        </a>
+        <a class="menu-item" href="../Clubs/dist/index.html">
+          <span class="menu-item-left">🎪 Clubs &amp; Societies</span>
+          <span>↗</span>
+        </a>
+        <a class="menu-item" href="./Profile/profile.html">
+          <span class="menu-item-left">⚙️ Profile &amp; Settings</span>
+          <span>⚙</span>
+        </a>
+      </div>
+
+      <!-- Quick Resources -->
+      <div class="glass-card" style="padding: 16px 20px; font-size: 12.5px; color: var(--text-sub);">
+        <strong style="color: var(--text-main); font-size: 13px; display:block; margin-bottom: 8px;">AIT Quick Links</strong>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <a href="#" style="color: var(--primary); text-decoration: none; font-weight:600;">📚 Digital Library &amp; IEEE Xplore</a>
+          <a href="#" style="color: var(--primary); text-decoration: none; font-weight:600;">📅 Academic Calendar 2025-26</a>
+          <a href="#" style="color: var(--primary); text-decoration: none; font-weight:600;">🍲 Mess &amp; Canteen Today's Menu</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CENTER FEED COLUMN -->
+    <section class="center-feed">
+
+      <!-- ROLE PRIVILEGE STATUS BANNER -->
+      <div class="role-privilege-banner" id="rolePrivilegeBanner">
+        <div class="privilege-banner-icon" id="roleBannerIcon">🎓</div>
+        <div class="privilege-banner-text">
+          <div class="privilege-banner-title">
+            <span id="roleBannerTitle">Student Mode Active</span>
+            <span class="privilege-badge student" id="roleBannerBadge">STUDENT</span>
+          </div>
+          <div class="privilege-banner-desc" id="roleBannerDesc">
+            Explore peer projects, discover upcoming campus events, share milestones, and recruit teammates.
+          </div>
+        </div>
+      </div>
+
+      <!-- CREATE POST / COMPOSER CARD -->
+      <div class="glass-card post-composer-card">
+        <div class="composer-top">
+          <img class="composer-avatar" id="composerAvatarImg" src="user.png" alt="You" />
+          <div class="composer-input-wrap">
+            <textarea
+              id="composerText"
+              class="composer-textarea"
+              placeholder="Share an achievement, recent project work, club event, or invite hackathon teammates..."
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="composer-tags">
+          <span style="font-size: 12px; font-weight: 700; color: var(--text-muted);">Post Tag:</span>
+          <button class="composer-tag-btn active" id="tagBtnStudent" onclick="selectComposerCategory('student', this)">💻 Recent Work</button>
+          <button class="composer-tag-btn" id="tagBtnCollab" onclick="selectComposerCategory('collab', this)">🤝 Collab Request</button>
+          <button class="composer-tag-btn" id="tagBtnClub" onclick="selectComposerCategory('club', this)">🎪 Club Event</button>
+          <button class="composer-tag-btn restricted" id="tagBtnCollege" onclick="selectComposerCategory('college', this)">
+            <span>🔒</span> 🏆 College Achievement
+          </button>
+          <button class="composer-tag-btn restricted" id="tagBtnFaculty" onclick="selectComposerCategory('faculty', this)">
+            <span>🔒</span> 👨‍🏫 Faculty Update
+          </button>
+        </div>
+
+        <!-- Dynamic Club Selection Dropdown (Only appears when 'Club Event' tag is selected) -->
+        <div class="composer-club-row" id="composerClubRow">
+          <span class="composer-club-label">Select Club:</span>
+          <select class="composer-club-select" id="composerClubSelect">
+            <!-- Populated with member verification in feed.js -->
+          </select>
+        </div>
+
+        <!-- Faculty & Admin Privileged Broadcast Row (Shows when role is faculty or admin) -->
+        <div class="composer-privileged-row" id="composerPrivilegedRow" style="display: none;">
+          <label class="privilege-toggle-label">
+            <input type="checkbox" id="composerBroadcastCircular" />
+            <span>📢 Broadcast as Official Circular (Pins to live Campus Notices widget &amp; modal)</span>
+          </label>
+          <label class="privilege-toggle-label" id="adminPinPostLabel" style="display: none;">
+            <input type="checkbox" id="composerPinPost" />
+            <span>📌 Pin Announcement to Top of Campus Feed</span>
+          </label>
+        </div>
+
+        <div class="composer-bottom">
+          <div class="composer-actions">
+            <button class="composer-action-btn" onclick="toggleComposerImage()">
+              <span>🖼️</span> <span id="attachImgLabel">Image Attached ✓</span>
+            </button>
+            <label style="font-size: 12.5px; font-weight: 600; color: var(--text-sub); display: flex; align-items: center; gap: 6px; cursor: pointer;">
+              <input type="checkbox" id="composerCollabWanted" checked /> Open for Collaborators
+            </label>
+          </div>
+          <button class="composer-publish-btn" onclick="publishNewPost()">Publish Post 🚀</button>
+        </div>
+      </div>
+
+      <!-- FILTER CHIPS BAR -->
+      <div class="filter-chips-bar">
+        <button class="filter-chip active" onclick="filterFeed('all', this)">✨ All Posts</button>
+        <button class="filter-chip" onclick="filterFeed('college', this)">🏆 College Achievements</button>
+        <button class="filter-chip" onclick="filterFeed('club', this)">🎪 Club Events</button>
+        <button class="filter-chip" onclick="filterFeed('student', this)">💻 Student Works</button>
+        <button class="filter-chip" onclick="filterFeed('faculty', this)">👨‍🏫 Faculty Posts</button>
+        <button class="filter-chip" onclick="filterFeed('saved', this)">🔖 Saved Archive</button>
+      </div>
+
+      <!-- FEED POSTS LIST CONTAINER -->
+      <div id="feedPostsContainer" style="display: flex; flex-direction: column; gap: 20px;">
+        <!-- Injected via feed.js -->
+      </div>
+
+    </section>
+
+    <!-- RIGHT SIDEBAR (INDEPENDENTLY SCROLLABLE) -->
+    <aside class="right-sidebar">
+
+      <!-- College Announcements -->
+      <div class="glass-card sidebar-widget">
+        <div class="widget-title">
+          <span>⚡ Campus Notices</span>
+          <button class="widget-action" id="btnClickToViewNotices" onclick="openAllNoticesModal()" style="border:none; cursor:pointer;" title="View all official campus notices">
+            Click to view ↗
+          </button>
+        </div>
+        <div id="noticesList" class="widget-scroll-container">
+          <!-- Injected via feed.js -->
+        </div>
+      </div>
+
+      <!-- Upcoming Club Events with Calendar Popout Trigger -->
+      <div class="glass-card sidebar-widget">
+        <div class="widget-title">
+          <span>🎪 Upcoming Events</span>
+          <button class="widget-action" onclick="openCalendarModal()" style="border:none; cursor:pointer;" id="btnOpenCalendar" title="Open monthly calendar view">
+            📅 Calendar View
+          </button>
+        </div>
+        <div id="upcomingEventsList" class="widget-scroll-container">
+          <!-- Injected via feed.js -->
+        </div>
+      </div>
+
+      <!-- Collaboration Radar -->
+      <div class="glass-card sidebar-widget">
+        <div class="widget-title">
+          <span>🤝 Collaboration Radar</span>
+          <button class="widget-action" onclick="openAllCollabModal()" style="border:none; cursor:pointer;" title="View active collaboration requests">
+            ● Active
+          </button>
+        </div>
+        <div id="collabRadarList" class="widget-scroll-container">
+          <!-- Injected via feed.js -->
+        </div>
+      </div>
+
+    </aside>
+  </main>
+
+  <!-- ───────────── MODAL BACKDROP ───────────── -->
+  <div class="modal-backdrop" id="modalBackdrop" onclick="closeNoticeModal(); closeEventModal(); closeCollabModal(); closeCalendarModal(); closeAllNoticesModal(); closeAllCollabModal();"></div>
+
+  <!-- ───────────── 1. CAMPUS NOTICE POPOUT MODAL ───────────── -->
+  <div class="popout-modal" id="noticeModal">
+    <div class="modal-header-bar">
+      <h3>📢 Official Campus Circular</h3>
+      <button class="modal-close-icon" onclick="closeNoticeModal()">✕</button>
+    </div>
+    <div class="modal-content-body" id="noticeModalContent">
+      <!-- Injected dynamically -->
+    </div>
+  </div>
+
+  <!-- ───────────── 2. EVENT DETAILS POPOUT MODAL ───────────── -->
+  <div class="popout-modal" id="eventModal">
+    <div class="modal-header-bar">
+      <h3>🎪 Event Details &amp; Registration</h3>
+      <button class="modal-close-icon" onclick="closeEventModal()">✕</button>
+    </div>
+    <div class="modal-content-body" id="eventModalContent">
+      <!-- Injected dynamically -->
+    </div>
+  </div>
+
+  <!-- ───────────── 3. COLLABORATION DETAILS POPOUT MODAL ───────────── -->
+  <div class="popout-modal" id="collabModal">
+    <div class="modal-header-bar">
+      <h3>🤝 Collaboration Lead Details</h3>
+      <button class="modal-close-icon" onclick="closeCollabModal()">✕</button>
+    </div>
+    <div class="modal-content-body" id="collabModalContent">
+      <!-- Injected dynamically -->
+    </div>
+  </div>
+
+  <!-- ───────────── 3b. ALL CAMPUS NOTICES MODAL ("CLICK TO VIEW") ───────────── -->
+  <div class="popout-modal calendar-modal" id="allNoticesModal">
+    <div class="modal-header-bar">
+      <h3>📢 Official Campus Circulars &amp; Notices</h3>
+      <button class="modal-close-icon" onclick="closeAllNoticesModal()">✕</button>
+    </div>
+    <div class="modal-content-body" id="allNoticesModalContent">
+      <!-- Injected dynamically -->
+    </div>
+  </div>
+
+  <!-- ───────────── 3c. ALL COLLABORATION REQUESTS MODAL ───────────── -->
+  <div class="popout-modal calendar-modal" id="allCollabModal">
+    <div class="modal-header-bar">
+      <h3>🤝 Active Campus Collaboration Radar</h3>
+      <button class="modal-close-icon" onclick="closeAllCollabModal()">✕</button>
+    </div>
+    <div class="modal-content-body" id="allCollabModalContent">
+      <!-- Injected dynamically -->
+    </div>
+  </div>
+
+  <!-- ───────────── 4. 70% WIDTH INTERACTIVE CALENDAR MODAL ───────────── -->
+  <div class="popout-modal calendar-modal" id="calendarModal">
+    <div class="modal-header-bar">
+      <h3>📅 AIT Campus Events Calendar — October 2026</h3>
+      <button class="modal-close-icon" onclick="closeCalendarModal()">✕</button>
+    </div>
+    <div class="modal-content-body">
+      <div class="calendar-month-header">
+        <div class="calendar-month-title">October 2026</div>
+        <div style="font-size: 12.5px; color: var(--text-muted); font-weight:600;">
+          💡 Click any highlighted date to view event details and registration links
+        </div>
+      </div>
+
+      <!-- Calendar day headers -->
+      <div class="calendar-grid" style="margin-bottom: 8px;">
+        <div class="calendar-day-header">Sun</div>
+        <div class="calendar-day-header">Mon</div>
+        <div class="calendar-day-header">Tue</div>
+        <div class="calendar-day-header">Wed</div>
+        <div class="calendar-day-header">Thu</div>
+        <div class="calendar-day-header">Fri</div>
+        <div class="calendar-day-header">Sat</div>
+      </div>
+
+      <!-- Month days grid -->
+      <div class="calendar-grid" id="calendarGridDays">
+        <!-- Rendered via feed.js -->
+      </div>
+
+      <!-- Selected Day Event Drawer / Expander -->
+      <div class="day-events-panel" id="dayEventsPanel" style="display: none;"></div>
+    </div>
+  </div>
+
+  <!-- ───────────── COMMENTS DRAWER MODAL ───────────── -->
+  <div class="drawer-overlay" id="commentOverlay" onclick="closeCommentsDrawer()"></div>
+  <div class="comments-drawer" id="commentsDrawer">
+    <div class="comments-drawer-header">
+      <span>Comments &amp; Discussions</span>
+      <button class="drawer-close-btn" onclick="closeCommentsDrawer()">✕</button>
+    </div>
+    <div class="drawer-comments-list" id="drawerCommentsList"></div>
+    <div class="drawer-input-row">
+      <input type="text" class="drawer-input" id="drawerCommentInput" placeholder="Add a public comment or congratulation..." />
+      <button class="drawer-send-btn" onclick="submitDrawerComment()">Send</button>
+    </div>
+  </div>
+
+  <!-- ───────────── GLOBAL TOAST NOTIFICATION ───────────── -->
+  <div class="toast-notify" id="toastNotify">
+    <span id="toastIcon">🤝</span>
+    <span id="toastMsg">Notification message</span>
+  </div>
+
+  <!-- External Modular JavaScript -->
+  <script src="feed.js"></script>
+  <script src="../shared/campus-ai.js"></script>
+</body>
+</html>

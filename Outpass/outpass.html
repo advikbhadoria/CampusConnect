@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Applications — Army Institute of Technology (AIT Pune)</title>
+  <meta name="description" content="Official Student Applications & Movement Portal for hostel residents of Army Institute of Technology, Pune. Apply for day outpasses, overnight leaves, track warden approvals, and obtain your security gate PIN." />
+
+  <!-- Google Fonts: Outfit, Plus Jakarta Sans, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Modern Glassmorphic Stylesheet -->
+  <link rel="stylesheet" href="./outpass.css" />
+</head>
+<body>
+
+  <!-- ========================================================================
+       1. Background Canvas Container (Hardware-accelerated moving radial orbs)
+       ======================================================================== -->
+  <div class="bg-canvas-container" aria-hidden="true">
+    <div class="moving-orb orb-navy"></div>
+    <div class="moving-orb orb-electric"></div>
+    <div class="moving-orb orb-ice"></div>
+    <div class="moving-orb orb-cyan"></div>
+    <div class="moving-orb orb-emerald"></div>
+  </div>
+
+  <!-- ========================================================================
+       2. Sticky Glassmorphic Navigation Bar
+       ======================================================================== -->
+  <header class="outpass-navbar">
+    <div class="nav-inner-box">
+      
+      <!-- Left: Back Action & Breadcrumbs -->
+      <div class="nav-left">
+        <button type="button" class="btn-back-link" id="btnNavBack" onclick="window.OutpassPortal.handleBackNavigation()" aria-label="Go back to previous screen">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Back</span>
+        </button>
+
+        <nav class="breadcrumb-nav" aria-label="Breadcrumb Navigation">
+          <a href="../Feed/feed.html" class="crumb-link"><i class="fa-solid fa-house"></i> Home</a>
+          <span class="crumb-divider">/</span>
+          <span class="crumb-muted">Hostel Wing</span>
+          <span class="crumb-divider">/</span>
+          <span class="crumb-current">Applications</span>
+        </nav>
+      </div>
+
+      <!-- Center: Authority Title & System Badge -->
+      <div class="nav-center-authority">
+        <div class="authority-crest">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <div class="authority-text-block">
+          <span class="authority-heading">AIT Hostel Services</span>
+          <span class="authority-sub">Digital Movement &amp; Gate Authority</span>
+        </div>
+      </div>
+
+      <!-- Right: Quick Actions & Live Gate Status -->
+      <div class="nav-right">
+        <div class="gate-status-pill" id="navGateStatus">
+          <span class="pulse-emerald"></span>
+          <span>Gate Scanner Active</span>
+        </div>
+        <button type="button" class="btn-primary-sm" onclick="window.OutpassPortal.openOutpassModal()" id="btnQuickOutpassNav">
+          <i class="fa-solid fa-plus"></i>
+          <span>New Application</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       3. Main Layout Wrapper
+       ======================================================================== -->
+  <main class="outpass-main-wrapper" id="mainContent">
+    
+    <!-- Hero / Header Section -->
+    <section class="portal-hero-section">
+      <div class="hero-content-flex">
+        <div class="hero-text-col">
+          <div class="security-chip-badge">
+            <i class="fa-solid fa-lock"></i>
+            <span>Encrypted Gate PIN Verification • Main Gate Sync</span>
+          </div>
+          <h1 class="hero-main-title">
+            Student <span>Applications</span>
+          </h1>
+          <p class="hero-subtext">
+            Streamlined hostel movement and absence applications for Army Institute of Technology residents. Request same-day day passes or sanctioned overnight leaves, inspect live warden reviews, and obtain your college gate verification PIN.
+          </p>
+        </div>
+
+        <!-- Student Profile Mini Snapshot (Just student name) -->
+        <div class="resident-profile-badge-card" id="studentSnapshotCard">
+          <div class="resident-avatar-ring">
+            <img src="../Feed/user.png" alt="Student Profile" class="resident-avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=Snehangshu+Das&background=1d4ed8&color=fff'" />
+            <div class="status-online-dot" title="Student Online"></div>
+          </div>
+          <div class="resident-info-block">
+            <h3 class="resident-name" id="heroResidentName">Snehangshu Das</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Statistics Strip -->
+      <div class="stats-counter-strip" id="statsCounterStrip">
+        
+        <div class="stat-glass-tile">
+          <div class="stat-icon-disc disc-blue">
+            <i class="fa-solid fa-file-invoice"></i>
+          </div>
+          <div class="stat-data-block">
+            <span class="stat-number" id="statTotalApps">4</span>
+            <span class="stat-label">Total Applications</span>
+          </div>
+        </div>
+
+        <div class="stat-glass-tile highlight-emerald">
+          <div class="stat-icon-disc disc-emerald">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <div class="stat-data-block">
+            <span class="stat-number" id="statActivePasses">1</span>
+            <span class="stat-label">Active / Ready Passes</span>
+          </div>
+        </div>
+
+        <div class="stat-glass-tile highlight-amber">
+          <div class="stat-icon-disc disc-amber">
+            <i class="fa-solid fa-clock"></i>
+          </div>
+          <div class="stat-data-block">
+            <span class="stat-number" id="statPendingApps">1</span>
+            <span class="stat-label">Pending Warden Review</span>
+          </div>
+        </div>
+
+        <div class="stat-glass-tile">
+          <div class="stat-icon-disc disc-indigo">
+            <i class="fa-solid fa-history"></i>
+          </div>
+          <div class="stat-data-block">
+            <span class="stat-number" id="statPastHistory">2</span>
+            <span class="stat-label">Completed History</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         4. CORE MODULE 1: Selection & Quick Action Cards (Top Section)
+         ====================================================================== -->
+    <section class="action-trio-cards-section" aria-labelledby="quickActionsHeading">
+      <div class="section-title-wrap">
+        <h2 id="quickActionsHeading" class="section-title">
+          <i class="fa-solid fa-bolt" style="color: var(--blue-royal);"></i> Create New Request
+        </h2>
+        <p class="section-subtitle">
+          Select your departure category to open the verified authorization form.
+        </p>
+      </div>
+
+      <div class="action-cards-grid">
+        
+        <!-- CARD A: Outpass (Day Pass) -->
+        <article class="action-portal-card outpass-accent" onclick="window.OutpassPortal.openOutpassModal()">
+          <div class="action-card-header">
+            <div class="action-icon-circle icon-indigo">
+              <i class="fa-solid fa-person-running"></i>
+            </div>
+            <span class="card-badge-pill badge-indigo">
+              <i class="fa-solid fa-sun"></i> Same Day Return
+            </span>
+          </div>
+          <div class="action-card-body">
+            <h3 class="card-title-text">Apply for Outpass (Day Pass)</h3>
+            <p class="card-desc-text">
+              For same-day outings within permissible campus hours. Ideal for market visits, project shopping, study groups, medical visits, or dinner.
+            </p>
+            <div class="card-movement-rules">
+              <div class="rule-chip"><i class="fa-solid fa-clock"></i> Same-Day Outing</div>
+              <div class="rule-chip"><i class="fa-solid fa-shield-halved"></i> Fast Warden Clearance</div>
+            </div>
+          </div>
+          <div class="action-card-footer">
+            <button type="button" class="btn-action-trigger btn-trigger-indigo" aria-label="Create Day Outpass Request">
+              <span>Create Outpass Request</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- CARD B: Overnight / Extended Leave -->
+        <article class="action-portal-card leave-accent" onclick="window.OutpassPortal.openLeaveModal()">
+          <div class="action-card-header">
+            <div class="action-icon-circle icon-violet">
+              <i class="fa-solid fa-suitcase-rolling"></i>
+            </div>
+            <span class="card-badge-pill badge-violet">
+              <i class="fa-solid fa-moon"></i> Overnight &amp; Extended
+            </span>
+          </div>
+          <div class="action-card-body">
+            <h3 class="card-title-text">Apply for Overnight / Extended Leave</h3>
+            <p class="card-desc-text">
+              For weekend home visits, sanctioned family vacations, medical departures, and external competitions. Requires parent/guardian emergency verification.
+            </p>
+            <div class="card-movement-rules">
+              <div class="rule-chip"><i class="fa-solid fa-phone"></i> Parent Contact Verification</div>
+              <div class="rule-chip"><i class="fa-solid fa-plane-departure"></i> Multi-Day Authorized Absence</div>
+            </div>
+          </div>
+          <div class="action-card-footer">
+            <button type="button" class="btn-action-trigger btn-trigger-violet" aria-label="Create Extended Leave Request">
+              <span>Create Leave Request</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         5. CORE MODULE 1 (Part 2): Live Applications Feed & History Deck
+         ====================================================================== -->
+    <section class="applications-deck-section" aria-labelledby="applicationsHeading">
+      
+      <div class="applications-header-flex">
+        <div>
+          <h2 id="applicationsHeading" class="section-title">
+            <i class="fa-solid fa-list-check" style="color: var(--blue-royal);"></i> Applications
+          </h2>
+          <p class="section-subtitle">
+            Track authorization status, review remarks from wardens, and view your College Gate Verification PIN.
+          </p>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-input-wrapper">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="applicationSearchInput" class="app-search-field" placeholder="Search by Pass ID, destination, reason..." oninput="window.OutpassPortal.handleSearchInput(this.value)" />
+          <button type="button" class="btn-clear-search" id="btnClearSearch" onclick="window.OutpassPortal.clearSearch()" style="display: none;" aria-label="Clear search">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Interactive Filter Tabs Bar -->
+      <div class="filter-pills-bar" role="tablist" aria-label="Application Status Filters">
+        <button type="button" class="filter-pill-btn active" data-filter="all" onclick="window.OutpassPortal.setFilter('all')">
+          <i class="fa-solid fa-layer-group"></i>
+          <span>All Applications</span>
+          <span class="pill-count" id="countFilterAll">4</span>
+        </button>
+        <button type="button" class="filter-pill-btn" data-filter="active" onclick="window.OutpassPortal.setFilter('active')">
+          <i class="fa-solid fa-qrcode"></i>
+          <span>Active / Approved</span>
+          <span class="pill-count count-emerald" id="countFilterActive">1</span>
+        </button>
+        <button type="button" class="filter-pill-btn" data-filter="pending" onclick="window.OutpassPortal.setFilter('pending')">
+          <i class="fa-solid fa-hourglass-half"></i>
+          <span>Pending Review</span>
+          <span class="pill-count count-amber" id="countFilterPending">1</span>
+        </button>
+        <button type="button" class="filter-pill-btn" data-filter="completed" onclick="window.OutpassPortal.setFilter('completed')">
+          <i class="fa-solid fa-circle-check"></i>
+          <span>Past History</span>
+          <span class="pill-count" id="countFilterCompleted">2</span>
+        </button>
+      </div>
+
+      <!-- Dynamic Applications Grid / Feed -->
+      <div class="applications-cards-container" id="applicationsContainer">
+        <!-- Rendered dynamically via outpass.js -->
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       6. CORE MODULE 2: FORMS & SPECIFIC INPUT SCHEMAS (Modals)
+       ======================================================================== -->
+
+  <!-- MODAL 1: Outpass Application Modal -->
+  <div class="outpass-modal-backdrop" id="outpassModal" role="dialog" aria-modal="true" aria-labelledby="outpassModalTitle">
+    <div class="modal-dialog-container modal-lg">
+      <div class="modal-glass-header outpass-header-gradient">
+        <div class="modal-header-titles">
+          <div class="modal-badge-row">
+            <span class="modal-type-badge badge-indigo">
+              <i class="fa-solid fa-person-running"></i> Day Outpass Request
+            </span>
+            <span class="modal-clearance-notice" style="background:#eef2ff; color:var(--blue-royal); border:1px solid var(--indigo-border);">
+              <i class="fa-solid fa-shield-halved"></i> Instant Warden Clearance
+            </span>
+          </div>
+          <h3 id="outpassModalTitle" class="modal-main-title">Hostel Day Outpass Form</h3>
+          <p class="modal-subtitle-text">Fill in your destination and movement hours for warden authorization.</p>
+        </div>
+        <button type="button" class="modal-close-btn" onclick="window.OutpassPortal.closeAllModals()" aria-label="Close dialog">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-glass-body">
+        <form class="glass-form-grid" id="formOutpass">
+          
+          <!-- Section 1: Resident & Hostel Details -->
+          <div class="form-section-banner">
+            <i class="fa-solid fa-id-card-clip"></i>
+            <span>Resident &amp; Hostel Room Verification</span>
+          </div>
+
+          <div class="form-field-group">
+            <label for="outpassFullName" class="form-label">Full Name *</label>
+            <input type="text" id="outpassFullName" class="form-input" placeholder="Full Name" required />
+          </div>
+
+          <div class="form-field-group">
+            <label for="outpassRegNo" class="form-label">Registration Number *</label>
+            <input type="text" id="outpassRegNo" class="form-input" placeholder="Registration Number" required />
+          </div>
+
+          <div class="form-field-group">
+            <label for="outpassHostel" class="form-label">Hostel Assigned *</label>
+            <select id="outpassHostel" class="form-select" required>
+              <option value="" disabled selected>-- Select Your Hostel --</option>
+              <option value="APJ Hostel">APJ Hostel</option>
+              <option value="Visvesvaraya Hostel">Visvesvaraya Hostel</option>
+              <option value="SN Bose Hostel">SN Bose Hostel</option>
+              <option value="Captain Gurbir Singh Hostel">Captain Gurbir Singh Hostel</option>
+              <option value="Ramanujan Hostel">Ramanujan Hostel</option>
+              <option value="Kalpana Chawla Hostel">Kalpana Chawla Hostel</option>
+              <option value="Sarabhai Hostel">Sarabhai Hostel</option>
+              <option value="Homi Bhabha Hostel">Homi Bhabha Hostel</option>
+            </select>
+          </div>
+
+          <div class="form-field-group">
+            <label for="outpassRoomNo" class="form-label">Room Number *</label>
+            <input type="text" id="outpassRoomNo" class="form-input" placeholder="e.g., 214" required />
+          </div>
+
+          <div class="form-field-group">
+            <label for="outpassFlank" class="form-label">Flank / Wing *</label>
+            <select id="outpassFlank" class="form-select" required>
+              <option value="" disabled selected>-- Select Flank / Wing --</option>
+              <option value="A Flank">A Flank</option>
+              <option value="B Flank">B Flank</option>
+              <option value="C Flank">C Flank</option>
+              <option value="D Flank">D Flank</option>
+              <option value="E Flank">E Flank</option>
+              <option value="F Flank">F Flank</option>
+              <option value="G Flank">G Flank</option>
+              <option value="H Flank">H Flank</option>
+              <option value="I Flank">I Flank</option>
+              <option value="J Flank">J Flank</option>
+            </select>
+          </div>
+
+          <!-- Section 2: Timing & Movement Details -->
+          <div class="form-section-banner">
+            <i class="fa-solid fa-clock"></i>
+            <span>Timing &amp; Movement Details</span>
+          </div>
+
+          <div class="form-field-group">
+            <label for="outpassDate" class="form-label">Date of Outing *</label>
+            <input type="date" id="outpassDate" class="form-input" required />
+          </div>
+
+          <div class="form-field-group">
+            <label for="outpassOutTime" class="form-label">Out Time (Departure from Gate) *</label>
+            <input type="time" id="outpassOutTime" class="form-input" required />
+          </div>
+
+          <div class="form-field-group">
+            <label for="outpassInTime" class="form-label">Expected In Time (Return to Gate) *</label>
+            <input type="time" id="outpassInTime" class="form-input" required />
+          </div>
+
+          <!-- Section 3: Purpose & Destination -->
+          <div class="form-section-banner">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Purpose &amp; Emergency Contact</span>
+          </div>
+
+          <div class="form-field-group">
+            <label for="outpassReason" class="form-label">Reason for Outpass *</label>
+            <select id="outpassReason" class="form-select" required onchange="window.OutpassPortal.handleReasonChange('outpass', this.value)">
+              <option value="" disabled selected>-- Select Reason for Outpass --</option>
+              <option value="Market / Personal Work">Market / Personal Shopping</option>
+              <option value="Project Supplies & Hardware">Project Supplies &amp; Electronics</option>
+              <option value="Medical Checkup / Pharmacy">Medical Checkup / Pharmacy</option>
+              <option value="Coaching / Academic Exam">Coaching / External Academic Exam</option>
+              <option value="Dinner & Weekend Outing">Dinner &amp; Weekend Outing</option>
+              <option value="Other">Other (Specify below)</option>
+            </select>
+          </div>
+
+          <div class="form-field-group form-col-full" id="outpassCustomReasonGroup" style="display: none;">
+            <label for="outpassCustomReason" class="form-label">Specify Reason for Outpass *</label>
+            <input type="text" id="outpassCustomReason" class="form-input" placeholder="Please enter your specific reason for outpass" />
+          </div>
+
+          <div class="form-field-group">
+            <label for="outpassDestination" class="form-label">Destination Area / Landmarks *</label>
+            <input type="text" id="outpassDestination" class="form-input" placeholder="e.g., Phoenix Marketcity, Viman Nagar" required />
+          </div>
+
+          <div class="form-field-group form-col-full">
+            <label for="outpassContact" class="form-label">Student Active Contact Number (WhatsApp Active) *</label>
+            <input type="tel" id="outpassContact" class="form-input" placeholder="10-digit mobile number, e.g., 9823012345" pattern="[0-9]{10}" required />
+          </div>
+
+          <div class="form-actions-full">
+            <button type="button" class="btn-secondary-action" onclick="window.OutpassPortal.closeAllModals()">
+              Cancel
+            </button>
+            <button type="submit" class="btn-submit-action btn-submit-indigo">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>Submit Outpass for Warden Approval 🚀</span>
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: Leave Application Modal -->
+  <div class="outpass-modal-backdrop" id="leaveModal" role="dialog" aria-modal="true" aria-labelledby="leaveModalTitle">
+    <div class="modal-dialog-container modal-lg">
+      <div class="modal-glass-header leave-header-gradient">
+        <div class="modal-header-titles">
+          <div class="modal-badge-row">
+            <span class="modal-type-badge badge-violet">
+              <i class="fa-solid fa-suitcase-rolling"></i> Overnight / Extended Leave Request
+            </span>
+            <span class="modal-clearance-notice">
+              <i class="fa-solid fa-shield-halved"></i> Parental Verification Mandatory
+            </span>
+          </div>
+          <h3 id="leaveModalTitle" class="modal-main-title">Hostel Leave Application</h3>
+          <p class="modal-subtitle-text">Authorized multi-day absence request with travel itinerary and guardian contacts.</p>
+        </div>
+        <button type="button" class="modal-close-btn" onclick="window.OutpassPortal.closeAllModals()" aria-label="Close dialog">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-glass-body">
+        <form class="glass-form-grid" id="formLeave">
+          
+          <!-- Section 1: Resident & Hostel Details -->
+          <div class="form-section-banner">
+            <i class="fa-solid fa-id-card-clip"></i>
+            <span>Resident &amp; Hostel Details</span>
+          </div>
+
+          <div class="form-field-group">
+            <label for="leaveFullName" class="form-label">Full Name *</label>
+            <input type="text" id="leaveFullName" class="form-input" placeholder="Full Name" required />
+          </div>
+
+          <div class="form-field-group">
+            <label for="leaveRegNo" class="form-label">Registration Number *</label>
+            <input type="text" id="leaveRegNo" class="form-input" placeholder="Registration Number" required />
+          </div>
+
+          <div class="form-field-group">
+            <label for="leaveHostel" class="form-label">Hostel Assigned *</label>
+            <select id="leaveHostel" class="form-select" required>
+              <option value="" disabled selected>-- Select Your Hostel --</option>
+              <option value="APJ Hostel">APJ Hostel</option>
+              <option value="Visvesvaraya Hostel">Visvesvaraya Hostel</option>
+              <option value="SN Bose Hostel">SN Bose Hostel</option>
+              <option value="Captain Gurbir Singh Hostel">Captain Gurbir Singh Hostel</option>
+              <option value="Ramanujan Hostel">Ramanujan Hostel</option>
+              <option value="Kalpana Chawla Hostel">Kalpana Chawla Hostel</option>
+              <option value="Sarabhai Hostel">Sarabhai Hostel</option>
+              <option value="Homi Bhabha Hostel">Homi Bhabha Hostel</option>
+            </select>
+          </div>
+
+          <div class="form-field-group">
+            <label for="leaveRoomNo" class="form-label">Room Number *</label>
+            <input type="text" id="leaveRoomNo" class="form-input" placeholder="e.g., 214" required />
+          </div>
+
+          <div class="form-field-group">
+            <label for="leaveFlank" class="form-label">Flank / Wing *</label>
+            <select id="leaveFlank" class="form-select" required>
+              <option value="" disabled selected>-- Select Flank / Wing --</option>
+              <option value="A Flank">A Flank</option>
+              <option value="B Flank">B Flank</option>
+              <option value="C Flank">C Flank</option>
+              <option value="D Flank">D Flank</option>
+              <option value="E Flank">E Flank</option>
+              <option value="F Flank">F Flank</option>
+              <option value="G Flank">G Flank</option>
+              <option value="H Flank">H Flank</option>
+              <option value="I Flank">I Flank</option>
+              <option value="J Flank">J Flank</option>
+            </select>
+          </div>
+
+          <!-- Section 2: Leave Schedule & Destination -->
+          <div class="form-section-banner">
+            <i class="fa-solid fa-calendar-days"></i>
+            <span>Leave Schedule &amp; Travel Itinerary</span>
+          </div>
+
+          <div class="form-field-group">
+            <label for="leaveDepartureDate" class="form-label">Departure Date *</label>
+            <input type="date" id="leaveDepartureDate" class="form-input" required />
+          </div>
+
+          <div class="form-field-group">
+            <label for="leaveDepartureTime" class="form-label">Expected Leaving Time *</label>
+            <input type="time" id="leaveDepartureTime" class="form-input" required />
+          </div>
+
+          <div class="form-field-group">
+            <label for="leaveReturnDate" class="form-label">Coming Back / Return Date *</label>
+            <input type="date" id="leaveReturnDate" class="form-input" required />
+          </div>
+
+          <div class="form-field-group">
+            <label for="leaveReturnTime" class="form-label">Expected Return Time *</label>
+            <input type="time" id="leaveReturnTime" class="form-input" required />
+          </div>
+
+          <div class="form-field-group">
+            <label for="leaveTravelMode" class="form-label">Mode of Travel *</label>
+            <select id="leaveTravelMode" class="form-select" required>
+              <option value="" disabled selected>-- Select Travel Mode --</option>
+              <option value="Train / Indian Railways">Train / Indian Railways</option>
+              <option value="Flight / Airline">Flight / Airline</option>
+              <option value="Interstate Bus">Interstate Bus</option>
+              <option value="Personal Vehicle / Cab">Personal Vehicle / Cab</option>
+            </select>
+          </div>
+
+          <!-- Section 3: Parental Verification & Reason -->
+          <div class="form-section-banner">
+            <i class="fa-solid fa-users"></i>
+            <span>Parental Verification &amp; Destination Address</span>
+          </div>
+
+          <div class="form-field-group">
+            <label for="leaveReasonCategory" class="form-label">Reason for Leave *</label>
+            <select id="leaveReasonCategory" class="form-select" required onchange="window.OutpassPortal.handleReasonChange('leave', this.value)">
+              <option value="" disabled selected>-- Select Reason for Leave --</option>
+              <option value="Home Visit / Family Vacation">Home Visit / Family Vacation</option>
+              <option value="Family Function / Wedding">Family Function / Wedding</option>
+              <option value="Medical Treatment / Doctor Appointment">Medical Treatment / Doctor Appointment</option>
+              <option value="Academic Conference / External Hackathon">Academic Conference / External Hackathon</option>
+              <option value="Other">Other (Specify below)</option>
+            </select>
+          </div>
+
+          <div class="form-field-group form-col-full" id="leaveCustomReasonGroup" style="display: none;">
+            <label for="leaveCustomReason" class="form-label">Specify Reason for Leave *</label>
+            <input type="text" id="leaveCustomReason" class="form-input" placeholder="Please enter your specific reason for leave..." />
+          </div>
+
+          <div class="form-field-group">
+            <label for="leaveParentPhone" class="form-label">Parent / Guardian Contact Number *</label>
+            <input type="tel" id="leaveParentPhone" class="form-input" placeholder="10-digit mobile number, e.g., 9822144812" pattern="[0-9]{10}" required />
+            <span class="field-hint">Warden office may call for telephonic confirmation</span>
+          </div>
+
+          <div class="form-field-group form-col-full">
+            <label for="leaveAddress" class="form-label">Destination Address / Home Address *</label>
+            <textarea id="leaveAddress" class="form-textarea" rows="2" placeholder="Full residential or lodging address with city & PIN code" required></textarea>
+          </div>
+
+          <div class="form-actions-full">
+            <button type="button" class="btn-secondary-action" onclick="window.OutpassPortal.closeAllModals()">
+              Cancel
+            </button>
+            <button type="submit" class="btn-submit-action btn-submit-violet">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>Submit Leave Application for Verification ✈️</span>
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       7. CORE MODULE 3: Digital E-Pass & Main Gate Verification Slip
+       ======================================================================== -->
+  <div class="outpass-modal-backdrop" id="digitalPassModal" role="dialog" aria-modal="true" aria-labelledby="digitalPassModalTitle">
+    <div class="modal-dialog-container modal-pass-slip">
+      
+      <!-- Secure Holographic Security Strip -->
+      <div class="holographic-security-ribbon">
+        <div class="ribbon-sparkle"></div>
+        <span>ARMY INSTITUTE OF TECHNOLOGY • HOSTEL SECURITY WING • OFFICIAL GATEPASS TOKEN</span>
+        <div class="ribbon-sparkle"></div>
+      </div>
+
+      <div class="pass-slip-inner" id="digitalPassContent">
+        <!-- Rendered dynamically via outpass.js -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL 4: Full Application Details Modal (for Pending / Rejected / Past) -->
+  <div class="outpass-modal-backdrop" id="detailsModal" role="dialog" aria-modal="true" aria-labelledby="detailsModalTitle">
+    <div class="modal-dialog-container modal-md">
+      <div class="modal-glass-header">
+        <div class="modal-header-titles">
+          <h3 id="detailsModalTitle" class="modal-main-title">Application Inspection</h3>
+          <p class="modal-subtitle-text" id="detailsModalSub">Verified Movement Request Records</p>
+        </div>
+        <button type="button" class="modal-close-btn" onclick="window.OutpassPortal.closeAllModals()" aria-label="Close dialog">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-glass-body" id="detailsModalBody">
+        <!-- Injected via outpass.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Deck -->
+  <div class="toast-notification-deck" id="toastDeck" aria-live="polite"></div>
+
+  <!-- JavaScript Controller -->
+  <script src="./outpass.js"></script>
+</body>
+</html>

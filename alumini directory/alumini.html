@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alumni Directory | Campus Connect</title>
+  <meta name="description" content="Discover alumni peers, seniors, and industry pioneers — connect with the people who make your college network powerful.">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="alumini.css">
+  <link rel="stylesheet" href="../shared/campus-ai.css">
+</head>
+<body>
+
+  <!-- TOP NAVIGATION BAR (Exact Match to Campus Connect Website) -->
+  <nav class="top-navbar" aria-label="Main Navigation">
+    <a href="../homepage/homepage.html" class="nav-brand" style="text-decoration:none; display:flex; align-items:center; gap:10px;">
+      <div style="width:36px; height:36px; border-radius:10px; background:linear-gradient(135deg, var(--brand-purple), #9333ea); display:flex; align-items:center; justify-content:center; color:#fff; font-size:18px;">🎓</div>
+      <span>Campus Connect</span>
+    </a>
+
+    <ul class="nav-menu">
+      <li><a href="../homepage/homepage.html" class="nav-link-item">Home</a></li>
+      <li><a href="../Feed/feed.html" class="nav-link-item">Feeds</a></li>
+      <li><a href="../Student-details/student-details.html" class="nav-link-item">Students</a></li>
+      <li><a href="../Faculty directory/faculty-directory.html" class="nav-link-item">Faculty</a></li>
+      <li><a href="./alumini.html" class="nav-link-item active">Alumni</a></li>
+      <li><a href="../Clubs/dist/index.html" class="nav-link-item">Clubs</a></li>
+      <li><a href="../Aakriti/aakriti.html" class="nav-link-item" style="color: #2563eb; font-weight: 700;">🏆 Aakriti</a></li>
+      <li><a href="../Outpass/outpass.html" class="nav-link-item" style="color: #1d4ed8; font-weight: 700;"><i class="fa-solid fa-file-signature" style="color: #6366f1; margin-right: 4px;"></i> Applications</a></li>
+      <li><a href="../Complain/dist/index.html" class="nav-link-item" style="color: #b45309; font-weight: 700;"><i class="fa-solid fa-bullhorn" style="color: #d97706; margin-right: 4px;"></i> Complaints</a></li>
+      <li><a href="../Shops/index.html" class="nav-link-item" style="color: #047857; font-weight: 700;"><i class="fa-solid fa-store" style="color: #059669; margin-right: 4px;"></i> Campus Shops</a></li>
+      <li><a href="../Borrow/dist/index.html" class="nav-link-item" style="color: #1d4ed8; font-weight: 700;"><i class="fa-solid fa-handshake" style="color: #2563eb; margin-right: 4px;"></i> Borrow &amp; Share</a></li>
+      <li><a href="../Feed/Profile/profile.html" class="nav-link-item">Profile</a></li>
+    </ul>
+
+    <div class="nav-user-actions" style="display:flex; align-items:center; gap:8px;">
+      <button onclick="window.CampusAuth.signOut()" style="border:none; padding:7px 14px; background:rgba(239,68,68,0.08); color:#ef4444; border:1px solid rgba(239,68,68,0.25); border-radius:9999px; font-size:12px; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:5px;" title="Sign out of Campus Connect">
+        <span>🚪 Sign Out</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- SMART SCROLL-DOCKED FLOATING SEARCH & FILTER BAR (Moves to Top-Right on Scroll) -->
+  <aside id="dockedFloatingBar" class="docked-floating-bar" aria-label="Scrolled Quick Search & Filters">
+    <div class="docked-input-wrapper">
+      <i class="fas fa-search"></i>
+      <input type="text" id="dockedSearchInput" class="docked-search-input" placeholder="Search alumni, skills, clubs..." autocomplete="off">
+    </div>
+
+    <!-- Filters Dropdown Trigger -->
+    <button id="dockedFilterTrigger" class="docked-filter-trigger" title="Quick Filters">
+      <i class="fas fa-sliders-h"></i>
+      <span>Filters</span>
+    </button>
+
+    <!-- Quick Filter Menu for Docked Bar -->
+    <div id="dockedFilterMenu" class="docked-filter-menu">
+      <div class="docked-menu-header">
+        <span><i class="fas fa-filter"></i> Quick Filters</span>
+        <button class="reset-btn" style="padding: 2px 8px; font-size: 0.72rem;" onclick="resetAll()">Reset</button>
+      </div>
+
+      <div class="docked-select-group">
+        <label for="dockedDomainSelect">Domain</label>
+        <select id="dockedDomainSelect" class="custom-filter-select" style="width: 100%;">
+          <option value="all">All Domains</option>
+          <option value="AI & ML">AI & Machine Learning</option>
+          <option value="Software Eng">Software Engineering</option>
+          <option value="Hardware & Robotics">Hardware & Robotics</option>
+          <option value="Product & Design">Product & Design</option>
+          <option value="Finance & Quant">Finance & Quant</option>
+          <option value="Cybersecurity">Cybersecurity</option>
+        </select>
+      </div>
+
+      <div class="docked-select-group">
+        <label for="dockedBatch">Graduation Batch</label>
+        <select id="dockedBatch" class="custom-filter-select" style="width: 100%;">
+          <option value="all">All Batches</option>
+          <option value="2024">Class of 2024</option>
+          <option value="2023">Class of 2023</option>
+          <option value="2022">Class of 2022</option>
+          <option value="2021">Class of 2021</option>
+          <option value="2020">Class of 2020</option>
+          <option value="2019">Class of 2019</option>
+          <option value="2018">Class of 2018</option>
+          <option value="2017">Class of 2017</option>
+          <option value="2016">Class of 2016</option>
+          <option value="2015">Class of 2015</option>
+        </select>
+      </div>
+
+      <div class="docked-select-group">
+        <label for="dockedClub">Past Club</label>
+        <select id="dockedClub" class="custom-filter-select" style="width: 100%;">
+          <option value="all">All Past Clubs</option>
+          <option value="OSS">OSS (Open Source Society)</option>
+          <option value="GDG">GDG (Google Developer Group)</option>
+          <option value="CP">Competitive Programming</option>
+          <option value="Robotics">Robotics Club</option>
+          <option value="Design">Design & Media</option>
+          <option value="Quant">Quant Club</option>
+          <option value="Cyber">Cybersecurity</option>
+        </select>
+      </div>
+
+      <div class="docked-select-group">
+        <label for="dockedSort">Sort By</label>
+        <select id="dockedSort" class="custom-filter-select" style="width: 100%;">
+          <option value="followers">Most Followed</option>
+          <option value="batch-new">Newest Batch</option>
+          <option value="batch-old">Senior Batch</option>
+          <option value="name">Alphabetical (A-Z)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Scroll Back to Top Button -->
+    <button id="scrollTopBtn" class="scroll-top-btn" title="Back to Top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+  </aside>
+
+  <!-- MAIN DIRECTORY PAGE -->
+  <main class="main-container">
+
+    <!-- DIRECTORY HEADER -->
+    <header class="directory-header">
+      <h1 class="directory-title">Alumni Directory</h1>
+      <p class="directory-subtitle">
+        Discover your peers, seniors, and juniors — connect with the alumni who carry forward our college legacy and shape the global tech industry.
+      </p>
+
+      <div id="alumniCountBadge" class="badge-counter-pill">
+        <i class="fas fa-graduation-cap"></i> Alumni (2000)
+      </div>
+    </header>
+
+    <!-- HERO SEARCH & FILTERS BUTTON SECTION -->
+    <section id="searchFilterSection" class="search-filter-section">
+      <div class="search-bar-row">
+        <!-- Search Input Box -->
+        <div class="search-box-wrapper">
+          <i class="fas fa-search search-box-icon"></i>
+          <input 
+            type="text" 
+            id="searchHeroInput" 
+            class="main-search-input" 
+            placeholder="Search alumni by name, skills (e.g. PyTorch, Go), past clubs (e.g. OSS, GDG), or company..." 
+            autocomplete="off"
+          >
+          <button id="clearSearchBtn" class="clear-search-btn" title="Clear Search">
+            <i class="fas fa-times"></i>
+          </button>
+          <button class="search-submit-btn" onclick="renderCards()">
+            <i class="fas fa-search"></i> Search
+          </button>
+        </div>
+
+        <!-- Filters Button next to Search -->
+        <button id="heroFilterBtn" class="hero-filter-btn" title="Open Filter Options">
+          <i class="fas fa-sliders-h"></i>
+          <span>Filters</span>
+          <span id="heroFilterBadgeDot" class="filter-badge-dot"></span>
+        </button>
+      </div>
+
+      <!-- FILTER DROPDOWN PANEL (Contains Domain Chips, Batch, Club, Sort, Reset) -->
+      <div id="filterDropdownPanel" class="filter-dropdown-panel">
+        <div class="filter-panel-header">
+          <span class="filter-panel-title"><i class="fas fa-filter"></i> Filter & Sort Alumni</span>
+          <button id="resetFiltersBtn" class="reset-btn">
+            <i class="fas fa-redo"></i> Reset Filters
+          </button>
+        </div>
+
+        <!-- Domain Chips inside Filter Panel -->
+        <div class="domain-chips-wrapper">
+          <span class="domain-chip-label">Domain of Expertise:</span>
+          <button class="domain-chip active" data-domain="all">All Domains</button>
+          <button class="domain-chip" data-domain="AI & ML">AI & Machine Learning</button>
+          <button class="domain-chip" data-domain="Software Eng">Software Engineering</button>
+          <button class="domain-chip" data-domain="Hardware & Robotics">Hardware & Robotics</button>
+          <button class="domain-chip" data-domain="Product & Design">Product & Design</button>
+          <button class="domain-chip" data-domain="Finance & Quant">Finance & Quant</button>
+          <button class="domain-chip" data-domain="Cybersecurity">Cybersecurity</button>
+        </div>
+
+        <!-- Secondary Dropdowns inside Filter Panel -->
+        <div class="dropdown-selectors-grid">
+          <!-- Batch Select -->
+          <div class="selector-box">
+            <label for="batchSelect">Graduation Batch</label>
+            <select id="batchSelect" class="custom-filter-select" aria-label="Graduation Batch">
+              <option value="all">All Batches</option>
+              <option value="2024">Class of 2024</option>
+              <option value="2023">Class of 2023</option>
+              <option value="2022">Class of 2022</option>
+              <option value="2021">Class of 2021</option>
+              <option value="2020">Class of 2020</option>
+              <option value="2019">Class of 2019</option>
+              <option value="2018">Class of 2018</option>
+              <option value="2017">Class of 2017</option>
+              <option value="2016">Class of 2016</option>
+              <option value="2015">Class of 2015</option>
+            </select>
+          </div>
+
+          <!-- Past Club Select -->
+          <div class="selector-box">
+            <label for="clubSelect">Past College Club</label>
+            <select id="clubSelect" class="custom-filter-select" aria-label="Past College Club">
+              <option value="all">All Past Clubs</option>
+              <option value="OSS">OSS (Open Source Society)</option>
+              <option value="GDG">GDG (Google Developer Group)</option>
+              <option value="CP">Competitive Programming</option>
+              <option value="Robotics">Robotics Club</option>
+              <option value="Design">Design & Media</option>
+              <option value="Quant">Quant Club</option>
+              <option value="Cyber">Cybersecurity</option>
+            </select>
+          </div>
+
+          <!-- Sort Select -->
+          <div class="selector-box">
+            <label for="sortSelect">Sort Alumni By</label>
+            <select id="sortSelect" class="custom-filter-select" aria-label="Sort Alumni">
+              <option value="followers">Most Followed</option>
+              <option value="batch-new">Newest Batch</option>
+              <option value="batch-old">Senior Batch</option>
+              <option value="name">Alphabetical (A-Z)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPACT ALUMNI CARD GRID (Click anywhere on card to open) -->
+    <section id="alumniCardsGrid" class="alumni-card-grid">
+
+      <!-- Hard-coded Alumni: Snehangshu Das -->
+      <div class="alumni-card" style="--card-accent: #8b5cf6;" onclick="openProfile('alum-1')" title="Tap to view full profile of Snehangshu Das">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Snehangshu Das</h3>
+          <div class="alumni-dept-text">B.Tech CSE - AIT Pune '21</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> Senior ML Engineer at Google DeepMind
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">OSS</span><span class="club-pill">GDG</span><span class="club-pill">CP</span><span class="club-pill">Robotics</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">PyTorch</span><span class="skill-pill">LLMs</span><span class="skill-pill">Distributed Systems</span><span class="skill-pill">Python</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111001" class="btn-alumni-action call-btn" title="Call Snehangshu Das">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111001?text=Hi%20Snehangshu%20Das,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Snehangshu Das">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-1')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Priya Sharma -->
+      <div class="alumni-card" style="--card-accent: #f97316;" onclick="openProfile('alum-2')" title="Tap to view full profile of Priya Sharma">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Priya Sharma</h3>
+          <div class="alumni-dept-text">B.Tech IT - AIT Pune '20</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> Staff Software Architect at Stripe
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">GDG</span><span class="club-pill">CP</span><span class="club-pill">Coding Ninjas</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">Go</span><span class="skill-pill">Kafka</span><span class="skill-pill">Kubernetes</span><span class="skill-pill">System Design</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111002" class="btn-alumni-action call-btn" title="Call Priya Sharma">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111002?text=Hi%20Priya%20Sharma,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Priya Sharma">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-2')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Arjun Mehta -->
+      <div class="alumni-card" style="--card-accent: #06b6d4;" onclick="openProfile('alum-3')" title="Tap to view full profile of Arjun Mehta">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Arjun Mehta</h3>
+          <div class="alumni-dept-text">B.Tech ECE - AIT Pune '22</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> Robotics Firmware Lead at Tesla
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">OSS</span><span class="club-pill">Robotics</span><span class="club-pill">Formula Student</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">C++20</span><span class="skill-pill">ROS2</span><span class="skill-pill">Embedded C</span><span class="skill-pill">RTOS</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111003" class="btn-alumni-action call-btn" title="Call Arjun Mehta">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111003?text=Hi%20Arjun%20Mehta,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Arjun Mehta">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-3')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Ananya Kulkarni -->
+      <div class="alumni-card" style="--card-accent: #ec4899;" onclick="openProfile('alum-4')" title="Tap to view full profile of Ananya Kulkarni">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Ananya Kulkarni</h3>
+          <div class="alumni-dept-text">B.Tech Mech - AIT Pune '21</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> Lead Product Designer at Airbnb
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">Design & Media</span><span class="club-pill">Fine Arts</span><span class="club-pill">Cultural Club</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">Figma</span><span class="skill-pill">Design Systems</span><span class="skill-pill">UX Research</span><span class="skill-pill">Micro-Interactions</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111004" class="btn-alumni-action call-btn" title="Call Ananya Kulkarni">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111004?text=Hi%20Ananya%20Kulkarni,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Ananya Kulkarni">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-4')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Rohan Patil -->
+      <div class="alumni-card" style="--card-accent: #3b82f6;" onclick="openProfile('alum-5')" title="Tap to view full profile of Rohan Patil">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Rohan Patil</h3>
+          <div class="alumni-dept-text">B.Tech CSE - AIT Pune '19</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> Quantitative Researcher at Citadel
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">Quant Club</span><span class="club-pill">CP</span><span class="club-pill">Math Society</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">C++</span><span class="skill-pill">Python</span><span class="skill-pill">Stochastic Calculus</span><span class="skill-pill">Time Series ML</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111005" class="btn-alumni-action call-btn" title="Call Rohan Patil">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111005?text=Hi%20Rohan%20Patil,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Rohan Patil">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-5')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Ishita Desai -->
+      <div class="alumni-card" style="--card-accent: #10b981;" onclick="openProfile('alum-6')" title="Tap to view full profile of Ishita Desai">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Ishita Desai</h3>
+          <div class="alumni-dept-text">B.Tech IT - AIT Pune '23</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> Security Researcher at Cisco Talos
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">Cybersecurity</span><span class="club-pill">OSS</span><span class="club-pill">ACM</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">Rust</span><span class="skill-pill">Reverse Eng</span><span class="skill-pill">Zero Knowledge</span><span class="skill-pill">Penetration Testing</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111006" class="btn-alumni-action call-btn" title="Call Ishita Desai">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111006?text=Hi%20Ishita%20Desai,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Ishita Desai">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-6')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Vikramaditya Rathore -->
+      <div class="alumni-card" style="--card-accent: #6366f1;" onclick="openProfile('alum-7')" title="Tap to view full profile of Vikramaditya Rathore">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Vikramaditya Rathore</h3>
+          <div class="alumni-dept-text">B.Tech CSE - AIT Pune '18</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> Principal Engineer at AWS Lambda
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">OSS</span><span class="club-pill">ACM</span><span class="club-pill">GDG</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">Rust</span><span class="skill-pill">Linux Kernel</span><span class="skill-pill">Distributed Systems</span><span class="skill-pill">AWS</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111007" class="btn-alumni-action call-btn" title="Call Vikramaditya Rathore">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111007?text=Hi%20Vikramaditya%20Rathore,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Vikramaditya Rathore">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-7')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Tanvi Saxena -->
+      <div class="alumni-card" style="--card-accent: #a855f7;" onclick="openProfile('alum-8')" title="Tap to view full profile of Tanvi Saxena">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Tanvi Saxena</h3>
+          <div class="alumni-dept-text">B.Tech IT - AIT Pune '22</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> AI Research Scientist at Meta FAIR
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">OSS</span><span class="club-pill">CP</span><span class="club-pill">Fine Arts</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">PyTorch</span><span class="skill-pill">Audio AI</span><span class="skill-pill">Transformers</span><span class="skill-pill">CUDA</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111008" class="btn-alumni-action call-btn" title="Call Tanvi Saxena">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111008?text=Hi%20Tanvi%20Saxena,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Tanvi Saxena">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-8')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Devendra Singhania -->
+      <div class="alumni-card" style="--card-accent: #f59e0b;" onclick="openProfile('alum-9')" title="Tap to view full profile of Devendra Singhania">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Devendra Singhania</h3>
+          <div class="alumni-dept-text">B.Tech Mech - AIT Pune '17</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> Propulsion Systems Specialist at ISRO
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">Robotics</span><span class="club-pill">Formula Student</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">Ansys Fluent</span><span class="skill-pill">Aerodynamics</span><span class="skill-pill">MATLAB</span><span class="skill-pill">Cryogenics</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111009" class="btn-alumni-action call-btn" title="Call Devendra Singhania">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111009?text=Hi%20Devendra%20Singhania,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Devendra Singhania">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-9')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Meera Krishnan -->
+      <div class="alumni-card" style="--card-accent: #ec4899;" onclick="openProfile('alum-10')" title="Tap to view full profile of Meera Krishnan">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Meera Krishnan</h3>
+          <div class="alumni-dept-text">B.Tech CSE - AIT Pune '20</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> Staff Product Manager at Razorpay
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">Design & Media</span><span class="club-pill">GDG</span><span class="club-pill">Cultural Club</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">Product Strategy</span><span class="skill-pill">Fintech</span><span class="skill-pill">User Analytics</span><span class="skill-pill">APIs</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111010" class="btn-alumni-action call-btn" title="Call Meera Krishnan">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111010?text=Hi%20Meera%20Krishnan,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Meera Krishnan">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-10')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Harsh Vardhan Joshi -->
+      <div class="alumni-card" style="--card-accent: #0ea5e9;" onclick="openProfile('alum-11')" title="Tap to view full profile of Harsh Vardhan Joshi">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Harsh Vardhan Joshi</h3>
+          <div class="alumni-dept-text">B.Tech ECE - AIT Pune '19</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> Senior Hardware Engineer at Apple
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">Robotics</span><span class="club-pill">Quant Club</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">SystemVerilog</span><span class="skill-pill">VLSI</span><span class="skill-pill">ASIC</span><span class="skill-pill">FPGA</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111011" class="btn-alumni-action call-btn" title="Call Harsh Vardhan Joshi">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111011?text=Hi%20Harsh%20Vardhan%20Joshi,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Harsh Vardhan Joshi">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-11')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Siddharth Nambiar -->
+      <div class="alumni-card" style="--card-accent: #10b981;" onclick="openProfile('alum-12')" title="Tap to view full profile of Siddharth Nambiar">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Siddharth Nambiar</h3>
+          <div class="alumni-dept-text">B.Tech CSE - AIT Pune '16</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> Co-Founder & CTO at NexusAI
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">OSS</span><span class="club-pill">CP</span><span class="club-pill">GDG</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">Startups</span><span class="skill-pill">System Architecture</span><span class="skill-pill">Generative AI</span><span class="skill-pill">Go</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111012" class="btn-alumni-action call-btn" title="Call Siddharth Nambiar">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111012?text=Hi%20Siddharth%20Nambiar,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Siddharth Nambiar">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-12')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Kavita Somani -->
+      <div class="alumni-card" style="--card-accent: #f43f5e;" onclick="openProfile('alum-13')" title="Tap to view full profile of Kavita Somani">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Kavita Somani</h3>
+          <div class="alumni-dept-text">B.Tech IT - AIT Pune '21</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> Threat Intelligence Analyst at Mandiant
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">Cybersecurity</span><span class="club-pill">ACM</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">Threat Hunting</span><span class="skill-pill">YARA</span><span class="skill-pill">OSINT</span><span class="skill-pill">Incident Response</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111013" class="btn-alumni-action call-btn" title="Call Kavita Somani">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111013?text=Hi%20Kavita%20Somani,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Kavita Somani">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-13')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Aditya Roy Chowdhury -->
+      <div class="alumni-card" style="--card-accent: #3b82f6;" onclick="openProfile('alum-14')" title="Tap to view full profile of Aditya Roy Chowdhury">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Aditya Roy Chowdhury</h3>
+          <div class="alumni-dept-text">B.Tech CSE - AIT Pune '23</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> Distributed Systems Engineer at Snowflake
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">OSS</span><span class="club-pill">CP</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">C++</span><span class="skill-pill">Java</span><span class="skill-pill">Database Internals</span><span class="skill-pill">Distributed Querying</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111014" class="btn-alumni-action call-btn" title="Call Aditya Roy Chowdhury">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111014?text=Hi%20Aditya%20Roy%20Chowdhury,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Aditya Roy Chowdhury">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-14')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Shruti Hegde -->
+      <div class="alumni-card" style="--card-accent: #eab308;" onclick="openProfile('alum-15')" title="Tap to view full profile of Shruti Hegde">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Shruti Hegde</h3>
+          <div class="alumni-dept-text">B.Tech ECE - AIT Pune '20</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> Quantitative Strategist at Goldman Sachs
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">Quant Club</span><span class="club-pill">Math Society</span><span class="club-pill">Cultural Club</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">Python</span><span class="skill-pill">Financial Math</span><span class="skill-pill">Risk Modeling</span><span class="skill-pill">C++</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111015" class="btn-alumni-action call-btn" title="Call Shruti Hegde">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111015?text=Hi%20Shruti%20Hegde,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Shruti Hegde">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-15')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Akash Nair -->
+      <div class="alumni-card" style="--card-accent: #0284c7;" onclick="openProfile('alum-16')" title="Tap to view full profile of Akash Nair">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Akash Nair</h3>
+          <div class="alumni-dept-text">B.Tech CSE - AIT Pune '22</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> Autonomous Vehicle Perception Engineer at Waymo
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">Robotics</span><span class="club-pill">OSS</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">Computer Vision</span><span class="skill-pill">TensorRT</span><span class="skill-pill">C++</span><span class="skill-pill">PyTorch</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111016" class="btn-alumni-action call-btn" title="Call Akash Nair">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111016?text=Hi%20Akash%20Nair,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Akash Nair">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-16')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Pooja Chhabra -->
+      <div class="alumni-card" style="--card-accent: #ec4899;" onclick="openProfile('alum-17')" title="Tap to view full profile of Pooja Chhabra">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Pooja Chhabra</h3>
+          <div class="alumni-dept-text">B.Tech IT - AIT Pune '19</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> Head of Design at Zepto
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">Design & Media</span><span class="club-pill">Fine Arts</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">Design Leadership</span><span class="skill-pill">Rapid Prototyping</span><span class="skill-pill">Design Ops</span><span class="skill-pill">Figma</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111017" class="btn-alumni-action call-btn" title="Call Pooja Chhabra">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111017?text=Hi%20Pooja%20Chhabra,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Pooja Chhabra">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-17')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Nikhil Deshmukh -->
+      <div class="alumni-card" style="--card-accent: #059669;" onclick="openProfile('alum-18')" title="Tap to view full profile of Nikhil Deshmukh">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Nikhil Deshmukh</h3>
+          <div class="alumni-dept-text">B.Tech Mech - AIT Pune '18</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> EV Battery Thermal Lead at Tata Motors
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">Formula Student</span><span class="club-pill">Robotics</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">Thermal Management</span><span class="skill-pill">Battery Pack Design</span><span class="skill-pill">SolidWorks</span><span class="skill-pill">SimScale</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111018" class="btn-alumni-action call-btn" title="Call Nikhil Deshmukh">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111018?text=Hi%20Nikhil%20Deshmukh,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Nikhil Deshmukh">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-18')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Divya Bansal -->
+      <div class="alumni-card" style="--card-accent: #6366f1;" onclick="openProfile('alum-19')" title="Tap to view full profile of Divya Bansal">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Divya Bansal</h3>
+          <div class="alumni-dept-text">B.Tech CSE - AIT Pune '24</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> Software Development Engineer at Microsoft
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">OSS</span><span class="club-pill">GDG</span><span class="club-pill">CP</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">TypeScript</span><span class="skill-pill">C#</span><span class="skill-pill">.NET Core</span><span class="skill-pill">Docker</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111019" class="btn-alumni-action call-btn" title="Call Divya Bansal">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111019?text=Hi%20Divya%20Bansal,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Divya Bansal">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-19')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Gaurav Sen -->
+      <div class="alumni-card" style="--card-accent: #d97706;" onclick="openProfile('alum-20')" title="Tap to view full profile of Gaurav Sen">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Gaurav Sen</h3>
+          <div class="alumni-dept-text">B.Tech IT - AIT Pune '15</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> Founder & Educator at Concept & System Design
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">CP</span><span class="club-pill">OSS</span><span class="club-pill">ACM</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">System Design</span><span class="skill-pill">Microservices</span><span class="skill-pill">Scalability</span><span class="skill-pill">Architecture</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111020" class="btn-alumni-action call-btn" title="Call Gaurav Sen">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111020?text=Hi%20Gaurav%20Sen,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Gaurav Sen">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-20')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Rhea Chatterjee -->
+      <div class="alumni-card" style="--card-accent: #8b5cf6;" onclick="openProfile('alum-21')" title="Tap to view full profile of Rhea Chatterjee">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Rhea Chatterjee</h3>
+          <div class="alumni-dept-text">B.Tech CSE - AIT Pune '21</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> AI Alignment Researcher at Anthropic
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">OSS</span><span class="club-pill">CP</span><span class="club-pill">Math Society</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">Interpretability</span><span class="skill-pill">TransformerLens</span><span class="skill-pill">Python</span><span class="skill-pill">Safety</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111021" class="btn-alumni-action call-btn" title="Call Rhea Chatterjee">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111021?text=Hi%20Rhea%20Chatterjee,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Rhea Chatterjee">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-21')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Manish Tiwari -->
+      <div class="alumni-card" style="--card-accent: #dc2626;" onclick="openProfile('alum-22')" title="Tap to view full profile of Manish Tiwari">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Manish Tiwari</h3>
+          <div class="alumni-dept-text">B.Tech ECE - AIT Pune '17</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> Director of Embedded Security at Qualcomm
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">Cybersecurity</span><span class="club-pill">Robotics</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">Secure Boot</span><span class="skill-pill">Hardware Security</span><span class="skill-pill">ARM TrustZone</span><span class="skill-pill">Cryptanalysis</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111022" class="btn-alumni-action call-btn" title="Call Manish Tiwari">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111022?text=Hi%20Manish%20Tiwari,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Manish Tiwari">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-22')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Deepika Verma -->
+      <div class="alumni-card" style="--card-accent: #0284c7;" onclick="openProfile('alum-23')" title="Tap to view full profile of Deepika Verma">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Deepika Verma</h3>
+          <div class="alumni-dept-text">B.Tech IT - AIT Pune '24</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> Frontend Engineer at Vercel
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">OSS</span><span class="club-pill">GDG</span><span class="club-pill">Design & Media</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">Next.js</span><span class="skill-pill">React</span><span class="skill-pill">Web Vitals</span><span class="skill-pill">TypeScript</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111023" class="btn-alumni-action call-btn" title="Call Deepika Verma">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111023?text=Hi%20Deepika%20Verma,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Deepika Verma">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-23')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Sameer Malhotra -->
+      <div class="alumni-card" style="--card-accent: #ea580c;" onclick="openProfile('alum-24')" title="Tap to view full profile of Sameer Malhotra">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Sameer Malhotra</h3>
+          <div class="alumni-dept-text">B.Tech Mech - AIT Pune '16</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> Director of Aerodynamics at McLaren Racing
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">Formula Student</span><span class="club-pill">Robotics</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">F1 Aerodynamics</span><span class="skill-pill">Wind Tunnel Testing</span><span class="skill-pill">OpenFOAM</span><span class="skill-pill">Carbon Composites</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111024" class="btn-alumni-action call-btn" title="Call Sameer Malhotra">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111024?text=Hi%20Sameer%20Malhotra,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Sameer Malhotra">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-24')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Aakash Banerjee -->
+      <div class="alumni-card" style="--card-accent: #e11d48;" onclick="openProfile('alum-25')" title="Tap to view full profile of Aakash Banerjee">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Aakash Banerjee</h3>
+          <div class="alumni-dept-text">B.Tech CSE - AIT Pune '20</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> Senior Cloud Architect at Netflix
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">OSS</span><span class="club-pill">GDG</span><span class="club-pill">CP</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">Chaos Eng</span><span class="skill-pill">Cassandra</span><span class="skill-pill">AWS</span><span class="skill-pill">Golang</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111025" class="btn-alumni-action call-btn" title="Call Aakash Banerjee">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111025?text=Hi%20Aakash%20Banerjee,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Aakash Banerjee">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-25')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard-coded Alumni: Rajeshwar Varma -->
+      <div class="alumni-card" style="--card-accent: #0891b2;" onclick="openProfile('alum-26')" title="Tap to view full profile of Rajeshwar Varma">
+        <div>
+          <!-- Top Avatar Row with Green Indicator Dot -->
+          <div class="card-avatar-row">
+            <div class="avatar-container">
+              <div class="avatar-circle">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="status-indicator-dot" title="Active on Campus Connect"></div>
+            </div>
+          </div>
+
+          <!-- Alumni Name & Degree Info -->
+          <h3 class="alumni-name-text">Rajeshwar Varma</h3>
+          <div class="alumni-dept-text">B.Tech IT - AIT Pune '17</div>
+          <div class="alumni-job-text">
+            <i class="fas fa-briefcase"></i> Lead Infrastructure Architect at Databricks
+          </div>
+
+          <!-- PAST CLUB AFFILIATIONS (Soft Purple Badges) -->
+          <div class="section-heading-caps">Past Club Affiliations</div>
+          <div class="pill-group">
+            <span class="club-pill">OSS</span><span class="club-pill">ACM</span>
+          </div>
+
+          <!-- SKILLS (Soft Pink/Red Badges) -->
+          <div class="section-heading-caps">Skills</div>
+          <div class="pill-group">
+            <span class="skill-pill">Scala</span><span class="skill-pill">Spark</span><span class="skill-pill">Kubernetes</span><span class="skill-pill">Lakehouse</span>
+          </div>
+
+          <!-- DIRECT CONTACT ACTIONS (Call, WhatsApp, View) -->
+          <div class="alumni-card-actions" onclick="event.stopPropagation();">
+            <a href="tel:+919820111026" class="btn-alumni-action call-btn" title="Call Rajeshwar Varma">
+              <i class="fas fa-phone-alt"></i> Call
+            </a>
+            <a href="https://wa.me/919820111026?text=Hi%20Rajeshwar%20Varma,%20connecting%20via%20CampusConnect!" target="_blank" rel="noopener noreferrer" class="btn-alumni-action wa-btn" title="Chat on WhatsApp with Rajeshwar Varma">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="btn-alumni-action profile-btn" onclick="openProfile('alum-26')" title="View Detailed Profile">
+              <i class="fas fa-external-link-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ALUMNI PROFILE DETAIL MODAL (Opens on Card Tap - Shows Bio, Stats, Follow, Timeline) -->
+  <div id="profileModal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <button id="modalCloseBtn" class="modal-close" aria-label="Close modal">
+        <i class="fas fa-times"></i>
+      </button>
+      <div id="modalContentInner" class="modal-content-inner">
+        <!-- Dynamic modal profile data -->
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toastBar" class="toast-bar"></div>
+
+  <!-- Scripts -->
+  <script src="alumini.js"></script>
+  <script src="../shared/campus-ai.js"></script>
+</body>
+</html>

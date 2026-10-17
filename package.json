@@ -1,0 +1,21 @@
+{
+  "name": "campus-connect-unified",
+  "version": "1.0.0",
+  "description": "Unified Production-Ready Campus Connect Platform for Army Institute of Technology (AIT Pune)",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node server/server.js",
+    "server": "node server/server.js"
+  },
+  "keywords": [
+    "campus-connect",
+    "ait-pune",
+    "student-portal",
+    "complaints-redressal",
+    "campus-shops",
+    "borrow-and-share"
+  ],
+  "author": "AIT Pune Engineering",
+  "license": "ISC"
+}

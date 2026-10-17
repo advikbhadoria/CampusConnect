@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aakriti Championship Hub 2026 — Army Institute of Technology (AIT Pune)</title>
+  <meta name="description" content="Official Aakriti Championship Hub at AIT Pune. Real-time scores, registration trials, branch leaderboards, and historical archives for Sports, Cultural, and Technical Aakriti." />
+
+  <!-- Google Fonts: Outfit, Plus Jakarta Sans, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Modern Glassmorphic Stylesheet -->
+  <link rel="stylesheet" href="./aakriti.css" />
+</head>
+<body>
+
+  <!-- ========================================================================
+       1. Background Canvas Container (Strict overflow:hidden, Floating Orbs)
+       ======================================================================== -->
+  <div class="background-canvas-container" aria-hidden="true">
+    <div class="floating-orb orb-navy"></div>
+    <div class="floating-orb orb-electric"></div>
+    <div class="floating-orb orb-ice"></div>
+    <div class="floating-orb orb-gold"></div>
+  </div>
+
+  <!-- ========================================================================
+       2. Sticky Glassmorphic Navigation Bar
+       ======================================================================== -->
+  <header class="aakriti-navbar">
+    <div class="nav-inner-container">
+      
+      <!-- Left: Back Button & Dynamic Breadcrumbs -->
+      <div class="nav-left-group">
+        <button type="button" class="btn-nav-back" id="btnNavBack" aria-label="Go back to previous screen">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Back</span>
+        </button>
+
+        <nav class="breadcrumb-trail" aria-label="Breadcrumb Navigation">
+          <a href="../Feed/feed.html" class="crumb-home"><i class="fa-solid fa-house"></i> <span class="crumb-text">Home</span></a>
+          <span class="breadcrumb-sep crumb-sep-1">/</span>
+          <a href="#overview" onclick="window.Aakriti.navigateTo('overview')" class="crumb-hub">Aakriti</a>
+          <span class="breadcrumb-sep crumb-sep-2">/</span>
+          <span class="breadcrumb-active" id="activeBreadcrumbLabel">Overview</span>
+        </nav>
+      </div>
+
+      <!-- Center: Championship Switcher Tabs -->
+      <div class="championship-tabs-deck" role="tablist" aria-label="Aakriti Championship Categories">
+        <button type="button" class="champ-tab-btn active" data-view="overview" role="tab" aria-selected="true">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Overview</span>
+        </button>
+        <button type="button" class="champ-tab-btn" data-view="sports" role="tab" aria-selected="false">
+          <i class="fa-solid fa-medal"></i>
+          <span>Sports</span>
+          <span class="tab-badge">9</span>
+        </button>
+        <button type="button" class="champ-tab-btn" data-view="cultural" role="tab" aria-selected="false">
+          <i class="fa-solid fa-masks-theater"></i>
+          <span>Cultural</span>
+          <span class="tab-badge">18</span>
+        </button>
+        <button type="button" class="champ-tab-btn" data-view="technical" role="tab" aria-selected="false">
+          <i class="fa-solid fa-microchip"></i>
+          <span>Technical</span>
+          <span class="tab-badge">8</span>
+        </button>
+      </div>
+
+      <!-- Right: Historical Archives Trigger & Live Indicator -->
+      <div class="nav-right-group">
+        <button type="button" class="btn-archives-trigger" id="btnArchivesNav" aria-label="View Previous Years Standings">
+          <i class="fa-solid fa-scroll"></i>
+          <span>Archives</span>
+        </button>
+        <div class="live-indicator-badge">
+          <span class="pulse-dot"></span>
+          <span>Live</span>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       3. Main Content Wrapper
+       ======================================================================== -->
+  <main class="aakriti-main-wrapper" id="mainContent">
+
+    <!-- ======================================================================
+         VIEW 1: HUB OVERVIEW (General Championship Hub & Standings)
+         ====================================================================== -->
+    <section class="aakriti-view-section active" id="view-overview" aria-labelledby="overviewHeading">
+      
+      <!-- Hero Banner -->
+      <div class="hub-hero-banner">
+        <div class="hub-hero-inner">
+          <div class="hub-hero-text">
+            <div class="hero-pill-badge">
+              <i class="fa-solid fa-fire"></i> Flagship Annual Inter-Branch Championship
+            </div>
+            <h1 class="hub-hero-title" id="overviewHeading">
+              Welcome to the <span>Aakriti Championship Hub</span>
+            </h1>
+            <p class="hub-hero-desc">
+              The grand battlefield where the 4 esteemed branches of Army Institute of Technology — 
+              <strong>Comp</strong>, <strong>IT</strong>, <strong>E&TC</strong>, and <strong>Mech-ARE</strong> — 
+              clash across Sports, Cultural, and Technical arenas for the immortal General Championship Shield.
+            </p>
+            <div class="hero-stats-strip">
+              <div class="stat-item">
+                <span class="stat-number">4</span>
+                <span class="stat-label">Competing Branches</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">3</span>
+                <span class="stat-label">Flagship Shields</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">32</span>
+                <span class="stat-label">Total Events</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">2,400+</span>
+                <span class="stat-label">Registered Contenders</span>
+              </div>
+            </div>
+          </div>
+          <div style="flex-shrink: 0; text-align: center;">
+            <div style="width: 170px; height: 170px; border-radius: 50%; background: radial-gradient(circle, #fef3c7 0%, #fde68a 60%, #fbbf24 100%); border: 5px solid #ffffff; box-shadow: 0 15px 40px rgba(217, 119, 6, 0.35); display: flex; align-items: center; justify-content: center; overflow: hidden; margin: 0 auto 12px auto;">
+              <img src="./images/trophy_gold.jpg" alt="AIT Championship Gold Trophy" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='./images/sports_hero.jpg'" />
+            </div>
+            <span style="font-family: var(--font-heading); font-size: 0.95rem; font-weight: 800; color: var(--navy-900); display: block;">
+              Annual General Shield
+            </span>
+            <span style="font-size: 0.75rem; color: var(--navy-600);">Highest Inter-Branch Honor</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reigning Champion Showcase Banner (Overall Shield) -->
+      <div class="reigning-champion-showcase" id="reigningBannerOverview">
+        <!-- Rendered via aakriti.js -->
+      </div>
+
+      <!-- Live Overall Annual Shield Standings Strip -->
+      <div class="standings-summary-card">
+        <div class="standings-header-row">
+          <div class="standings-title-group">
+            <h3><i class="fa-solid fa-ranking-star" style="color: var(--blue-royal);"></i> Overall Annual Shield Points Table (2025–2026)</h3>
+            <p class="standings-subtitle">Aggregated departmental points across all Sports, Cultural, and Technical championship events.</p>
+          </div>
+          <button type="button" class="btn-secondary-action" onclick="window.Aakriti.openArchivesModal()">
+            <i class="fa-solid fa-clock-rotate-left"></i> Full Archives
+          </button>
+        </div>
+        <div class="department-teams-grid" id="standingsGridOverview">
+          <!-- Rendered via aakriti.js -->
+        </div>
+      </div>
+
+      <!-- Flagship Championship Trio Cards -->
+      <div style="margin-bottom: 24px;">
+        <h2 style="font-family: var(--font-heading); font-size: 1.85rem; font-weight: 800; color: var(--navy-950); margin-bottom: 8px;">
+          Explore Flagship Championships
+        </h2>
+        <p style="font-size: 0.95rem; color: var(--navy-600); margin-bottom: 24px;">
+          Select a championship arena to register for trials, inspect scorecards, or consult senior branch in-charges.
+        </p>
+
+        <div class="flagships-trio-grid">
+          
+          <!-- Sports Aakriti Card -->
+          <div class="flagship-portal-card" onclick="window.Aakriti.navigateTo('sports')">
+            <div class="flagship-card-hero-banner sports-banner">
+              <div class="flagship-watermark-icon">
+                <i class="fa-solid fa-volleyball"></i>
+              </div>
+              <div class="flagship-banner-badge">
+                <i class="fa-solid fa-medal"></i> Athletics Arena
+              </div>
+              <h3 class="flagship-card-title">
+                <i class="fa-solid fa-volleyball"></i> Sports Aakriti
+              </h3>
+            </div>
+            <div class="flagship-card-body">
+              <div class="flagship-card-meta">
+                <span class="defending-champ-pill">🏆 Champ: COMP (480 Pts)</span>
+                <span style="font-size: 0.775rem; font-weight: 700; color: var(--blue-royal);">9 Unified Sports</span>
+              </div>
+              <p class="flagship-card-desc">
+                High-octane varsity athletics spanning Lawn Tennis, Basketball, Cricket, Football, Kabaddi, and Badminton across Boys, Girls, and Mixed Doubles divisions.
+              </p>
+              <button type="button" class="btn-primary-action">
+                Enter Sports Arena ⚡
+              </button>
+            </div>
+          </div>
+
+          <!-- Cultural Aakriti Card -->
+          <div class="flagship-portal-card" onclick="window.Aakriti.navigateTo('cultural')">
+            <div class="flagship-card-hero-banner cultural-banner">
+              <div class="flagship-watermark-icon">
+                <i class="fa-solid fa-masks-theater"></i>
+              </div>
+              <div class="flagship-banner-badge">
+                <i class="fa-solid fa-music"></i> Performing Arts
+              </div>
+              <h3 class="flagship-card-title">
+                <i class="fa-solid fa-masks-theater"></i> Cultural Aakriti
+              </h3>
+            </div>
+            <div class="flagship-card-body">
+              <div class="flagship-card-meta">
+                <span class="defending-champ-pill">🏆 Champ: IT (510 Pts)</span>
+                <span style="font-size: 0.775rem; font-weight: 700; color: var(--blue-royal);">18 Flagship Events</span>
+              </div>
+              <p class="flagship-card-desc">
+                The grand artistic battle: Stage &amp; Theatre, Classical Vocals (LIMS), Nukkad Natak, Parliamentary Debate, Fine Arts, and Cinematic Filmmaking challenges.
+              </p>
+              <button type="button" class="btn-primary-action">
+                Enter Cultural Stage 🎤
+              </button>
+            </div>
+          </div>
+
+          <!-- Technical Aakriti Card -->
+          <div class="flagship-portal-card" onclick="window.Aakriti.navigateTo('technical')">
+            <div class="flagship-card-hero-banner technical-banner">
+              <div class="flagship-watermark-icon">
+                <i class="fa-solid fa-laptop-code"></i>
+              </div>
+              <div class="flagship-banner-badge">
+                <i class="fa-solid fa-microchip"></i> Engineering &amp; Hackathons
+              </div>
+              <h3 class="flagship-card-title">
+                <i class="fa-solid fa-laptop-code"></i> Technical Aakriti
+              </h3>
+            </div>
+            <div class="flagship-card-body">
+              <div class="flagship-card-meta">
+                <span class="defending-champ-pill">🏆 Champ: COMP (540 Pts)</span>
+                <span style="font-size: 0.775rem; font-weight: 700; color: var(--blue-royal);">8 High-Impact Contests</span>
+              </div>
+              <p class="flagship-card-desc">
+                Cutthroat engineering challenges: 24-Hour Code Hackathons, Algorithmic DSA sprints, Autonomous Robo-Soccer, CAD Modeling, IoT Debugging, and Cybersecurity CTFs.
+              </p>
+              <button type="button" class="btn-primary-action">
+                Enter Tech Arena 🚀
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ======================================================================
+         VIEW 2: SPORTS AAKRITI DASHBOARD
+         ====================================================================== -->
+    <section class="aakriti-view-section" id="view-sports" aria-labelledby="sportsHeading">
+      
+      <!-- Reigning Champion Showcase Banner (Sports) -->
+      <div class="reigning-champion-showcase" id="reigningBannerSports">
+        <!-- Rendered via aakriti.js -->
+      </div>
+
+      <!-- Sports Standings Strip -->
+      <div class="standings-summary-card">
+        <div class="standings-header-row">
+          <div class="standings-title-group">
+            <h3 id="sportsHeading"><i class="fa-solid fa-medal" style="color: var(--blue-royal);"></i> Sports Aakriti — Department Standings</h3>
+            <p class="standings-subtitle">Points and medal tally across all 9 sports categories (Comp, IT, E&TC, Mech-ARE).</p>
+          </div>
+        </div>
+        <div class="department-teams-grid" id="standingsGridSports">
+          <!-- Rendered via aakriti.js -->
+        </div>
+      </div>
+
+      <!-- Catalog Filter Bar -->
+      <div class="catalog-filter-bar">
+        <div class="filter-pills-deck">
+          <button type="button" class="filter-pill active" data-filter-domain="sports" data-filter="All">All Sports (9)</button>
+          <button type="button" class="filter-pill" data-filter-domain="sports" data-filter="Racket Sports">Racket Sports</button>
+          <button type="button" class="filter-pill" data-filter-domain="sports" data-filter="Ball & Team Games">Ball &amp; Team Games</button>
+          <button type="button" class="filter-pill" data-filter-domain="sports" data-filter="Combat/Field">Combat / Field</button>
+        </div>
+
+        <div class="search-input-wrapper">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="search" class="search-catalog-field" id="sportsSearchInput" placeholder="Search sports or venue..." aria-label="Search Sports" />
+        </div>
+      </div>
+
+      <!-- Sports Event Cards Grid (Unified 9 Sports) -->
+      <div class="events-cards-grid" id="sportsCardsGrid">
+        <!-- Rendered via aakriti.js -->
+      </div>
+
+    </section>
+
+    <!-- ======================================================================
+         VIEW 3: CULTURAL AAKRITI DASHBOARD
+         ====================================================================== -->
+    <section class="aakriti-view-section" id="view-cultural" aria-labelledby="culturalHeading">
+      
+      <!-- Reigning Champion Showcase Banner (Cultural) -->
+      <div class="reigning-champion-showcase" id="reigningBannerCultural">
+        <!-- Rendered via aakriti.js -->
+      </div>
+
+      <!-- Cultural Standings Strip -->
+      <div class="standings-summary-card">
+        <div class="standings-header-row">
+          <div class="standings-title-group">
+            <h3 id="culturalHeading"><i class="fa-solid fa-masks-theater" style="color: var(--blue-royal);"></i> Cultural Aakriti — Department Standings</h3>
+            <p class="standings-subtitle">Points and medal tally across 15 fine arts and stage competitions (Comp, IT, E&TC, Mech-ARE).</p>
+          </div>
+        </div>
+        <div class="department-teams-grid" id="standingsGridCultural">
+          <!-- Rendered via aakriti.js -->
+        </div>
+      </div>
+
+      <!-- Catalog Filter Bar -->
+      <div class="catalog-filter-bar">
+        <div class="filter-pills-deck">
+          <button type="button" class="filter-pill active" data-filter-domain="cultural" data-filter="All">All Events (15)</button>
+          <button type="button" class="filter-pill" data-filter-domain="cultural" data-filter="Stage & Theatre">Stage &amp; Theatre</button>
+          <button type="button" class="filter-pill" data-filter-domain="cultural" data-filter="BCJ (Debate & Quiz)">BCJ (Debate &amp; Quiz)</button>
+          <button type="button" class="filter-pill" data-filter-domain="cultural" data-filter="Magboard (Literary)">Magboard (Literary)</button>
+          <button type="button" class="filter-pill" data-filter-domain="cultural" data-filter="Fine Arts">Fine Arts</button>
+          <button type="button" class="filter-pill" data-filter-domain="cultural" data-filter="Film & Media">Film &amp; Media</button>
+        </div>
+
+        <div class="search-input-wrapper">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="search" class="search-catalog-field" id="culturalSearchInput" placeholder="Search cultural event..." aria-label="Search Cultural Events" />
+        </div>
+      </div>
+
+      <!-- Cultural Event Cards Grid -->
+      <div class="events-cards-grid" id="culturalCardsGrid">
+        <!-- Rendered via aakriti.js -->
+      </div>
+
+    </section>
+
+    <!-- ======================================================================
+         VIEW 4: TECHNICAL AAKRITI DASHBOARD
+         ====================================================================== -->
+    <section class="aakriti-view-section" id="view-technical" aria-labelledby="technicalHeading">
+      
+      <!-- Reigning Champion Showcase Banner (Technical) -->
+      <div class="reigning-champion-showcase" id="reigningBannerTechnical">
+        <!-- Rendered via aakriti.js -->
+      </div>
+
+      <!-- Technical Standings Strip -->
+      <div class="standings-summary-card">
+        <div class="standings-header-row">
+          <div class="standings-title-group">
+            <h3 id="technicalHeading"><i class="fa-solid fa-microchip" style="color: var(--blue-royal);"></i> Technical Aakriti — Department Standings</h3>
+            <p class="standings-subtitle">Points and medal tally across 8 engineering &amp; software tournaments (Comp, IT, E&TC, Mech-ARE).</p>
+          </div>
+        </div>
+        <div class="department-teams-grid" id="standingsGridTechnical">
+          <!-- Rendered via aakriti.js -->
+        </div>
+      </div>
+
+      <!-- Catalog Filter Bar -->
+      <div class="catalog-filter-bar">
+        <div class="filter-pills-deck">
+          <button type="button" class="filter-pill active" data-filter-domain="technical" data-filter="All">All Competitions (8)</button>
+          <button type="button" class="filter-pill" data-filter-domain="technical" data-filter="Software & AI">Software &amp; AI</button>
+          <button type="button" class="filter-pill" data-filter-domain="technical" data-filter="Robotics & Hardware">Robotics &amp; Hardware</button>
+          <button type="button" class="filter-pill" data-filter-domain="technical" data-filter="Design & Ideation">Design &amp; Ideation</button>
+        </div>
+
+        <div class="search-input-wrapper">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="search" class="search-catalog-field" id="technicalSearchInput" placeholder="Search tech hackathon, CAD, bots..." aria-label="Search Technical Events" />
+        </div>
+      </div>
+
+      <!-- Technical Event Cards Grid -->
+      <div class="events-cards-grid" id="technicalCardsGrid">
+        <!-- Rendered via aakriti.js -->
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       4. MODALS & OVERLAYS
+       ======================================================================== -->
+
+  <!-- MODAL A: Event Details, In-Charge & Referee / Judge Overlay -->
+  <div class="aakriti-modal-backdrop" id="eventDetailsModal" role="dialog" aria-modal="true" aria-labelledby="detailsModalTitle">
+    <div class="aakriti-modal-container">
+      <div class="aakriti-modal-header">
+        <div class="modal-header-titles">
+          <h3 id="detailsModalTitle">Event Details &amp; Rulebook</h3>
+          <p id="detailsModalSub">Verified Championship Guidelines</p>
+        </div>
+        <button type="button" class="modal-close-btn" aria-label="Close dialog">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="aakriti-modal-body" id="detailsModalBody">
+        <!-- Injected via aakriti.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL B: Registration / Trial / Audition Form & Senior In-Charge Reveal -->
+  <div class="aakriti-modal-backdrop" id="registrationModal" role="dialog" aria-modal="true" aria-labelledby="regModalEventTitle">
+    <div class="aakriti-modal-container">
+      <div class="aakriti-modal-header">
+        <div class="modal-header-titles">
+          <h3 id="regModalEventTitle">Register for Event Trials</h3>
+          <p id="regModalEventCategory">Department Trial Candidate Application</p>
+        </div>
+        <button type="button" class="modal-close-btn" aria-label="Close dialog">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="aakriti-modal-body">
+        
+        <!-- Registration Form -->
+        <form class="reg-form-grid" id="championshipRegForm">
+          <input type="hidden" id="regHiddenEventId" />
+          <input type="hidden" id="regHiddenDomain" />
+
+          <!-- Candidate Full Name -->
+          <div>
+            <label for="regInputFullName" class="form-label">Full Name *</label>
+            <input type="text" id="regInputFullName" class="form-input-field" placeholder="e.g., Arjun Malhotra" required />
+          </div>
+
+          <!-- Registration ID -->
+          <div>
+            <label for="regInputRegNo" class="form-label">College Registration ID *</label>
+            <input type="text" id="regInputRegNo" class="form-input-field" placeholder="e.g., 22145" required />
+          </div>
+
+          <!-- Mobile Phone Number -->
+          <div class="form-group-full">
+            <label for="regInputPhone" class="form-label">Mobile Phone (WhatsApp Active) *</label>
+            <input type="tel" id="regInputPhone" class="form-input-field" placeholder="e.g., +91 98230 45678" required />
+          </div>
+
+          <!-- Competition Category / Division Interactive Selection -->
+          <div class="form-group-full" id="regCategorySection">
+            <label class="form-label" id="regCategoryLabel">
+              <i class="fa-solid fa-venus-mars" style="color: var(--blue-royal);"></i> Competition Category / Division *
+            </label>
+            <p class="reg-category-help-text" id="regCategoryHelpText" style="font-size: 0.8rem; color: var(--navy-600); margin-top: -4px; margin-bottom: 8px;">
+              Select whether you are registering for the Boys or Girls division:
+            </p>
+            <div class="reg-category-pill-group" id="regCategoryPillsContainer" role="radiogroup" aria-label="Category Selection">
+              <!-- Dynamically populated interactive category buttons (Boys / Girls / Mixed Doubles) -->
+            </div>
+            <input type="hidden" id="regInputCategory" value="Boys" />
+          </div>
+
+          <!-- Branch Selection (Dropdown with strictly 4 options) -->
+          <div class="form-group-full">
+            <label class="form-label">Your Branch Selection (Strictly 4 Official Teams) *</label>
+            <div class="branch-selector-grid">
+              
+              <div class="branch-select-pill">
+                <input type="radio" name="selectedBranch" id="branchRadioComp" value="Comp" checked />
+                <label for="branchRadioComp" class="branch-radio-label">
+                  <span class="branch-code-text" style="color: var(--branch-comp);">Comp</span>
+                  <span class="branch-desc-text">Computer Engg</span>
+                </label>
+              </div>
+
+              <div class="branch-select-pill">
+                <input type="radio" name="selectedBranch" id="branchRadioIT" value="IT" />
+                <label for="branchRadioIT" class="branch-radio-label">
+                  <span class="branch-code-text" style="color: var(--branch-it);">IT</span>
+                  <span class="branch-desc-text">Information Tech</span>
+                </label>
+              </div>
+
+              <div class="branch-select-pill">
+                <input type="radio" name="selectedBranch" id="branchRadioETC" value="E&TC" />
+                <label for="branchRadioETC" class="branch-radio-label">
+                  <span class="branch-code-text" style="color: var(--branch-etc);">E&amp;TC</span>
+                  <span class="branch-desc-text">Electronics &amp; TC</span>
+                </label>
+              </div>
+
+              <div class="branch-select-pill">
+                <input type="radio" name="selectedBranch" id="branchRadioMech" value="Mech-ARE" />
+                <label for="branchRadioMech" class="branch-radio-label">
+                  <span class="branch-code-text" style="color: var(--branch-mech);">Mech-ARE</span>
+                  <span class="branch-desc-text">Mech &amp; Robotics</span>
+                </label>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Relevant Experience / Specialization -->
+          <div class="form-group-full">
+            <label for="regInputExperience" class="form-label" id="regLabelExperience">Relevant Experience / Specialization</label>
+            <input type="text" id="regInputExperience" class="form-input-field" placeholder="e.g., Striker, Opening Batsman, Lead Vocalist, ROS2 / React" />
+          </div>
+
+          <div class="form-group-full" style="margin-top: 8px;">
+            <button type="submit" class="btn-primary-action" style="padding: 12px 20px; font-size: 1rem;">
+              <i class="fa-solid fa-paper-plane"></i> Submit Registration &amp; Reveal Branch Senior Lead
+            </button>
+          </div>
+        </form>
+
+        <!-- Dynamic Senior In-Charge Reveal Screen (Rendered after submit) -->
+        <div id="seniorRevealContainer" style="display: none;">
+          <!-- Injected via aakriti.js -->
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL C: Live Results & Deep Match Scorecard Modal -->
+  <div class="aakriti-modal-backdrop" id="scorecardModal" role="dialog" aria-modal="true" aria-labelledby="scorecardModalTitle">
+    <div class="aakriti-modal-container" style="max-width: 760px;">
+      <div class="aakriti-modal-header">
+        <div class="modal-header-titles">
+          <h3 id="scorecardModalTitle">Match Scorecard &amp; Standings</h3>
+          <p id="scorecardModalSub">Verified Points &amp; Performance Summary</p>
+        </div>
+        <button type="button" class="modal-close-btn" aria-label="Close dialog">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="aakriti-modal-body" id="scorecardModalBody">
+        <!-- Injected via aakriti.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL D: Historical Archives Modal (2023–2025) -->
+  <div class="aakriti-modal-backdrop" id="archivesModal" role="dialog" aria-modal="true" aria-labelledby="archivesModalTitle">
+    <div class="aakriti-modal-container archives-modal-container">
+      <div class="aakriti-modal-header">
+        <div class="modal-header-titles">
+          <h3 id="archivesModalTitle">📜 Previous Years Aakriti Archives (2023–2025)</h3>
+          <p>Annual General Championship Shield Records &amp; Cross-Branch Points Tables</p>
+        </div>
+        <button type="button" class="modal-close-btn" aria-label="Close dialog">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="aakriti-modal-body">
+        
+        <!-- Year Switcher Buttons -->
+        <div class="archive-year-switcher" id="archivesYearSwitcher">
+          <!-- Injected via aakriti.js -->
+        </div>
+
+        <!-- Dynamic Year Content -->
+        <div id="archivesContentContainer">
+          <!-- Injected via aakriti.js -->
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL E: Event Participants & Player Roster Modal -->
+  <div class="aakriti-modal-backdrop" id="participantsModal" role="dialog" aria-modal="true" aria-labelledby="participantsModalTitle">
+    <div class="aakriti-modal-container" style="max-width: 880px;">
+      <div class="aakriti-modal-header">
+        <div class="modal-header-titles">
+          <h3 id="participantsModalTitle">Event Participants &amp; Players</h3>
+          <p id="participantsModalSub">Official Departmental Squad Lineups &amp; Registered Players</p>
+        </div>
+        <button type="button" class="modal-close-btn" aria-label="Close dialog">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="aakriti-modal-body" id="participantsModalBody" style="padding: 24px; max-height: calc(90vh - 120px); overflow-y: auto;">
+        <!-- Injected dynamically via aakriti.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Deck for notifications -->
+  <div class="aakriti-toast-deck" id="aakritiToastDeck"></div>
+
+  <!-- Main JavaScript Controller -->
+  <script src="./aakriti.js"></script>
+</body>
+</html>

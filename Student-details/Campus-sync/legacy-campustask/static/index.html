@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  
+  <title>CampusTask — Verified Campus Peer Marketplace</title>
+  <meta name="description" content="Campus-only anonymous peer task marketplace connecting busy seniors with skilled junior students for permitted academic assistance." />
+  <meta name="theme-color" content="#080c14" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="CampusTask" />
+  
+  <!-- PWA Manifest & Favicons -->
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="/static/icons/icon-192.svg" />
+  <link rel="apple-touch-icon" href="/static/icons/icon-192.svg" />
+  
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="/static/css/main.css" />
+</head>
+<body>
+
+  <!-- Ambient Dark Midnight Study Glow Canvas -->
+  <div class="artistic-bg-canvas" aria-hidden="true">
+    <div class="aurora-orb orb-indigo"></div>
+    <div class="aurora-orb orb-lamp-amber"></div>
+    <div class="aurora-orb orb-emerald"></div>
+    <div class="aurora-orb orb-violet"></div>
+    <div class="artistic-mesh-grid"></div>
+  </div>
+
+  <!-- Sticky Header Navigation Slot -->
+  <div id="site-header-slot"></div>
+
+  <!-- PWA Install Prompt Banner Slot -->
+  <div class="container" id="pwa-banner-slot" style="margin-top: 16px;"></div>
+
+  <!-- Main Single Page Application Container -->
+  <main class="container" id="app-root" style="min-height: calc(100vh - 160px);">
+    <div style="display: flex; justify-content: center; align-items: center; height: 300px; color: var(--text-muted);">
+      <div style="text-align: center;">
+        <div style="font-size: 2rem; margin-bottom: 8px;">🎓</div>
+        <div>Loading CampusTask...</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Mobile Bottom Navigation Bar Slot -->
+  <div id="bottom-nav-slot"></div>
+
+  <!-- Toast Notification System -->
+  <div id="toast-container"></div>
+
+  <!-- Core JavaScript Modules -->
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/pwa.js"></script>
+  
+  <!-- SPA View Components -->
+  <script src="/static/js/views/landingView.js"></script>
+  <script src="/static/js/views/marketplaceView.js"></script>
+  <script src="/static/js/views/taskDetailView.js"></script>
+  <script src="/static/js/views/postTaskView.js"></script>
+  <script src="/static/js/views/seniorDashboardView.js"></script>
+  <script src="/static/js/views/juniorDashboardView.js"></script>
+  <script src="/static/js/views/chatView.js"></script>
+  <script src="/static/js/views/walletView.js"></script>
+  <script src="/static/js/views/adminDashboardView.js"></script>
+  <script src="/static/js/views/profileView.js"></script>
+  <script src="/static/js/views/notificationsView.js"></script>
+  <script src="/static/js/views/authView.js"></script>
+  <script src="/static/js/views/offlineView.js"></script>
+
+  <!-- Main Application Coordinator -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

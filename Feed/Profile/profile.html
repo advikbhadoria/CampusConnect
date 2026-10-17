@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snehangshu Das — Profile & Settings · Campus Connect</title>
+  <meta name="description" content="Manage your campus profile, shared achievements, projects, saved posts, and collaboration settings on Campus Connect AIT Pune." />
+  <link rel="stylesheet" href="profile.css" />
+  <link rel="stylesheet" href="../../shared/campus-ai.css" />
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Ambient Glow Background Blobs -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <!-- ───────────── NAVBAR ───────────── -->
+  <navbar>
+    <a class="logo-wrap" href="../../homepage/homepage.html" title="Campus Connect Homepage">
+      <div class="logo-icon">🎓</div>
+      <div class="logo-text">Campus Connect</div>
+    </a>
+
+    <div class="nav-links">
+      <a class="nav-item" href="../../homepage/homepage.html">Home</a>
+      <a class="nav-item" href="../feed.html">Feeds</a>
+      <a class="nav-item" href="../../Student-details/student-details.html">Students</a>
+      <a class="nav-item" href="../../Faculty directory/faculty-directory.html">Faculty</a>
+      <a class="nav-item" href="../../alumini directory/alumini.html">Alumni</a>
+      <a class="nav-item" href="../../Clubs/dist/index.html">Clubs</a>
+      <a class="nav-item" href="../../Aakriti/aakriti.html" style="color: #2563eb; font-weight: 700;"><i class="fa-solid fa-trophy" style="color: #f59e0b; margin-right: 4px;"></i> Aakriti</a>
+      <a class="nav-item" href="../../Outpass/outpass.html" style="color: #1d4ed8; font-weight: 700;"><i class="fa-solid fa-file-signature" style="color: #6366f1; margin-right: 4px;"></i> Applications</a>
+      <a class="nav-item" href="../../Complain/dist/index.html" style="color: #b45309; font-weight: 700;"><i class="fa-solid fa-bullhorn" style="color: #d97706; margin-right: 4px;"></i> Complaints</a>
+      <a class="nav-item" href="../../Shops/index.html" style="color: #047857; font-weight: 700;"><i class="fa-solid fa-store" style="color: #059669; margin-right: 4px;"></i> Campus Shops</a>
+      <a class="nav-item" href="../../Borrow/dist/index.html" style="color: #1d4ed8; font-weight: 700;"><i class="fa-solid fa-handshake" style="color: #2563eb; margin-right: 4px;"></i> Borrow &amp; Share</a>
+      <a class="nav-item active" href="./profile.html">Profile</a>
+    </div>
+
+    <div class="nav-right" style="display: flex; align-items: center; gap: 8px;">
+      <a class="btn-primary" href="#" onclick="openComposeModal(); return false;" style="padding: 7px 18px; font-size: 12.5px;">
+        <span>✏️ New Post</span>
+      </a>
+      <button class="btn-secondary" onclick="window.CampusAuth.signOut()" style="padding: 7px 14px; font-size: 12px; background: rgba(239,68,68,0.08); color: #ef4444; border: 1px solid rgba(239,68,68,0.25); border-radius: var(--radius-full); font-weight: 700; cursor: pointer;" title="Sign out of Campus Connect">
+        <span>🚪 Sign Out</span>
+      </button>
+    </div>
+  </navbar>
+
+  <!-- ───────────── MAIN PROFILE WRAPPER ───────────── -->
+  <div class="profile-wrapper">
+
+    <!-- HERO PROFILE CARD -->
+    <div class="glass-box profile-hero-card">
+      <div class="profile-cover"></div>
+      
+      <div class="profile-hero-body">
+        <div class="profile-avatar-row">
+          <div class="profile-avatar-holder">
+            <img class="profile-avatar-lg" src="user.png" alt="Snehangshu Das" id="profileAvatarImg" />
+            <div class="profile-online-badge"></div>
+          </div>
+          <div class="profile-hero-actions">
+            <button class="btn-verify-pill" id="btnHeroVerifyAction" onclick="openIdCardModal()" title="Upload College ID Card to get verified">
+              <i class="fa-solid fa-id-card"></i>
+              <span id="btnHeroVerifyLabel">Verify ID Card</span>
+            </button>
+            <button class="btn-secondary" onclick="switchProfileTab('settings')">
+              <span>⚙️ Edit Profile</span>
+            </button>
+            <button class="btn-primary" onclick="openComposeModal()">
+              <span>🚀 Share Work</span>
+            </button>
+            <button class="btn-secondary" onclick="window.CampusAuth.signOut()" style="background: rgba(239,68,68,0.08); color: #ef4444; border: 1px solid rgba(239,68,68,0.25);" title="Sign out of Campus Connect">
+              <span>🚪 Sign Out</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="profile-title-row">
+          <div class="profile-name-badge-wrap">
+            <h1 class="profile-name" id="profileNameDisplay">Snehangshu Das</h1>
+            <span class="x-verified-badge" id="profileVerifiedBadge" style="display: none;" title="Verified Student Account · AIT College ID Verified">
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="x-verified-icon">
+                <path fill="#1d9bf0" d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.67-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.34 2.19c-1.39-.46-2.9-.2-3.91.81s-1.27 2.52-.81 3.91c-1.31.67-2.19 1.91-2.19 3.34s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.27 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.67-.88 3.34-2.19c1.39.46 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/>
+              </svg>
+            </span>
+          </div>
+          <span class="profile-status-pill" id="profileStatusPill">🚀 Open for Collaborations</span>
+          <span class="profile-verified-pill" id="heroVerifiedPill" style="display: none;">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>College ID Verified</span>
+          </span>
+        </div>
+
+        <p class="profile-subtitle" id="profileSubtitleDisplay">B.Tech Computer Science '26 · Army Institute of Technology, Pune</p>
+        
+        <p class="profile-bio-text" id="profileBioDisplay">
+          Full-stack developer &amp; AI researcher bridging web architecture and ML systems. Lead at Open Source Software Club. Currently building developer productivity tools and competing in collegiate hackathons.
+        </p>
+
+        <!-- Dynamic Social Channels Bar (Visible links only, with privacy controls) -->
+        <div class="profile-social-channels-bar" id="profileSocialLinksBar">
+          <!-- Injected via profile.js -->
+        </div>
+
+        <div class="profile-stats-bar">
+          <div class="profile-stat-box">
+            <strong id="statPostsCount">14</strong>
+            <span>Posts</span>
+          </div>
+          <div class="profile-stat-box">
+            <strong>312</strong>
+            <span>Followers</span>
+          </div>
+          <div class="profile-stat-box">
+            <strong>189</strong>
+            <span>Following</span>
+          </div>
+          <div class="profile-stat-box">
+            <strong>6</strong>
+            <span>Projects</span>
+          </div>
+          <div class="profile-stat-box">
+            <strong style="color: var(--emerald);">8</strong>
+            <span>Collabs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COLLEGE ID VERIFICATION PROMPT / STATUS BANNER -->
+    <div class="glass-box id-verification-banner" id="idVerificationBanner">
+      <!-- Injected by profile.js: displays dynamic verified / unverified state -->
+    </div>
+
+    <!-- TABS HEADER -->
+    <div class="profile-tabs-header">
+      <button class="tab-nav-btn active" onclick="switchProfileTab('posts', this)" id="tabBtn-posts">
+        <span>📸 My Posts &amp; Works</span>
+      </button>
+      <button class="tab-nav-btn" onclick="switchProfileTab('saved', this)" id="tabBtn-saved">
+        <span>🔖 Saved Archive (<span id="savedCountNum">0</span>)</span>
+      </button>
+      <button class="tab-nav-btn" onclick="switchProfileTab('portfolio', this)" id="tabBtn-portfolio">
+        <span>💼 Portfolio &amp; Projects</span>
+      </button>
+      <button class="tab-nav-btn" onclick="switchProfileTab('settings', this)" id="tabBtn-settings">
+        <span>⚙️ Settings &amp; Preferences</span>
+      </button>
+    </div>
+
+    <!-- TAB 1: MY POSTS & ACHIEVEMENTS -->
+    <section class="tab-panel active" id="panel-posts">
+      <div class="posts-grid" id="myPostsList">
+        <!-- Injected via JS -->
+      </div>
+    </section>
+
+    <!-- TAB 2: SAVED & BOOKMARKED POSTS (Instagram Style Archive) -->
+    <section class="tab-panel" id="panel-saved">
+      <div class="saved-grid" id="savedPostsList">
+        <!-- Injected via JS -->
+      </div>
+    </section>
+
+    <!-- TAB 3: PORTFOLIO & PROJECTS -->
+    <section class="tab-panel" id="panel-portfolio">
+      <div style="display: flex; flex-direction: column; gap: 20px;" id="portfolioProjectsList">
+        <!-- Injected dynamically with live clickable links via profile.js -->
+      </div>
+    </section>
+
+    <!-- TAB 4: SETTINGS & PREFERENCES -->
+    <section class="tab-panel" id="panel-settings">
+      
+      <!-- General Profile Info Settings -->
+      <div class="glass-box settings-section">
+        <h2 class="settings-section-title">👤 Edit Profile Information</h2>
+        <p class="settings-section-sub">Update your personal details, bio, and student credentials visible to peers.</p>
+
+        <form onsubmit="saveProfileSettings(event)">
+          <div class="settings-form-grid">
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-input" id="settingName" value="Snehangshu Das" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Graduation Year &amp; Branch</label>
+              <input type="text" class="form-input" id="settingYear" value="B.Tech Computer Science '26 · AIT Pune" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Roll Number</label>
+              <input type="text" class="form-input" id="settingRoll" value="22045" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Collaboration Status Headline</label>
+              <input type="text" class="form-input" id="settingStatus" value="🚀 Open for Collaborations" />
+            </div>
+
+            <div class="form-group full-width">
+              <label class="form-label">Bio &amp; About You</label>
+              <textarea class="form-textarea" id="settingBio" rows="3">Full-stack developer &amp; AI researcher bridging web architecture and ML systems. Lead at Open Source Software Club. Currently building developer productivity tools and competing in collegiate hackathons.</textarea>
+            </div>
+
+            <div class="form-group full-width">
+              <label class="form-label">Skills (Comma separated)</label>
+              <input type="text" class="form-input" id="settingSkills" value="React, Node.js, Python, TypeScript, Docker, FastAPI, Git, UI/UX" />
+            </div>
+          </div>
+
+          <!-- Social Profiles & Custom Links with Visibility Privacy Toggles -->
+          <div style="margin-top: 28px; border-top: 1px solid rgba(0,0,0,0.08); padding-top: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+              <div>
+                <h3 style="font-size: 15px; font-weight: 800; color: var(--text-main);">🌐 Social &amp; Connect Channels</h3>
+                <p style="font-size: 12.5px; color: var(--text-sub); margin-top: 2px;">
+                  Add any social link, messaging handle, or portfolio. Use the visibility switch to hide or show on your public profile (not compulsory to show!).
+                </p>
+              </div>
+              <button type="button" class="btn-secondary" onclick="addCustomSocialField()" style="font-size: 12px; padding: 6px 14px;">
+                + Add Custom Site Link ➕
+              </button>
+            </div>
+
+            <div class="settings-socials-grid">
+              
+              <!-- LinkedIn -->
+              <div class="settings-social-item">
+                <div class="social-item-header">
+                  <span class="social-item-name">💼 LinkedIn</span>
+                  <label class="social-vis-toggle">
+                    <input type="checkbox" id="vis-linkedin" checked />
+                    <span>👁️ Visible</span>
+                  </label>
+                </div>
+                <input type="text" class="form-input" id="settingLinkedin" placeholder="e.g. linkedin.com/in/username" value="linkedin.com/in/snehangshudas" />
+              </div>
+
+              <!-- GitHub -->
+              <div class="settings-social-item">
+                <div class="social-item-header">
+                  <span class="social-item-name">🐙 GitHub</span>
+                  <label class="social-vis-toggle">
+                    <input type="checkbox" id="vis-github" checked />
+                    <span>👁️ Visible</span>
+                  </label>
+                </div>
+                <input type="text" class="form-input" id="settingGithub" placeholder="e.g. github.com/username" value="github.com/snehangshu" />
+              </div>
+
+              <!-- Instagram -->
+              <div class="settings-social-item">
+                <div class="social-item-header">
+                  <span class="social-item-name">📸 Instagram</span>
+                  <label class="social-vis-toggle">
+                    <input type="checkbox" id="vis-instagram" checked />
+                    <span>👁️ Visible</span>
+                  </label>
+                </div>
+                <input type="text" class="form-input" id="settingInstagram" placeholder="e.g. instagram.com/username" value="instagram.com/snehangshu.dev" />
+              </div>
+
+              <!-- Telegram -->
+              <div class="settings-social-item">
+                <div class="social-item-header">
+                  <span class="social-item-name">✈️ Telegram</span>
+                  <label class="social-vis-toggle">
+                    <input type="checkbox" id="vis-telegram" />
+                    <span>👁️ Visible</span>
+                  </label>
+                </div>
+                <input type="text" class="form-input" id="settingTelegram" placeholder="e.g. t.me/username or @username" value="t.me/snehangshu_ait" />
+              </div>
+
+              <!-- X (Twitter) -->
+              <div class="settings-social-item">
+                <div class="social-item-header">
+                  <span class="social-item-name">🐦 X (Twitter)</span>
+                  <label class="social-vis-toggle">
+                    <input type="checkbox" id="vis-x" checked />
+                    <span>👁️ Visible</span>
+                  </label>
+                </div>
+                <input type="text" class="form-input" id="settingX" placeholder="e.g. x.com/username" value="x.com/snehangshu_d" />
+              </div>
+
+              <!-- WhatsApp -->
+              <div class="settings-social-item">
+                <div class="social-item-header">
+                  <span class="social-item-name">💬 WhatsApp Number</span>
+                  <label class="social-vis-toggle">
+                    <input type="checkbox" id="vis-whatsapp" />
+                    <span>👁️ Visible</span>
+                  </label>
+                </div>
+                <input type="text" class="form-input" id="settingWhatsapp" placeholder="e.g. +91 9876543210 or wa.me/..." value="+91 98765 43210" />
+              </div>
+
+              <!-- Portfolio / Website -->
+              <div class="settings-social-item">
+                <div class="social-item-header">
+                  <span class="social-item-name">🌐 Portfolio / Website</span>
+                  <label class="social-vis-toggle">
+                    <input type="checkbox" id="vis-website" checked />
+                    <span>👁️ Visible</span>
+                  </label>
+                </div>
+                <input type="text" class="form-input" id="settingWebsite" placeholder="e.g. snehangshu.dev or yourportfolio.com" value="snehangshu.dev" />
+              </div>
+
+            </div>
+
+            <!-- Custom Sites Container (User can add literally any site) -->
+            <div id="customSocialsContainer" style="margin-top: 16px; display: flex; flex-direction: column; gap: 10px;">
+              <!-- Dynamic custom links injected here -->
+            </div>
+          </div>
+
+          <div style="margin-top: 24px; display: flex; justify-content: flex-end;">
+            <button type="submit" class="btn-primary">Save Profile Changes ✓</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- College ID Card & Student Verification Settings Card -->
+      <div class="glass-box settings-section id-settings-card" id="settingsIdCardSection">
+        <div class="settings-id-header">
+          <div>
+            <h2 class="settings-section-title">
+              <i class="fa-solid fa-id-card-clip" style="color: #1d9bf0; margin-right: 6px;"></i>
+              College ID Card &amp; Student Verification
+            </h2>
+            <p class="settings-section-sub">
+              Upload your official AIT Pune student ID card photo to get verified and unlock the Twitter/X Verified Blue Badge across your profile and feeds.
+            </p>
+          </div>
+          <div id="settingsVerificationBadgeContainer">
+            <!-- Injected by profile.js: "✓ Verified" or "⚠️ Not Verified" -->
+          </div>
+        </div>
+
+        <div id="settingsIdCardContent">
+          <!-- Injected by profile.js: live preview and upload dropzone -->
+        </div>
+      </div>
+
+      <!-- Collaboration & Project Preferences -->
+      <div class="glass-box settings-section">
+        <h2 class="settings-section-title">🤝 Collaboration &amp; Project Preferences</h2>
+        <p class="settings-section-sub">Configure how peers can reach out to you for hackathons, capstones, and club projects.</p>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-title">Open for Hackathon Teaming</div>
+            <div class="toggle-desc">Show your profile in the Collaboration Radar for upcoming tech fests</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" checked id="toggleHackathons" />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-title">Open for Faculty Research Capstones</div>
+            <div class="toggle-desc">Permit professors to view your research projects and send invitations</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" checked id="toggleResearch" />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-title">Instant Notification on Collab Invites</div>
+            <div class="toggle-desc">Receive real-time notification alerts whenever a peer requests collaboration</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" checked id="toggleCollabNotify" />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Privacy & Account Security -->
+      <div class="glass-box settings-section">
+        <h2 class="settings-section-title">🔒 Privacy &amp; Visibility</h2>
+        <p class="settings-section-sub">Control who can discover and interact with your campus presence.</p>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-title">Public Campus Visibility</div>
+            <div class="toggle-desc">Allow all verified AIT students and faculty to view your profile and posts</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-title">Show Email &amp; Contact Info to Alumni</div>
+            <div class="toggle-desc">Allow verified alumni mentors to contact you regarding internships</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <div style="font-weight: 700; color: #ef4444; font-size: 14px;">🚪 Sign Out of Campus Connect</div>
+            <div style="font-size: 12px; color: var(--text-muted);">End your active session on this device. You will be redirected to the homepage.</div>
+          </div>
+          <button class="btn-secondary" onclick="window.CampusAuth.signOut()" style="background: #ef4444; color: #ffffff; border: none; font-weight: 700; padding: 10px 22px; cursor: pointer; border-radius: var(--radius-full);">
+            Sign Out Now
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <!-- ───────────── COMPOSE POST MODAL (FLOATING) ───────────── -->
+  <div class="modal-overlay" id="composeOverlay" onclick="closeComposeModal()"></div>
+  <div class="compose-modal" id="composeModal">
+    <div class="modal-header">
+      <h3>🚀 Create Campus Post</h3>
+      <button class="modal-close-btn" onclick="closeComposeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <!-- Author info header -->
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
+        <img src="user.png" style="width: 44px; height: 44px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" />
+        <div>
+          <strong style="font-size: 14.5px; color: var(--text-main); display: block;" id="modalAuthorName">Snehangshu Das</strong>
+          <span style="font-size: 11.5px; color: var(--text-muted);">B.Tech CSE '26 · AIT Pune · <span style="color: var(--primary); font-weight:700;">🎓 Verified Student</span></span>
+        </div>
+      </div>
+
+      <!-- Textarea -->
+      <div class="form-group" style="margin-bottom: 14px;">
+        <textarea
+          class="form-textarea"
+          id="modalPostText"
+          rows="4"
+          placeholder="Share an achievement, recent project work, club event, or invite hackathon teammates..."
+        ></textarea>
+      </div>
+
+      <!-- Post Tag Selector -->
+      <div style="margin-bottom: 14px;">
+        <div style="font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px;">Post Tag:</div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button type="button" class="composer-tag-btn active" id="modalTagRecent" onclick="selectModalCategory('student', this)">💻 Recent Work</button>
+          <button type="button" class="composer-tag-btn" id="modalTagCollab" onclick="selectModalCategory('collab', this)">🤝 Collab Request</button>
+          <button type="button" class="composer-tag-btn" id="modalTagClub" onclick="selectModalCategory('club', this)">🎪 Club Event</button>
+          <button type="button" class="composer-tag-btn restricted" id="modalTagCollege" onclick="selectModalCategory('college', this)" title="Restricted: Only Faculty/Admin can post College Achievements">
+            <span>🔒</span> 🏆 College Achievement
+          </button>
+        </div>
+      </div>
+
+      <!-- Dynamic Club Selection Row (Only shows when Club Event is selected) -->
+      <div class="composer-club-row" id="modalClubRow" style="display: none; margin-bottom: 14px; background: rgba(99,102,241,0.06); padding: 10px 14px; border-radius: 10px; border: 1px dashed rgba(99,102,241,0.25);">
+        <span style="font-size: 12.5px; font-weight: 700; color: var(--text-main); display:block; margin-bottom: 6px;">Select Club:</span>
+        <select class="form-select" id="modalClubSelect" style="width: 100%; padding: 8px 12px; border-radius: 8px; font-size: 13px;">
+          <!-- Populated with myMemberClubs -->
+        </select>
+      </div>
+
+      <!-- Bottom toolbar & Actions -->
+      <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(0,0,0,0.06); padding-top: 14px; margin-top: 10px; flex-wrap: wrap; gap: 10px;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <button type="button" class="composer-action-btn" onclick="toggleModalImage()" id="modalAttachImgBtn" style="font-size: 12.5px; padding: 6px 12px; border-radius: 99px; background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.2); cursor: pointer; color: var(--primary); font-weight: 700;">
+            <span>🖼️</span> <span id="modalAttachImgLabel">Image Attached ✓</span>
+          </button>
+          <label style="font-size: 12.5px; font-weight: 600; color: var(--text-sub); display: flex; align-items: center; gap: 6px; cursor: pointer;">
+            <input type="checkbox" id="modalIncludeCollab" checked /> Open for Collaborators
+          </label>
+        </div>
+        <button class="btn-primary" onclick="submitModalPost()">Publish Post 🚀</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───────────── ID CARD UPLOAD MODAL ───────────── -->
+  <div class="modal-overlay" id="idUploadOverlay" onclick="closeIdCardModal()"></div>
+  <div class="id-modal glass-box" id="idUploadModal" role="dialog" aria-labelledby="idModalTitle" aria-modal="true">
+    <div class="modal-header">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div class="id-modal-icon-badge">
+          <i class="fa-solid fa-id-card"></i>
+        </div>
+        <div>
+          <h3 id="idModalTitle" style="margin: 0; font-size: 17px; font-weight: 800; color: var(--text-main);">Upload College ID Card</h3>
+          <p style="margin: 2px 0 0; font-size: 12px; color: var(--text-sub);">Get verified and earn your Twitter/X blue checkmark badge</p>
+        </div>
+      </div>
+      <button type="button" class="modal-close-btn" onclick="closeIdCardModal()" aria-label="Close">✕</button>
+    </div>
+
+    <div class="modal-body" style="padding: 20px 24px;">
+      <!-- Quick Demo Option -->
+      <div class="id-demo-helper-banner">
+        <div>
+          <strong style="color: #0369a1; font-size: 13px; display: flex; align-items: center; gap: 5px;">
+            <span>⚡ Quick Demo Testing:</span>
+          </strong>
+          <span style="font-size: 12px; color: var(--text-sub); display: block; margin-top: 2px;">Click to instantly test with the official sample AIT Student Smart ID Card</span>
+        </div>
+        <button type="button" class="btn-demo-id" onclick="useDemoIdCard()">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          <span>Use Sample AIT ID</span>
+        </button>
+      </div>
+
+      <!-- File Dropzone -->
+      <div class="id-upload-dropzone" id="idUploadDropzone" onclick="triggerIdFileInput()">
+        <input type="file" id="idCardFileInput" accept="image/*" style="display: none;" onchange="handleIdFileSelect(event)">
+        <div class="dropzone-content" id="dropzonePrompt">
+          <div class="dropzone-icon">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+          </div>
+          <div class="dropzone-title">Click to upload or drag &amp; drop College ID photo</div>
+          <div class="dropzone-sub">Supports JPG, PNG, WEBP (Max 5MB) · Both sides or front view accepted</div>
+        </div>
+
+        <!-- Selected Image Preview Inside Dropzone -->
+        <div class="dropzone-preview" id="dropzonePreview" style="display: none;">
+          <img id="idPreviewImg" src="" alt="College ID Preview">
+          <div class="dropzone-preview-overlay">
+            <span class="preview-badge"><i class="fa-solid fa-check"></i> Photo Selected</span>
+            <button type="button" class="btn-preview-change" onclick="event.stopPropagation(); triggerIdFileInput();">
+              <i class="fa-solid fa-arrow-rotate-right"></i> Change Photo
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Verification Info Confirmation Box -->
+      <div class="id-student-meta-card">
+        <div class="meta-row">
+          <span class="meta-label">Student Name:</span>
+          <strong class="meta-value" id="idMetaStudentName">Snehangshu Das</strong>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">College Reg / Roll No:</span>
+          <strong class="meta-value" id="idMetaRollNo">22045</strong>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Institution:</span>
+          <strong class="meta-value">Army Institute of Technology (AIT), Pune</strong>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Badge Unlocked:</span>
+          <strong class="meta-value" style="color: #1d9bf0; display: inline-flex; align-items: center; gap: 5px;">
+            <svg viewBox="0 0 24 24" style="width: 17px; height: 17px; display: inline-block;">
+              <path fill="#1d9bf0" d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.67-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.34 2.19c-1.39-.46-2.9-.2-3.91.81s-1.27 2.52-.81 3.91c-1.31.67-2.19 1.91-2.19 3.34s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.27 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.67-.88 3.34-2.19c1.39.46 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/>
+            </svg>
+            Twitter/X Verified Blue Logo
+          </strong>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div style="display: flex; align-items: center; justify-content: flex-end; gap: 12px; margin-top: 20px;">
+        <button type="button" class="btn-secondary" onclick="closeIdCardModal()">Cancel</button>
+        <button type="button" class="btn-primary" id="btnSubmitIdVerification" onclick="submitIdCardVerification()" disabled style="background: linear-gradient(135deg, #1d9bf0, #0284c7);">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Verify &amp; Activate Badge ✓</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───────────── ID CARD VIEW MODAL ───────────── -->
+  <div class="modal-overlay" id="idViewOverlay" onclick="closeIdViewModal()"></div>
+  <div class="id-modal glass-box" id="idViewModal" role="dialog" aria-labelledby="idViewModalTitle" aria-modal="true">
+    <div class="modal-header">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div class="id-modal-icon-badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <div>
+          <h3 id="idViewModalTitle" style="margin: 0; font-size: 17px; font-weight: 800; color: var(--text-main);">Verified College ID Card</h3>
+          <p style="margin: 2px 0 0; font-size: 12px; color: var(--text-sub);">Official AIT Student Credential · Active Verification</p>
+        </div>
+      </div>
+      <button type="button" class="modal-close-btn" onclick="closeIdViewModal()" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body" style="padding: 20px 24px; text-align: center;">
+      <div class="id-card-display-wrapper">
+        <img id="idCardFullDisplayImg" src="" alt="Verified College ID Card" style="width: 100%; max-height: 380px; object-fit: contain; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+        <div class="id-verified-watermark">
+          <svg viewBox="0 0 24 24" style="width: 20px; height: 20px; vertical-align: middle;">
+            <path fill="#1d9bf0" d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.67-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.34 2.19c-1.39-.46-2.9-.2-3.91.81s-1.27 2.52-.81 3.91c-1.31.67-2.19 1.91-2.19 3.34s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.27 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.67-.88 3.34-2.19c1.39.46 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/>
+          </svg>
+          <span style="font-weight: 700; color: #0f172a; margin-left: 4px;">Verified Student • AIT Pune</span>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(0,0,0,0.06); flex-wrap: wrap; gap: 10px;">
+        <span style="font-size: 12px; color: var(--text-muted);" id="idViewDateTimestamp">Verified: Oct 2026</span>
+        <div style="display: flex; gap: 8px;">
+          <button type="button" class="btn-secondary" onclick="closeIdViewModal(); openIdCardModal();" style="font-size: 12px; padding: 6px 14px;">
+            <i class="fa-solid fa-arrow-rotate-right"></i> Re-upload Photo
+          </button>
+          <button type="button" class="btn-primary" onclick="closeIdViewModal()" style="font-size: 12px; padding: 6px 18px;">
+            Done
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───────────── GLOBAL TOAST NOTIFICATION ───────────── -->
+  <div class="toast-notify" id="toastNotify">
+    <span id="toastIcon">🤝</span>
+    <span id="toastMsg">Notification message</span>
+  </div>
+
+  <!-- ───────────── EXTERNAL SCRIPT ───────────── -->
+  <script src="profile.js"></script>
+  <script src="../../shared/campus-ai.js"></script>
+</body>
+</html>

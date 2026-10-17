@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus Connect — Army Institute of Technology (AIT Pune)</title>
+  <meta name="description" content="Campus Connect is the digital portal for Army Institute of Technology (AIT Pune). Discover student clubs overview, campus news, fests, and connect directly with global alumni." />
+
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="./homepage.css" />
+  <link rel="stylesheet" href="../shared/campus-ai.css" />
+</head>
+<body>
+
+  <!-- Ambient Light-Blue Glow Blobs -->
+  <div class="ambient-glow-1"></div>
+  <div class="ambient-glow-2"></div>
+  <div class="ambient-glow-3"></div>
+
+  <!-- ==========================================================================
+       1. Top Glassmorphic Navigation Bar
+       ========================================================================== -->
+  <header class="site-header">
+    <nav class="navbar-glass" aria-label="Main Navigation">
+      <!-- Brand Logo -->
+      <a href="./homepage.html" class="brand-logo">
+        <div class="brand-icon">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <div class="brand-text-wrapper">
+          <span class="brand-title">Campus Connect</span>
+          <span class="brand-subtitle">Army Institute of Technology, Pune</span>
+        </div>
+      </a>
+
+      <!-- Desktop & Tablet Navigation Links -->
+      <ul class="nav-links" style="overflow-x: auto; max-width: 60%; scrollbar-width: none;">
+        <li class="nav-link-item active"><a href="./homepage.html"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li class="nav-link-item"><a href="../Feed/feed.html"><i class="fa-solid fa-compass"></i> Feeds</a></li>
+        <li class="nav-link-item"><a href="../Student-details/student-details.html"><i class="fa-solid fa-users"></i> Students</a></li>
+        <li class="nav-link-item"><a href="../Faculty directory/faculty-directory.html"><i class="fa-solid fa-chalkboard-user"></i> Faculty</a></li>
+        <li class="nav-link-item"><a href="../alumini directory/alumini.html"><i class="fa-solid fa-user-tie"></i> Alumni</a></li>
+        <li class="nav-link-item"><a href="../Clubs/dist/index.html"><i class="fa-solid fa-people-group"></i> Clubs</a></li>
+        <li class="nav-link-item"><a href="../Aakriti/aakriti.html" style="color: #2563eb; font-weight: 700;"><i class="fa-solid fa-trophy" style="color: #f59e0b;"></i> Aakriti</a></li>
+        <li class="nav-link-item"><a href="../Outpass/outpass.html" style="color: #1d4ed8; font-weight: 700;"><i class="fa-solid fa-file-signature" style="color: #6366f1;"></i> Applications</a></li>
+        <li class="nav-link-item"><a href="../Complain/dist/index.html" style="color: #b45309; font-weight: 700;"><i class="fa-solid fa-bullhorn" style="color: #d97706;"></i> Complaints</a></li>
+        <li class="nav-link-item"><a href="../Shops/index.html" style="color: #047857; font-weight: 700;"><i class="fa-solid fa-store" style="color: #059669;"></i> Campus Shops</a></li>
+        <li class="nav-link-item"><a href="../Borrow/dist/index.html" style="color: #1d4ed8; font-weight: 700;"><i class="fa-solid fa-handshake" style="color: #2563eb;"></i> Borrow &amp; Share</a></li>
+      </ul>
+
+      <!-- Nav Actions (Guest status + Sign In options) -->
+      <div class="nav-actions">
+        <div class="guest-status-pill" id="userSessionPill">
+          <span class="glass-badge-pulse" id="userStatusDot"></span>
+          <span id="userStatusLabel">Guest Mode</span>
+        </div>
+
+        <button class="btn-glass btn-glass-primary btn-glass-sm open-login-trigger" data-role="student" id="navLoginBtn">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          <span>Sign In</span>
+        </button>
+
+        <a href="../Feed/feed.html" class="btn-glass btn-glass-primary btn-glass-sm" id="navDashboardBtn" style="display: none; text-decoration: none; background: linear-gradient(135deg, var(--primary-600), var(--secondary-600)); color: #fff;">
+          <i class="fa-solid fa-compass"></i>
+          <span>Go to Feed 🚀</span>
+        </a>
+
+        <button class="btn-glass btn-glass-secondary btn-glass-sm" id="navSignOutBtn" style="display: none;">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Sign Out</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         2. Hero Section with 3D Canvas Visuals & Floating Glass Badges
+         ========================================================================== -->
+    <section class="hero-section" id="home">
+      <div class="site-container">
+        <div class="hero-grid">
+          
+          <!-- Hero Left Content -->
+          <div class="hero-content">
+            <div class="glass-badge" style="margin-bottom: 16px;">
+              <i class="fa-solid fa-shield-halved" style="color: var(--primary-500);"></i>
+              <span>Army Institute of Technology, Pune • NAAC 'A' & Autonomous</span>
+            </div>
+
+            <h1 class="hero-headline">
+              Your Campus, Your Voice, <br />
+              <span class="gradient-text">Connected in Real Time.</span>
+            </h1>
+
+            <p class="hero-description">
+              Welcome to <strong>Campus Connect @ AIT Pune</strong> — the unified digital commons uniting students, faculty, and distinguished alumni. Discover student clubs, track flagship fests like <em>Solutions</em> & <em>Aakriti</em>, celebrate milestones, and connect directly with our global alumni network.
+            </p>
+
+            <div class="hero-cta-group">
+              <a href="../Aakriti/aakriti.html" class="btn-glass btn-glass-primary btn-glass-lg" style="text-decoration: none; background: linear-gradient(135deg, #1d4ed8, #2563eb); border-color: rgba(56, 189, 248, 0.5); box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);">
+                <i class="fa-solid fa-trophy" style="color: #fbbf24;"></i>
+                <span>Aakriti Hub 🏆</span>
+              </a>
+
+              <a href="../Outpass/outpass.html" class="btn-glass btn-glass-secondary btn-glass-lg" style="text-decoration: none; border-color: rgba(99, 102, 241, 0.4); color: #0f172a; background: rgba(255, 255, 255, 0.85); box-shadow: 0 4px 16px rgba(99, 102, 241, 0.15);">
+                <i class="fa-solid fa-file-signature" style="color: #6366f1;"></i>
+                <span>Applications 📝</span>
+              </a>
+
+              <a href="../Complain/dist/index.html" class="btn-glass btn-glass-secondary btn-glass-lg" style="text-decoration: none; border-color: rgba(245, 158, 11, 0.5); color: #92400e; background: #fffbeb; box-shadow: 0 4px 16px rgba(245, 158, 11, 0.15);">
+                <i class="fa-solid fa-bullhorn" style="color: #d97706;"></i>
+                <span>Complaints 📢</span>
+              </a>
+
+              <a href="../Shops/index.html" class="btn-glass btn-glass-secondary btn-glass-lg" style="text-decoration: none; border-color: rgba(16, 185, 129, 0.5); color: #065f46; background: #ecfdf5; box-shadow: 0 4px 16px rgba(16, 185, 129, 0.15);">
+                <i class="fa-solid fa-store" style="color: #059669;"></i>
+                <span>Shops 🏬</span>
+              </a>
+
+              <a href="../Borrow/dist/index.html" class="btn-glass btn-glass-secondary btn-glass-lg" style="text-decoration: none; border-color: rgba(37, 99, 235, 0.5); color: #1e40af; background: #eff6ff; box-shadow: 0 4px 16px rgba(37, 99, 235, 0.15);">
+                <i class="fa-solid fa-handshake" style="color: #2563eb;"></i>
+                <span>Borrow &amp; Share 🤝</span>
+              </a>
+
+              <button class="btn-glass btn-glass-secondary btn-glass-lg open-login-trigger" data-role="student">
+                <i class="fa-solid fa-user-graduate"></i>
+                <span>Student Portal</span>
+              </button>
+              
+              <button class="btn-glass btn-glass-secondary btn-glass-lg open-login-trigger" data-role="faculty">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                <span>Faculty Login</span>
+              </button>
+
+              <a href="#portals" class="btn-glass btn-glass-sm">
+                <span>Explore Portals</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </a>
+            </div>
+
+            <!-- Stats Row -->
+            <div class="hero-stats-row">
+              <div class="stat-item">
+                <span class="stat-number">1,800+</span>
+                <span class="stat-label">AIT Students</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">25+</span>
+                <span class="stat-label">Active Clubs & Chapters</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">7,500+</span>
+                <span class="stat-label">Global Alumni</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">96.8%</span>
+                <span class="stat-label">Placement Rate</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Right 3D Visual -->
+          <div class="hero-3d-visual">
+            <!-- 3D Three.js Canvas -->
+            <div id="canvas-3d-container"></div>
+
+            <!-- Floating 3D Glass Badges with Parallax -->
+            <a href="../Aakriti/aakriti.html" class="floating-glass-card card-pos-1" style="text-decoration: none; cursor: pointer;" title="Enter Aakriti Championship Hub">
+              <div class="card-icon-badge" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white;">
+                <i class="fa-solid fa-trophy"></i>
+              </div>
+              <div>
+                <div class="card-info-title">Aakriti Hub 2026 🏆</div>
+                <div class="card-info-sub">Sports • Cultural • Tech Shields</div>
+              </div>
+            </a>
+
+            <div class="floating-glass-card card-pos-2">
+              <div class="card-icon-badge badge-alumni">
+                <i class="fa-solid fa-address-book"></i>
+              </div>
+              <div>
+                <div class="card-info-title">Alumni Directory</div>
+                <div class="card-info-sub">Google, Microsoft & Startups • Direct Contact</div>
+              </div>
+            </div>
+
+            <div class="floating-glass-card card-pos-3">
+              <div class="card-icon-badge badge-faculty">
+                <i class="fa-solid fa-award"></i>
+              </div>
+              <div>
+                <div class="card-info-title">NAAC 'A' & Autonomous</div>
+                <div class="card-info-sub">Dighi Hills, Pune Campus</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         3. Live Campus Pulse Bar (Live Ticker)
+         ========================================================================== -->
+    <div class="site-container pulse-bar-wrapper">
+      <div class="pulse-bar-inner">
+        <div class="pulse-label-box">
+          <span class="glass-badge-pulse"></span>
+          <span id="liveActiveUsersCount">1,842 Online Now</span>
+        </div>
+
+        <div class="pulse-ticker">
+          <div class="ticker-track">
+            <div class="ticker-item" onclick="window.location.href='../Aakriti/aakriti.html'" style="cursor: pointer;">
+              <i class="fa-solid fa-trophy" style="color: #f59e0b;"></i>
+              <span><strong>Aakriti Hub 2026:</strong> Official Inter-Branch Championships live for Comp, IT, E&amp;TC, Mech-ARE. Click here to enter Hub! ⚡</span>
+            </div>
+            <div class="ticker-item">
+              <i class="fa-solid fa-bullhorn" style="color: #0284c7;"></i>
+              <span><strong>Fest Alert:</strong> AIT Annual Tech Symposium 'Solutions 2026' &amp; Innerve Hackathon registrations are live!</span>
+            </div>
+            <div class="ticker-item">
+              <i class="fa-solid fa-trophy" style="color: #f59e0b;"></i>
+              <span><strong>Hardware & Robotics:</strong> Robotics Club & Team BAJA unveil custom autonomous rover prototype for national expo.</span>
+            </div>
+            <div class="ticker-item">
+              <i class="fa-solid fa-address-book" style="color: #10b981;"></i>
+              <span><strong>Alumni Connect:</strong> Verified alumni directory updated with direct contact links for top tech & defense leaders.</span>
+            </div>
+            <div class="ticker-item">
+              <i class="fa-solid fa-calendar-check" style="color: #6366f1;"></i>
+              <span><strong>Club Workshop:</strong> Git & Open Source Contribution Sprint by OSS Club this Friday at 5:00 PM.</span>
+            </div>
+            <div class="ticker-item">
+              <i class="fa-solid fa-medal" style="color: #ea580c;"></i>
+              <span><strong>Sports Fest:</strong> Pace 2026 Inter-Collegiate Football, Cricket & Basketball fixtures released!</span>
+            </div>
+            <!-- Duplicate for continuous marquee -->
+            <div class="ticker-item">
+              <i class="fa-solid fa-bullhorn" style="color: #0284c7;"></i>
+              <span><strong>Fest Alert:</strong> AIT Annual Tech Symposium 'Solutions 2026' & Innerve Hackathon registrations are live!</span>
+            </div>
+            <div class="ticker-item">
+              <i class="fa-solid fa-trophy" style="color: #f59e0b;"></i>
+              <span><strong>Hardware & Robotics:</strong> Robotics Club & Team BAJA unveil custom autonomous rover prototype for national expo.</span>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-glass btn-glass-sm open-login-trigger" data-role="student" style="flex-shrink: 0;">
+          <i class="fa-solid fa-bolt"></i> Join Feed
+        </button>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         4. Dedicated Role Portals Hub (Separate Login for Student, Faculty, Alumni)
+         ========================================================================== -->
+    <section class="role-launch-section" id="portals">
+      <div class="site-container">
+        <div class="section-header">
+          <div class="glass-badge section-tag">
+            <i class="fa-solid fa-id-card"></i> Dedicated Campus Access
+          </div>
+          <h2 class="section-title">One Campus, Tailored Portals</h2>
+          <p class="section-desc">
+            Access customized tools, community feeds, and verified collaboration channels designed specifically for your role at AIT Pune.
+          </p>
+        </div>
+
+        <div class="roles-grid">
+          
+          <!-- Student Portal Card -->
+          <div class="role-3d-card role-student">
+            <div class="role-icon-box">
+              <i class="fa-solid fa-user-graduate"></i>
+            </div>
+            <h3 class="role-name">Student Portal</h3>
+            <p class="role-tagline">Connect with batchmates, join technical clubs (OSS, Robotics, BAJA, Coding), and collaborate on hackathon projects.</p>
+            
+            <ul class="role-features-list">
+              <li><span class="check-bullet">✓</span> Department course materials & academic notes</li>
+              <li><span class="check-bullet">✓</span> Quick club registrations & project teaming</li>
+              <li><span class="check-bullet">✓</span> Innerve Hackathon teaming & Solutions project expo</li>
+              <li><span class="check-bullet">✓</span> Direct contact access to verified AIT alumni</li>
+            </ul>
+
+            <div class="role-card-footer">
+              <button class="btn-glass btn-glass-primary open-login-trigger" data-role="student" style="width: 100%;">
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                <span>Student Sign In</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Faculty / Teacher Portal Card -->
+          <div class="role-3d-card role-faculty">
+            <div class="role-icon-box">
+              <i class="fa-solid fa-chalkboard-user"></i>
+            </div>
+            <h3 class="role-name">Faculty & Teachers</h3>
+            <p class="role-tagline">Publish department notices, manage lab schedules (3D PLM, Robotics), and supervise student capstone projects.</p>
+            
+            <ul class="role-features-list">
+              <li><span class="check-bullet">✓</span> Department announcement & circular broadcasts</li>
+              <li><span class="check-bullet">✓</span> Research lab project & patent application oversight</li>
+              <li><span class="check-bullet">✓</span> Student project supervision & advisory slots</li>
+              <li><span class="check-bullet">✓</span> Autonomous curriculum committee forums</li>
+            </ul>
+
+            <div class="role-card-footer">
+              <button class="btn-glass btn-glass-primary open-login-trigger" data-role="faculty" style="width: 100%; background: linear-gradient(135deg, #6366f1, #4338ca);">
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                <span>Faculty Sign In</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Alumni Portal Card -->
+          <div class="role-3d-card role-alumni">
+            <div class="role-icon-box">
+              <i class="fa-solid fa-user-tie"></i>
+            </div>
+            <h3 class="role-name">Alumni Network</h3>
+            <p class="role-tagline">Connect with fellow AITians globally, share job referrals, and respond directly to student inquiries.</p>
+            
+            <ul class="role-features-list">
+              <li><span class="check-bullet">✓</span> Searchable global alumni directory & chapters</li>
+              <li><span class="check-bullet">✓</span> Post job openings & internship referrals for AITians</li>
+              <li><span class="check-bullet">✓</span> Direct contact channel for student career questions</li>
+              <li><span class="check-bullet">✓</span> Incubation grants & campus startup support</li>
+            </ul>
+
+            <div class="role-card-footer">
+              <button class="btn-glass btn-glass-primary open-login-trigger" data-role="alumni" style="width: 100%; background: linear-gradient(135deg, #0d9488, #0f766e);">
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                <span>Alumni Sign In</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Aakriti Flagship Championship Hub Feature Banner -->
+        <div class="aakriti-portal-banner" style="margin-top: 36px; background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(239, 246, 255, 0.96) 55%, rgba(254, 243, 199, 0.55) 100%); border: 2px solid rgba(245, 158, 11, 0.5); border-radius: var(--radius-xl); padding: 32px 36px; box-shadow: 0 16px 45px -8px rgba(245, 158, 11, 0.2), 0 0 25px rgba(245, 158, 11, 0.15); display: flex; align-items: center; justify-content: space-between; gap: 24px; position: relative; overflow: hidden; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 22px; flex: 1; min-width: 300px;">
+            <div style="width: 78px; height: 78px; border-radius: 20px; background: linear-gradient(135deg, #f59e0b, #d97706); display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 2.2rem; box-shadow: 0 10px 25px rgba(217, 119, 6, 0.35); flex-shrink: 0;">
+              <i class="fa-solid fa-trophy"></i>
+            </div>
+            <div>
+              <div style="display: inline-flex; align-items: center; gap: 6px; background: #fffbeb; border: 1px solid #fde047; padding: 4px 12px; border-radius: 9999px; font-size: 0.75rem; font-weight: 800; color: #854d0e; text-transform: uppercase; margin-bottom: 8px;">
+                <i class="fa-solid fa-crown"></i> Official Inter-Branch Flagship Hub
+              </div>
+              <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.65rem; font-weight: 800; color: var(--text-dark); margin-bottom: 6px;">
+                Aakriti Championship Hub 2026
+              </h3>
+              <p style="font-size: 0.95rem; color: var(--text-muted); margin: 0; line-height: 1.5;">
+                Track live scores, match scorecards, trial registrations, and departmental standings across <strong>Sports Aakriti</strong>, <strong>Cultural Aakriti</strong>, and <strong>Technical Aakriti</strong> for <strong>Comp</strong>, <strong>IT</strong>, <strong>E&amp;TC</strong>, and <strong>Mech-ARE</strong>.
+              </p>
+            </div>
+          </div>
+          <div style="flex-shrink: 0;">
+            <a href="../Aakriti/aakriti.html" class="btn-glass btn-glass-primary btn-glass-lg" style="text-decoration: none; background: linear-gradient(135deg, #1d4ed8, #2563eb); border-color: rgba(56, 189, 248, 0.4); box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3); font-weight: 800; white-space: nowrap; display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px;">
+              <i class="fa-solid fa-bolt" style="color: #fef08a;"></i>
+              <span>Enter Aakriti Hub ⚡</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Student Applications Portal Feature Banner -->
+        <div class="outpass-portal-banner" style="margin-top: 24px; background: linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(238, 242, 255, 0.96) 55%, rgba(224, 231, 255, 0.65) 100%); border: 2px solid rgba(99, 102, 241, 0.45); border-radius: var(--radius-xl); padding: 32px 36px; box-shadow: 0 16px 45px -8px rgba(99, 102, 241, 0.18), 0 0 25px rgba(99, 102, 241, 0.1); display: flex; align-items: center; justify-content: space-between; gap: 24px; position: relative; overflow: hidden; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 22px; flex: 1; min-width: 300px;">
+            <div style="width: 78px; height: 78px; border-radius: 20px; background: linear-gradient(135deg, #4f46e5, #6366f1); display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 2.2rem; box-shadow: 0 10px 25px rgba(79, 70, 229, 0.35); flex-shrink: 0;">
+              <i class="fa-solid fa-file-signature"></i>
+            </div>
+            <div>
+              <div style="display: inline-flex; align-items: center; gap: 6px; background: #eef2ff; border: 1px solid #c7d2fe; padding: 4px 12px; border-radius: 9999px; font-size: 0.75rem; font-weight: 800; color: #3730a3; text-transform: uppercase; margin-bottom: 8px;">
+                <i class="fa-solid fa-shield-halved"></i> Hostel Resident Services
+              </div>
+              <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.65rem; font-weight: 800; color: var(--text-dark); margin-bottom: 6px;">
+                Student Applications Portal
+              </h3>
+              <p style="font-size: 0.95rem; color: var(--text-muted); margin: 0; line-height: 1.5;">
+                Apply for same-day outing passes, request sanctioned overnight leaves, inspect live chief warden review statuses, and display dynamic encrypted QR gate passes &amp; Gate PINs at Main Security Gate #1.
+              </p>
+            </div>
+          </div>
+          <div style="flex-shrink: 0;">
+            <a href="../Outpass/outpass.html" class="btn-glass btn-glass-primary btn-glass-lg" style="text-decoration: none; background: linear-gradient(135deg, #4338ca, #6366f1); border-color: rgba(165, 180, 252, 0.6); box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3); font-weight: 800; white-space: nowrap; display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; color:#ffffff;">
+              <i class="fa-solid fa-qrcode" style="color: #a5b4fc;"></i>
+              <span>Access Applications 📝</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Complaints / Grievance Redressal Portal Feature Banner -->
+        <div class="complain-portal-banner" style="margin-top: 24px; background: linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(254, 243, 199, 0.96) 55%, rgba(253, 230, 138, 0.65) 100%); border: 2px solid rgba(245, 158, 11, 0.45); border-radius: var(--radius-xl); padding: 32px 36px; box-shadow: 0 16px 45px -8px rgba(245, 158, 11, 0.18), 0 0 25px rgba(245, 158, 11, 0.1); display: flex; align-items: center; justify-content: space-between; gap: 24px; position: relative; overflow: hidden; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 22px; flex: 1; min-width: 300px;">
+            <div style="width: 78px; height: 78px; border-radius: 20px; background: linear-gradient(135deg, #d97706, #f59e0b); display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 2.2rem; box-shadow: 0 10px 25px rgba(217, 119, 6, 0.35); flex-shrink: 0;">
+              <i class="fa-solid fa-bullhorn"></i>
+            </div>
+            <div>
+              <div style="display: inline-flex; align-items: center; gap: 6px; background: #fef3c7; border: 1px solid #fde68a; padding: 4px 12px; border-radius: 9999px; font-size: 0.75rem; font-weight: 800; color: #92400e; text-transform: uppercase; margin-bottom: 8px;">
+                <i class="fa-solid fa-scale-balanced"></i> Institutional Accountability & Redressal
+              </div>
+              <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.65rem; font-weight: 800; color: var(--text-dark); margin-bottom: 6px;">
+                Complaints &amp; Grievance Redressal
+              </h3>
+              <p style="font-size: 0.95rem; color: var(--text-muted); margin: 0; line-height: 1.5;">
+                File and track hostel, mess, academic, or campus maintenance dockets with automated role routing to Chief Warden, HoDs, and Director. Real-time SLA countdowns, community upvotes, and public accountability boards.
+              </p>
+            </div>
+          </div>
+          <div style="flex-shrink: 0;">
+            <a href="../Complain/dist/index.html" class="btn-glass btn-glass-primary btn-glass-lg" style="text-decoration: none; background: linear-gradient(135deg, #b45309, #d97706); border-color: rgba(252, 211, 77, 0.6); box-shadow: 0 8px 24px rgba(217, 119, 6, 0.3); font-weight: 800; white-space: nowrap; display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; color:#ffffff;">
+              <i class="fa-solid fa-bullhorn" style="color: #fef08a;"></i>
+              <span>Open Complaints 📢</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Campus Commercial Shops Banner -->
+        <div class="shops-portal-banner" style="margin-top: 24px; background: linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(209, 250, 229, 0.96) 55%, rgba(167, 243, 208, 0.65) 100%); border: 2px solid rgba(16, 185, 129, 0.45); border-radius: var(--radius-xl); padding: 32px 36px; box-shadow: 0 16px 45px -8px rgba(16, 185, 129, 0.18), 0 0 25px rgba(16, 185, 129, 0.1); display: flex; align-items: center; justify-content: space-between; gap: 24px; position: relative; overflow: hidden; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 22px; flex: 1; min-width: 300px;">
+            <div style="width: 78px; height: 78px; border-radius: 20px; background: linear-gradient(135deg, #059669, #10b981); display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 2.2rem; box-shadow: 0 10px 25px rgba(5, 150, 105, 0.35); flex-shrink: 0;">
+              <i class="fa-solid fa-store"></i>
+            </div>
+            <div>
+              <div style="display: inline-flex; align-items: center; gap: 6px; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 4px 12px; border-radius: 9999px; font-size: 0.75rem; font-weight: 800; color: #065f46; text-transform: uppercase; margin-bottom: 8px;">
+                <i class="fa-solid fa-clock"></i> Live Status &amp; Skip-The-Queue Ordering
+              </div>
+              <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.65rem; font-weight: 800; color: var(--text-dark); margin-bottom: 6px;">
+                Campus Commercial Shops &amp; Ordering
+              </h3>
+              <p style="font-size: 0.95rem; color: var(--text-muted); margin: 0; line-height: 1.5;">
+                Inspect live open/closed operating schedules for all 8 campus shops (Food Court, Xerox, Stationary, Juice Shop, Ice Cream, Barber, Thapa Shop, OAC). Pre-pay online via UPI and collect food with instant digital pickup tokens!
+              </p>
+            </div>
+          </div>
+          <div style="flex-shrink: 0;">
+            <a href="../Shops/index.html" class="btn-glass btn-glass-primary btn-glass-lg" style="text-decoration: none; background: linear-gradient(135deg, #047857, #059669); border-color: rgba(110, 231, 183, 0.6); box-shadow: 0 8px 24px rgba(5, 150, 105, 0.3); font-weight: 800; white-space: nowrap; display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; color:#ffffff;">
+              <i class="fa-solid fa-utensils" style="color: #a7f3d0;"></i>
+              <span>Explore Shops 🏬</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Borrow & Share / CampuSync Banner -->
+        <div class="borrow-portal-banner" style="margin-top: 24px; background: linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(239, 246, 255, 0.96) 55%, rgba(219, 234, 254, 0.65) 100%); border: 2px solid rgba(37, 99, 235, 0.45); border-radius: var(--radius-xl); padding: 32px 36px; box-shadow: 0 16px 45px -8px rgba(37, 99, 235, 0.18), 0 0 25px rgba(37, 99, 235, 0.1); display: flex; align-items: center; justify-content: space-between; gap: 24px; position: relative; overflow: hidden; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 22px; flex: 1; min-width: 300px;">
+            <div style="width: 78px; height: 78px; border-radius: 20px; background: linear-gradient(135deg, #1d4ed8, #2563eb); display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 2.2rem; box-shadow: 0 10px 25px rgba(29, 78, 216, 0.35); flex-shrink: 0;">
+              <i class="fa-solid fa-handshake"></i>
+            </div>
+            <div>
+              <div style="display: inline-flex; align-items: center; gap: 6px; background: #eff6ff; border: 1px solid #bfdbfe; padding: 4px 12px; border-radius: 9999px; font-size: 0.75rem; font-weight: 800; color: #1e40af; text-transform: uppercase; margin-bottom: 8px;">
+                <i class="fa-solid fa-shield-halved"></i> Verified @aitpune.edu.in Peer Sharing
+              </div>
+              <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.65rem; font-weight: 800; color: var(--text-dark); margin-bottom: 6px;">
+                Borrow &amp; Share — CampuSync
+              </h3>
+              <p style="font-size: 0.95rem; color: var(--text-muted); margin: 0; line-height: 1.5;">
+                Hyper-local campus rental, equipment sharing, and skill-barter platform. Rent lab kits &amp; mini-drafters, exchange SPPU engineering books, and trade programming help with peer chat &amp; hostel filtering!
+              </p>
+            </div>
+          </div>
+          <div style="flex-shrink: 0;">
+            <a href="../Borrow/dist/index.html" class="btn-glass btn-glass-primary btn-glass-lg" style="text-decoration: none; background: linear-gradient(135deg, #1e40af, #1d4ed8); border-color: rgba(147, 197, 253, 0.6); box-shadow: 0 8px 24px rgba(29, 78, 216, 0.3); font-weight: 800; white-space: nowrap; display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; color:#ffffff;">
+              <i class="fa-solid fa-handshake" style="color: #bfdbfe;"></i>
+              <span>Open Borrow &amp; Share 🤝</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         5. Clubs & Student Societies Section (Concise Overview + Login Required)
+         ========================================================================== -->
+    <section class="clubs-section" id="clubs">
+      <div class="site-container">
+        <div class="section-header">
+          <div class="glass-badge section-tag">
+            <i class="fa-solid fa-users"></i> Campus Life & Societies
+          </div>
+          <h2 class="section-title">Student Clubs & Societies</h2>
+        </div>
+
+        <div class="clubs-overview-card">
+          <!-- Overview Paragraph -->
+          <p class="clubs-overview-text">
+            Life at the Army Institute of Technology thrives through student-led innovation, technical exploration, and creative expression. From premier coding and software bodies like the <strong>Open Source Software (OSS) Club</strong> to mechatronics in the <strong>3D PLM Robotics Lab</strong>, motorsport engineering with <strong>Team BAJA</strong>, cultural performing arts (<em>Aakriti</em>), varsity athletics (<em>Pace</em>), and startup incubation at <strong>E-Cell</strong> — our student societies shape well-rounded engineers, leaders, and problem solvers.
+          </p>
+
+          <!-- Dual Preview Images -->
+          <div class="clubs-preview-grid">
+            <div class="club-preview-item" onclick="window.location.href='../Clubs/dist/index.html'" style="cursor: pointer;" title="Explore Technical & Software Clubs">
+              <img src="./images/innerve_hackathon.jpg" alt="AIT Software & Hackathons" />
+              <div class="club-preview-overlay">
+                <span class="club-preview-tag"><i class="fa-solid fa-code"></i> Technical & Software</span>
+                <div class="club-preview-title">OSS Club, Coding Guild & Innerve Hackathons</div>
+              </div>
+            </div>
+
+            <div class="club-preview-item" onclick="window.location.href='../Clubs/dist/index.html'" style="cursor: pointer;" title="Explore Hardware & Robotics Clubs">
+              <img src="./images/robotics_lab.jpg" alt="AIT Robotics & Motorsport" />
+              <div class="club-preview-overlay">
+                <span class="club-preview-tag"><i class="fa-solid fa-robot"></i> Hardware & Racing</span>
+                <div class="club-preview-title">3D PLM Robotics Lab & Team BAJA Racing</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Direct Access Banner for Clubs Hub -->
+          <div class="clubs-login-gate">
+            <div class="clubs-login-gate-text">
+              <div class="clubs-login-gate-title">
+                <i class="fa-solid fa-users" style="color: var(--primary-600);"></i>
+                <span>Explore 29+ Active AIT Clubs &amp; Student Chapters</span>
+              </div>
+              <p class="clubs-login-gate-desc">
+                Comprehensive club rosters, project repositories, event registration links, and society bylaws are accessible directly. Explore technical, cultural, sports, and entrepreneurship clubs across campus.
+              </p>
+            </div>
+
+            <a href="../Clubs/dist/index.html" class="btn-glass btn-glass-primary" style="flex-shrink: 0; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-compass"></i>
+              <span>Open Clubs Directory 🚀</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         6. Latest Campus News & Announcements Section
+         ========================================================================== -->
+    <section class="news-section" id="news">
+      <div class="site-container">
+        <div class="section-header">
+          <div class="glass-badge section-tag">
+            <i class="fa-solid fa-newspaper"></i> Official Campus Dispatch
+          </div>
+          <h2 class="section-title">Latest Campus News & Updates</h2>
+          <p class="section-desc">
+            Stay informed with verified AIT Pune announcements, academic calendars, technical symposium circulars, and placement reports.
+          </p>
+        </div>
+
+        <div class="news-layout-grid">
+          
+          <!-- Featured News Card -->
+          <div class="featured-news-card">
+            <div class="featured-news-media">
+              <img src="./images/innerve_hackathon.jpg" alt="AIT Solutions Tech Fest & Innerve Hackathon" />
+            </div>
+            <div class="featured-news-content">
+              <div class="news-date-tag">
+                <i class="fa-solid fa-calendar-day"></i> September 2026 • <span>AIT Headlining</span>
+              </div>
+              <h3 class="featured-news-title">
+                Annual Technical Symposium 'Solutions 2026' & Innerve Hackathon Dates Released
+              </h3>
+              <p class="featured-news-excerpt">
+                The Student Council and Technical Board have officially announced the schedule for Solutions 2026. The 3-day national symposium will host the iconic 36-hour Innerve Hackathon, RoboWars arena, competitive coding sprints, and project expos.
+              </p>
+              <button class="btn-glass btn-glass-primary open-login-trigger" data-role="student">
+                <span>Sign In for Registration Details</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- News List Column -->
+          <div class="news-list-column">
+            
+            <div class="news-compact-card">
+              <div class="news-compact-header">
+                <span class="news-badge badge-research">Robotics & 3D PLM</span>
+                <span style="font-size: 0.75rem; color: var(--text-light);">2 hours ago</span>
+              </div>
+              <h4 class="news-compact-title">Robotics Club & 3D PLM Lab Develop Autonomous Rover for National Challenge</h4>
+              <p class="news-compact-desc">
+                Student engineers in the 3D PLM innovation facility successfully tested lidar-guided autonomous navigation and obstacle avoidance.
+              </p>
+            </div>
+
+            <div class="news-compact-card open-login-trigger" data-role="student">
+              <div class="news-compact-header">
+                <span class="news-badge badge-placement">Career & Placements</span>
+                <span style="font-size: 0.75rem; color: var(--text-light);">Yesterday</span>
+              </div>
+              <h4 class="news-compact-title">AIT Pune Placement Season 2025-26: Over 92% Batch Placed with Top Tech Firms</h4>
+              <p class="news-compact-desc">
+                Leading product engineering MNCs, cloud leaders, and automotive giants recruit AIT students across Computer, IT, E&TC, and Mechanical branches.
+              </p>
+            </div>
+
+            <div class="news-compact-card" onclick="window.location.href='../Aakriti/aakriti.html'" style="cursor: pointer;">
+              <div class="news-compact-header">
+                <span class="news-badge badge-fest">Campus Life</span>
+                <span style="font-size: 0.75rem; color: var(--text-light);">3 days ago</span>
+              </div>
+              <h4 class="news-compact-title">Stage Set for 'Aakriti 2026' — AIT's Flagship Championship</h4>
+              <p class="news-compact-desc">
+                Trials &amp; auditions commence across Sports, Cultural, and Technical championships among Comp, IT, E&amp;TC, and Mech-ARE.
+              </p>
+              <span style="display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem; font-weight: 700; color: var(--primary-600); margin-top: 6px;">
+                Enter Championship Hub <i class="fa-solid fa-arrow-right"></i>
+              </span>
+            </div>
+
+            <div class="news-compact-card open-login-trigger" data-role="faculty">
+              <div class="news-compact-header">
+                <span class="news-badge badge-academic">Academic Notice</span>
+                <span style="font-size: 0.75rem; color: var(--text-light);">5 days ago</span>
+              </div>
+              <h4 class="news-compact-title">Autonomous Curriculum & Minor Elective Registration Window Open</h4>
+              <p class="news-compact-desc">
+                Students can select interdisciplinary electives across AI/ML, Cyber Security, Robotics Automation, and VLSI systems.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         7. Wall of Fame & Latest Achievements Section
+         ========================================================================== -->
+    <section class="achievements-section" id="achievements">
+      <div class="site-container">
+        <div class="section-header">
+          <div class="glass-badge section-tag">
+            <i class="fa-solid fa-trophy"></i> Excellence & Milestones
+          </div>
+          <h2 class="section-title">Wall of Fame & Achievements</h2>
+          <p class="section-desc">
+            Celebrating the groundbreaking technical victories, research accomplishments, and sports laurels earned by AIT Pune students and faculty.
+          </p>
+        </div>
+
+        <div class="achievements-grid">
+          
+          <div class="achievement-card">
+            <div class="trophy-icon-wrap">
+              <i class="fa-solid fa-award"></i>
+            </div>
+            <div class="achievement-metric">NAAC 'A'</div>
+            <h4 class="achievement-title">Autonomous & NBA Accredited</h4>
+            <p class="achievement-desc">Recognized for premier academic rigor, world-class laboratory infrastructure, and research-driven engineering education.</p>
+          </div>
+
+          <div class="achievement-card">
+            <div class="trophy-icon-wrap">
+              <i class="fa-solid fa-laptop-code"></i>
+            </div>
+            <div class="achievement-metric">1st Prize</div>
+            <h4 class="achievement-title">National Smart India Hackathon</h4>
+            <p class="achievement-desc">AIT Pune student coding squads repeatedly bag top honors and cash prizes across national SIH software & hardware editions.</p>
+          </div>
+
+          <div class="achievement-card">
+            <div class="trophy-icon-wrap">
+              <i class="fa-solid fa-building-columns"></i>
+            </div>
+            <div class="achievement-metric">120+</div>
+            <h4 class="achievement-title">Published Research & Patents</h4>
+            <p class="achievement-desc">Faculty and student co-authored papers featured in IEEE, Springer, and ACM indexed international conferences.</p>
+          </div>
+
+          <div class="achievement-card">
+            <div class="trophy-icon-wrap">
+              <i class="fa-solid fa-medal"></i>
+            </div>
+            <div class="achievement-metric">24 Trophies</div>
+            <h4 class="achievement-title">Pace & Inter-University Sports</h4>
+            <p class="achievement-desc">AIT athletes brought home championship trophies in Football, Basketball, Volleyball, Squash, and Athletics.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         8. Alumni Network & Directory (Contact Feature)
+         ========================================================================== -->
+    <section class="alumni-section" id="alumni">
+      <div class="site-container">
+        <div class="section-header">
+          <div class="glass-badge section-tag">
+            <i class="fa-solid fa-earth-americas"></i> Global AIT Alumni Family
+          </div>
+          <h2 class="section-title">Distinguished Alumni Network</h2>
+          <p class="section-desc">
+            AIT Pune graduates hold key leadership roles across top global tech firms, research organizations, defense establishments, and high-growth startups. Connect directly with our alumni.
+          </p>
+        </div>
+
+        <!-- Alumni Spotlight Grid -->
+        <div class="alumni-showcase-grid">
+          
+          <!-- Alumni 1 -->
+          <div class="alumni-card">
+            <div class="alumni-profile-header">
+              <img src="./images/alumni_1.jpg" class="alumni-avatar-img" alt="Neha Sharma" />
+              <div>
+                <h4 class="alumni-name">Neha Sharma</h4>
+                <div class="alumni-role">Senior Engineering Manager @ Google Cloud</div>
+                <div class="alumni-batch">B.E. Computer Engineering • Class of 2015</div>
+              </div>
+            </div>
+            <div class="alumni-quote">
+              "My time at AIT Pune and contributing to the OSS Club built the foundational engineering grit that shaped my career. Always delighted to connect with fellow AITians!"
+            </div>
+            <div class="alumni-card-footer">
+              <span class="glass-badge" style="font-size: 0.78rem;"><i class="fa-solid fa-location-dot"></i> Sunnyvale, CA</span>
+              <button class="btn-glass btn-glass-primary btn-glass-sm open-contact-modal" data-alumni="Neha Sharma" data-role="Senior Engineering Manager" data-company="Google Cloud" data-email="neha.sharma@alumni.aitpune.edu.in">
+                <i class="fa-solid fa-paper-plane"></i> Contact
+              </button>
+            </div>
+          </div>
+
+          <!-- Alumni 2 -->
+          <div class="alumni-card">
+            <div class="alumni-profile-header">
+              <img src="./images/alumni_2.jpg" class="alumni-avatar-img" alt="Major Rohan Bakshi" />
+              <div>
+                <h4 class="alumni-name">Major Rohan Bakshi (Retd.)</h4>
+                <div class="alumni-role">Founder & CEO @ DefTech Intelligence</div>
+                <div class="alumni-batch">B.E. Mechanical Engineering • Class of 2012</div>
+              </div>
+            </div>
+            <div class="alumni-quote">
+              "AIT instills discipline, innovation, and an unbeatable work ethic. Always eager to connect and collaborate with motivated students and alumni founders."
+            </div>
+            <div class="alumni-card-footer">
+              <span class="glass-badge" style="font-size: 0.78rem;"><i class="fa-solid fa-location-dot"></i> Bengaluru, India</span>
+              <button class="btn-glass btn-glass-primary btn-glass-sm open-contact-modal" data-alumni="Rohan Bakshi" data-role="Founder & CEO" data-company="DefTech Intelligence" data-email="rohan.bakshi@alumni.aitpune.edu.in">
+                <i class="fa-solid fa-paper-plane"></i> Contact
+              </button>
+            </div>
+          </div>
+
+          <!-- Alumni 3 -->
+          <div class="alumni-card">
+            <div class="alumni-profile-header">
+              <img src="./images/alumni_3.jpg" class="alumni-avatar-img" alt="Dr. Siddharth Deshmukh" />
+              <div>
+                <h4 class="alumni-name">Dr. Siddharth Deshmukh</h4>
+                <div class="alumni-role">AI Research Scientist @ Microsoft Research</div>
+                <div class="alumni-batch">B.E. Information Technology • Class of 2017</div>
+              </div>
+            </div>
+            <div class="alumni-quote">
+              "From late nights in AIT labs to publishing research in premier AI venues — proud of how far our alma mater has come. Reach out anytime for research discussions!"
+            </div>
+            <div class="alumni-card-footer">
+              <span class="glass-badge" style="font-size: 0.78rem;"><i class="fa-solid fa-location-dot"></i> Redmond, WA</span>
+              <button class="btn-glass btn-glass-primary btn-glass-sm open-contact-modal" data-alumni="Dr. Siddharth Deshmukh" data-role="AI Research Scientist" data-company="Microsoft Research" data-email="siddharth.d@alumni.aitpune.edu.in">
+                <i class="fa-solid fa-paper-plane"></i> Contact
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Global Alumni Chapters Banner -->
+        <div class="alumni-network-banner">
+          <div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 6px;">Search the Global AIT Alumni Directory</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 520px;">
+              Access verified profiles of over 7,500+ AIT alumni across 40+ countries. Filter by domain, branch, or batch year and initiate direct professional correspondence.
+            </p>
+          </div>
+          <div class="alumni-stats-cluster">
+            <div class="stat-item">
+              <span class="stat-number">40+</span>
+              <span class="stat-label">Global Chapters</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">7,500+</span>
+              <span class="stat-label">Verified Alumni</span>
+            </div>
+            <button class="btn-glass btn-glass-primary open-login-trigger" data-role="alumni">
+              <i class="fa-solid fa-address-book"></i> Access Alumni Directory
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         9. Campus Vibe & Interactive Guest Poll
+         ========================================================================== -->
+    <section class="vibe-section" id="vibe">
+      <div class="site-container">
+        <div class="vibe-card">
+          <div>
+            <div class="glass-badge" style="margin-bottom: 12px;">
+              <i class="fa-solid fa-chart-simple"></i> Guest & Student Pulse
+            </div>
+            <h2 style="font-size: 2.1rem; margin-bottom: 12px;">What are you most excited for this semester at AIT?</h2>
+            <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px;">
+              Cast your vote as a guest explorer or logged-in student. See what the AIT Pune campus community is buzzing about in real time!
+            </p>
+            <div style="display: flex; gap: 16px; align-items: center;">
+              <span style="font-size: 0.85rem; color: var(--text-light);"><i class="fa-solid fa-users"></i> 1,420 votes recorded</span>
+              <button class="btn-glass btn-glass-sm open-login-trigger" data-role="student">
+                Log In to Comment
+              </button>
+            </div>
+          </div>
+
+          <!-- Poll Options -->
+          <div class="poll-options-box">
+            
+            <button class="poll-option-btn" data-opt="opt1">
+              <div class="poll-progress-bg"></div>
+              <div class="poll-option-content">
+                <span>🔥 Solutions '26 Tech Fest & Innerve Hackathon</span>
+                <span class="poll-pct">34%</span>
+              </div>
+            </button>
+
+            <button class="poll-option-btn" data-opt="opt2">
+              <div class="poll-progress-bg"></div>
+              <div class="poll-option-content">
+                <span>🤖 New Robotics Club Autonomous Rover Demos</span>
+                <span class="poll-pct">28%</span>
+              </div>
+            </button>
+
+            <button class="poll-option-btn" data-opt="opt3">
+              <div class="poll-progress-bg"></div>
+              <div class="poll-option-content">
+                <span>🏆 Pace 2026 Inter-Collegiate Sports Tournament</span>
+                <span class="poll-pct">22%</span>
+              </div>
+            </button>
+
+            <button class="poll-option-btn" data-opt="opt4">
+              <div class="poll-progress-bg"></div>
+              <div class="poll-option-content">
+                <span>🎭 Aakriti Cultural Fest & Star Night Concert</span>
+                <span class="poll-pct">16%</span>
+              </div>
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       10. Multi-Role Dedicated Login Modal (Student / Teacher / Alumni)
+       ========================================================================== -->
+  <div class="modal-overlay" id="loginModalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalRoleTitle">
+    <div class="login-modal-box">
+      <button class="modal-close-btn" id="closeLoginModalBtn" aria-label="Close modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="modal-header-area">
+        <div class="brand-icon" style="margin: 0 auto 12px; width: 48px; height: 48px;">
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        <h3 class="modal-title" id="modalRoleTitle">AIT Pune Portal Login</h3>
+        <p class="modal-subtitle">Choose your designated portal to access verified resources</p>
+      </div>
+
+      <!-- Tab Selection for 3 Roles -->
+      <div class="modal-tabs-nav">
+        <button class="modal-tab-btn active" data-tab="student">
+          <i class="fa-solid fa-user-graduate"></i> Student
+        </button>
+        <button class="modal-tab-btn" data-tab="faculty">
+          <i class="fa-solid fa-chalkboard-user"></i> Faculty / Teacher
+        </button>
+        <button class="modal-tab-btn" data-tab="alumni">
+          <i class="fa-solid fa-user-tie"></i> Alumni
+        </button>
+      </div>
+
+      <!-- 1. Student Login Panel -->
+      <div class="role-form-panel active" id="studentFormPanel">
+        <form id="studentLoginForm">
+          <div class="form-group">
+            <label class="form-label" for="studentIdInput">AIT Roll No / Registration ID</label>
+            <div class="form-input-wrap">
+              <i class="fa-solid fa-id-badge input-icon"></i>
+              <input type="text" id="studentIdInput" class="form-input" placeholder="e.g. 21101 (Comp A)" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="studentEmailInput">AIT Institutional Email</label>
+            <div class="form-input-wrap">
+              <i class="fa-solid fa-envelope input-icon"></i>
+              <input type="email" id="studentEmailInput" class="form-input" placeholder="student_roll@aitpune.edu.in" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="studentPassInput">Password</label>
+            <div class="form-input-wrap">
+              <i class="fa-solid fa-key input-icon"></i>
+              <input type="password" id="studentPassInput" class="form-input" placeholder="Enter student password" required />
+            </div>
+          </div>
+
+          <button type="submit" class="btn-glass btn-glass-primary" style="width: 100%; padding: 12px;">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            <span>Sign In to Student Feed</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- 2. Faculty / Teacher Login Panel -->
+      <div class="role-form-panel" id="facultyFormPanel">
+        <form id="facultyLoginForm">
+          <div class="form-group">
+            <label class="form-label" for="facultyIdInput">Faculty Employee Code</label>
+            <div class="form-input-wrap">
+              <i class="fa-solid fa-id-card-clip input-icon"></i>
+              <input type="text" id="facultyIdInput" class="form-input" placeholder="e.g. FAC-COMP-104" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="facultyEmailInput">Institutional Email</label>
+            <div class="form-input-wrap">
+              <i class="fa-solid fa-envelope input-icon"></i>
+              <input type="email" id="facultyEmailInput" class="form-input" placeholder="prof.name@aitpune.edu.in" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="facultyPassInput">Faculty Security Key</label>
+            <div class="form-input-wrap">
+              <i class="fa-solid fa-shield-halved input-icon"></i>
+              <input type="password" id="facultyPassInput" class="form-input" placeholder="Enter faculty password" required />
+            </div>
+          </div>
+
+          <button type="submit" class="btn-glass btn-glass-primary" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #6366f1, #4338ca);">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            <span>Sign In to Faculty Portal</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- 3. Alumni Login Panel -->
+      <div class="role-form-panel" id="alumniFormPanel">
+        <form id="alumniLoginForm">
+          <div class="form-group">
+            <label class="form-label" for="alumniIdInput">Alumni Registration No / Batch</label>
+            <div class="form-input-wrap">
+              <i class="fa-solid fa-award input-icon"></i>
+              <input type="text" id="alumniIdInput" class="form-input" placeholder="e.g. AIT-ALUM-2015" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="alumniEmailInput">Registered Email Address</label>
+            <div class="form-input-wrap">
+              <i class="fa-solid fa-envelope input-icon"></i>
+              <input type="email" id="alumniEmailInput" class="form-input" placeholder="alumni@company.com" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="alumniPassInput">Password</label>
+            <div class="form-input-wrap">
+              <i class="fa-solid fa-lock input-icon"></i>
+              <input type="password" id="alumniPassInput" class="form-input" placeholder="Enter alumni password" required />
+            </div>
+          </div>
+
+          <button type="submit" class="btn-glass btn-glass-primary" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #0d9488, #0f766e);">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            <span>Sign In to Alumni Directory</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Guest Continue Footer -->
+      <div class="guest-continue-box">
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">Just visiting the AIT campus portal?</p>
+        <button type="button" class="btn-glass btn-glass-secondary btn-glass-sm" id="guestPassModalBtn" style="width: 100%;">
+          <i class="fa-solid fa-globe"></i>
+          <span>Continue Exploring as Guest</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       11. Interactive Contact Alumni Modal
+       ========================================================================== -->
+  <div class="modal-overlay" id="detailsModalOverlay" role="dialog" aria-modal="true">
+    <div class="details-modal-box">
+      <button class="modal-close-btn" id="closeDetailsModalBtn" aria-label="Close modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div id="detailsModalContent">
+        <!-- Dynamically injected via JavaScript for Direct Contact & Messages -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       12. Site Footer
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="site-container">
+      <div class="footer-grid">
+        
+        <div class="footer-col">
+          <div class="brand-logo" style="margin-bottom: 16px;">
+            <div class="brand-icon">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div class="brand-text-wrapper">
+              <span class="brand-title">Campus Connect</span>
+              <span class="brand-subtitle">Army Institute of Technology</span>
+            </div>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px;">
+            The unified social and community infrastructure connecting aspiring engineers, faculty, and global alumni across technical fests, research, racing teams, and career connections at AIT Pune.
+          </p>
+          <div style="display: flex; gap: 12px;">
+            <a href="https://alumni.aitpune.edu.in" target="_blank" class="btn-glass btn-glass-sm" style="width: 36px; height: 36px; padding: 0;"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://www.aitpune.com" target="_blank" class="btn-glass btn-glass-sm" style="width: 36px; height: 36px; padding: 0;"><i class="fa-solid fa-globe"></i></a>
+            <a href="#" class="btn-glass btn-glass-sm" style="width: 36px; height: 36px; padding: 0;"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="btn-glass btn-glass-sm" style="width: 36px; height: 36px; padding: 0;"><i class="fa-brands fa-github"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Portals &amp; Logins</h4>
+          <ul class="footer-links">
+            <li><a href="../Aakriti/aakriti.html" style="color: #2563eb; font-weight: 700;"><i class="fa-solid fa-trophy" style="color: #f59e0b; margin-right: 4px;"></i> Aakriti Championship Hub</a></li>
+            <li><a href="../Feed/feed.html">Feeds &amp; Campus Life</a></li>
+            <li><a href="../Student-details/student-details.html">Student Directory</a></li>
+            <li><a href="../Faculty directory/faculty-directory.html">Faculty Directory</a></li>
+            <li><a href="../alumini directory/alumini.html">Alumni Network Directory</a></li>
+            <li><a href="../Clubs/dist/index.html">Clubs &amp; Student Chapters</a></li>
+            <li><a href="../Complain/dist/index.html" style="color: #d97706; font-weight: 700;"><i class="fa-solid fa-bullhorn" style="color: #f59e0b; margin-right: 4px;"></i> Complaints &amp; Redressal</a></li>
+            <li><a href="../Shops/index.html" style="color: #059669; font-weight: 700;"><i class="fa-solid fa-store" style="color: #10b981; margin-right: 4px;"></i> Campus Commercial Shops</a></li>
+            <li><a href="../Borrow/dist/index.html" style="color: #2563eb; font-weight: 700;"><i class="fa-solid fa-handshake" style="color: #3b82f6; margin-right: 4px;"></i> Borrow &amp; Share (CampuSync)</a></li>
+            <li><a href="../Feed/Profile/profile.html">Student Profile &amp; Settings</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>AIT Pune Life</h4>
+          <ul class="footer-links">
+            <li><a href="../Aakriti/aakriti.html" style="color: #d97706; font-weight: 700;"><i class="fa-solid fa-medal" style="color: #f59e0b; margin-right: 4px;"></i> Sports, Cultural &amp; Tech Shields</a></li>
+            <li><a href="../Clubs/dist/index.html">Clubs &amp; Student Societies</a></li>
+            <li><a href="../Feed/feed.html">Campus Feeds &amp; Tech News</a></li>
+            <li><a href="#achievements">Wall of Fame &amp; SIH Wins</a></li>
+            <li><a href="../alumini directory/alumini.html">Global Alumni Directory</a></li>
+            <li><a href="#vibe">Weekly Campus Vibe Poll</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Campus Helpdesk</h4>
+          <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 8px;">
+            <i class="fa-solid fa-location-dot" style="color: var(--primary-600); margin-right: 6px;"></i> Dighi Hills, Alandi Road, Pune - 411015
+          </p>
+          <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 8px;">
+            <i class="fa-solid fa-phone" style="color: var(--primary-600); margin-right: 6px;"></i> +91 8956018951 / 52 / 53
+          </p>
+          <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 16px;">
+            <i class="fa-solid fa-envelope" style="color: var(--primary-600); margin-right: 6px;"></i> ait@aitpune.edu.in
+          </p>
+          <span class="glass-badge" style="font-size: 0.78rem;">
+            <i class="fa-solid fa-shield-check"></i> NAAC 'A' Grade • Autonomous
+          </span>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Campus Connect • Army Institute of Technology, Pune. All rights reserved.</span>
+        <span>Permanently affiliated to SPPU • Approved by AICTE • Managed by AWES</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Three.js Library CDN for 3D Animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Main Script File -->
+  <script src="./homepage.js"></script>
+  <script src="../shared/campus-ai.js"></script>
+</body>
+</html>
