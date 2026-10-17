@@ -3336,7 +3336,7 @@
     if (window.history.length > 1) {
       window.history.back();
     } else {
-      window.location.href = '../homepage/homepage.html';
+      window.location.href = '/homepage/homepage.html';
     }
   }
 

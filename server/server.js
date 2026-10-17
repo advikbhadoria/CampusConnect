@@ -85,6 +85,10 @@ const server = http.createServer(async (req, res) => {
       safePath = path.join(ROOT_DIR, 'Shops', reqPath);
     } else if (fs.existsSync(path.join(ROOT_DIR, 'Complain/dist', reqPath))) {
       safePath = path.join(ROOT_DIR, 'Complain/dist', reqPath);
+    } else if (fs.existsSync(path.join(ROOT_DIR, 'Outpass', reqPath))) {
+      safePath = path.join(ROOT_DIR, 'Outpass', reqPath);
+    } else if (fs.existsSync(path.join(ROOT_DIR, 'Aakriti', reqPath))) {
+      safePath = path.join(ROOT_DIR, 'Aakriti', reqPath);
     } else {
       res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
       return res.end(`

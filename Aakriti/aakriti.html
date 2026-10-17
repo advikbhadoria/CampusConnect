@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <base href="/Aakriti/">
   <title>Aakriti Championship Hub 2026 — Army Institute of Technology (AIT Pune)</title>
   <meta name="description" content="Official Aakriti Championship Hub at AIT Pune. Real-time scores, registration trials, branch leaderboards, and historical archives for Sports, Cultural, and Technical Aakriti." />
 
@@ -14,7 +15,8 @@
   <!-- Font Awesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <!-- Modern Glassmorphic Stylesheet -->
+  <!-- Modern Glassmorphic Stylesheet (Absolute & Relative Fallbacks) -->
+  <link rel="stylesheet" href="/Aakriti/aakriti.css" />
   <link rel="stylesheet" href="./aakriti.css" />
 </head>
 <body>
@@ -37,13 +39,13 @@
       
       <!-- Left: Back Button & Dynamic Breadcrumbs -->
       <div class="nav-left-group">
-        <button type="button" class="btn-nav-back" id="btnNavBack" aria-label="Go back to previous screen">
+        <button type="button" class="btn-nav-back" id="btnNavBack" onclick="if(window.history.length>1){window.history.back();}else{window.location.href='/homepage/homepage.html';}" aria-label="Go back to Campus Connect homepage">
           <i class="fa-solid fa-arrow-left"></i>
           <span>Back</span>
         </button>
 
         <nav class="breadcrumb-trail" aria-label="Breadcrumb Navigation">
-          <a href="../Feed/feed.html" class="crumb-home"><i class="fa-solid fa-house"></i> <span class="crumb-text">Home</span></a>
+          <a href="/homepage/homepage.html" class="crumb-home"><i class="fa-solid fa-house"></i> <span class="crumb-text">Home</span></a>
           <span class="breadcrumb-sep crumb-sep-1">/</span>
           <a href="#overview" onclick="window.Aakriti.navigateTo('overview')" class="crumb-hub">Aakriti</a>
           <span class="breadcrumb-sep crumb-sep-2">/</span>
@@ -606,6 +608,6 @@
   <div class="aakriti-toast-deck" id="aakritiToastDeck"></div>
 
   <!-- Main JavaScript Controller -->
-  <script src="./aakriti.js"></script>
+  <script src="/Aakriti/aakriti.js"></script>
 </body>
 </html>

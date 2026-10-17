@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <base href="/Outpass/">
   <title>Applications — Army Institute of Technology (AIT Pune)</title>
   <meta name="description" content="Official Student Applications & Movement Portal for hostel residents of Army Institute of Technology, Pune. Apply for day outpasses, overnight leaves, track warden approvals, and obtain your security gate PIN." />
 
@@ -14,7 +15,8 @@
   <!-- Font Awesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <!-- Modern Glassmorphic Stylesheet -->
+  <!-- Modern Glassmorphic Stylesheet (Absolute & Relative Fallbacks) -->
+  <link rel="stylesheet" href="/Outpass/outpass.css" />
   <link rel="stylesheet" href="./outpass.css" />
 </head>
 <body>
@@ -38,13 +40,13 @@
       
       <!-- Left: Back Action & Breadcrumbs -->
       <div class="nav-left">
-        <button type="button" class="btn-back-link" id="btnNavBack" onclick="window.OutpassPortal.handleBackNavigation()" aria-label="Go back to previous screen">
+        <button type="button" class="btn-back-link" id="btnNavBack" onclick="if(window.history.length>1){window.history.back();}else{window.location.href='/homepage/homepage.html';}" aria-label="Go back to Campus Connect homepage">
           <i class="fa-solid fa-arrow-left"></i>
           <span>Back</span>
         </button>
 
         <nav class="breadcrumb-nav" aria-label="Breadcrumb Navigation">
-          <a href="../Feed/feed.html" class="crumb-link"><i class="fa-solid fa-house"></i> Home</a>
+          <a href="/homepage/homepage.html" class="crumb-link"><i class="fa-solid fa-house"></i> Home</a>
           <span class="crumb-divider">/</span>
           <span class="crumb-muted">Hostel Wing</span>
           <span class="crumb-divider">/</span>
@@ -645,6 +647,6 @@
   <div class="toast-notification-deck" id="toastDeck" aria-live="polite"></div>
 
   <!-- JavaScript Controller -->
-  <script src="./outpass.js"></script>
+  <script src="/Outpass/outpass.js"></script>
 </body>
 </html>

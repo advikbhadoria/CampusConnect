@@ -18,8 +18,14 @@
 /assets/*                           /Complain/dist/assets/:splat                200
 /Aakriti                            /Aakriti/aakriti.html                       200
 /Aakriti/                           /Aakriti/aakriti.html                       200
+/Aakriti/*                          /Aakriti/:splat                             200
+/aakriti.css                        /Aakriti/aakriti.css                        200
+/aakriti.js                         /Aakriti/aakriti.js                         200
 /Outpass                            /Outpass/outpass.html                       200
 /Outpass/                           /Outpass/outpass.html                       200
+/Outpass/*                          /Outpass/:splat                             200
+/outpass.css                        /Outpass/outpass.css                        200
+/outpass.js                         /Outpass/outpass.js                         200
 /Student-details                    /Student-details/student-details.html       200
 /Student-details/                   /Student-details/student-details.html       200
 /Feed                               /Feed/feed.html                             200

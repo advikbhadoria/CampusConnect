@@ -1291,15 +1291,11 @@
    * Top-Left Back Navigation
    */
   function handleBackNavigation() {
-    if (document.referrer && !document.referrer.includes('outpass.html')) {
-      window.location.href = document.referrer;
-      return;
-    }
     if (window.history.length > 1) {
       window.history.back();
-      return;
+    } else {
+      window.location.href = '/homepage/homepage.html';
     }
-    window.location.href = '../Feed/feed.html';
   }
 
   /**
@@ -1520,7 +1516,7 @@
     if (window.history.length > 1) {
       window.history.back();
     } else {
-      window.location.href = '../homepage/homepage.html';
+      window.location.href = '/homepage/homepage.html';
     }
   }
 
