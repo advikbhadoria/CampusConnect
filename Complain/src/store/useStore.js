@@ -19,9 +19,28 @@ const getOrCreateStudentId = () => {
 
 const initialStudentId = getOrCreateStudentId();
 
+const getInitialNavigation = () => {
+  try {
+    const search = (window.location.search || '').toLowerCase();
+    const hash = (window.location.hash || '').toLowerCase();
+    if (search.includes('dashboard') || search.includes('authority') || search.includes('jd') || hash.includes('dashboard') || hash.includes('authority')) {
+      return { screen: 'authority', role: 'jd' };
+    }
+    if (search.includes('board') || search.includes('scorecard') || hash.includes('scorecard')) {
+      return { screen: 'board', role: 'student' };
+    }
+    if (search.includes('new') || hash.includes('new')) {
+      return { screen: 'new', role: 'student' };
+    }
+  } catch {}
+  return { screen: 'register', role: 'student' };
+};
+
+const initialNav = getInitialNavigation();
+
 export const useStore = create((set, get) => ({
   // Active role in the application: 'student' | 'jd' | 'director' | 'chief_warden' | 'warden' | 'council'
-  currentRole: 'student',
+  currentRole: initialNav.role,
   setRole: (role) => set({ currentRole: role }),
 
   // Toggle between Student and Faculty (Joint Director) part
@@ -42,7 +61,7 @@ export const useStore = create((set, get) => ({
 
   // Navigation State
   // currentScreen: 'register' | 'new' | 'detail' | 'authority' | 'board'
-  currentScreen: 'register',
+  currentScreen: initialNav.screen,
   selectedComplaintId: null,
   
   navigate: (screen, complaintId = null) => {

@@ -84,7 +84,7 @@ export default function AuthorityDashboard() {
               <span className="text-[11px] text-steel hidden sm:inline">• {activeOfficer.department}</span>
             </div>
             <h1 className="font-headline font-medium text-3xl sm:text-4xl text-white tracking-tight">
-              {currentRole === 'jd' ? 'Joint Director Review Queue' : 'Authority grievance queue'}
+              {currentRole === 'jd' ? 'Complaint Dashboard · Review Queue' : 'Authority Grievance Dashboard'}
             </h1>
             <p className="text-xs text-steel mt-1">
               {currentRole === 'jd' 
@@ -163,18 +163,25 @@ export default function AuthorityDashboard() {
         {/* TAB 1: Clean Queue Table (Title, Category, Status, SLA, Votes) */}
         {activeTab === 'queue' && (
           <div className="rounded-card border border-ink-border bg-ink-surface overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs border-collapse">
-                <thead>
-                  <tr className="border-b border-ink-border text-steel font-medium">
-                    <th className="py-3.5 px-5">Title</th>
-                    <th className="py-3.5 px-4">Category</th>
-                    <th className="py-3.5 px-4">Status</th>
-                    <th className="py-3.5 px-4">SLA</th>
-                    <th className="py-3.5 px-5 text-right">Votes</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-ink-border">
+            {loading ? (
+              <div className="p-12 text-center text-steel text-xs">Loading queue dockets...</div>
+            ) : filteredQueue.length === 0 ? (
+              <div className="p-12 text-center text-steel text-xs">
+                No complaint dockets currently in review queue.
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs border-collapse">
+                  <thead>
+                    <tr className="border-b border-ink-border text-steel font-medium">
+                      <th className="py-3.5 px-5">Title</th>
+                      <th className="py-3.5 px-4">Category</th>
+                      <th className="py-3.5 px-4">Status</th>
+                      <th className="py-3.5 px-4">SLA</th>
+                      <th className="py-3.5 px-5 text-right">Votes</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-ink-border">
                   {filteredQueue.map((item) => {
                     const isOverdue = item.status !== 'resolved' && item.status !== 'closed' &&
                                       item.sla_deadline && new Date(item.sla_deadline).getTime() < Date.now();
@@ -232,8 +239,9 @@ export default function AuthorityDashboard() {
                 </tbody>
               </table>
             </div>
-          </div>
-        )}
+          )}
+        </div>
+      )}
 
         {/* TAB 2: Moderation Tab for Reported Complaints */}
         {activeTab === 'moderation' && (

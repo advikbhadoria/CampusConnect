@@ -10,8 +10,8 @@ export default function Navbar() {
   const isFacultyActive = currentRole === 'jd' || currentRole === 'chief_warden' || currentRole === 'director';
 
   const navItems = [
-    { id: 'register', label: 'Student Board' },
-    { id: 'authority', label: 'JD Queue' },
+    { id: 'register', label: 'Complaints Board' },
+    { id: 'authority', label: 'Complaint Dashboard' },
     { id: 'board', label: 'Scorecard' },
   ];
 
@@ -47,6 +47,7 @@ export default function Navbar() {
                   className={`relative py-1 transition-colors whitespace-nowrap ${
                     isActive ? 'text-ink font-semibold' : 'text-steel hover:text-ink'
                   }`}
+                  title={item.id === 'authority' ? 'Joint Director / Authority Review Dashboard' : item.label}
                 >
                   {item.label}
                   {isActive && (

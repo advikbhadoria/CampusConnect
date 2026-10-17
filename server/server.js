@@ -60,9 +60,53 @@ const server = http.createServer(async (req, res) => {
 
   // --- STATIC FILE SERVING ---
   let reqPath = pathname === '/' ? '/homepage/homepage.html' : pathname;
+  const normPath = pathname.toLowerCase();
   
-  // Normalize path & prevent directory traversal
-  let safePath = path.normalize(path.join(ROOT_DIR, reqPath));
+  // Dedicated SPA / Production Bundle Route Mapping
+  let safePath = null;
+
+  if (
+    normPath === '/complain' ||
+    normPath === '/complain/' ||
+    normPath === '/complain/index.html' ||
+    normPath === '/complain/dist' ||
+    normPath === '/complain/dist/' ||
+    normPath === '/complain/dist/index.html'
+  ) {
+    safePath = path.join(ROOT_DIR, 'Complain', 'dist', 'index.html');
+  } else if (normPath.startsWith('/complain/dist/assets/')) {
+    safePath = path.join(ROOT_DIR, 'Complain', 'dist', pathname.slice('/complain/dist/'.length));
+  } else if (normPath.startsWith('/complain/assets/')) {
+    safePath = path.join(ROOT_DIR, 'Complain', 'dist', pathname.slice('/complain/'.length));
+  } else if (
+    normPath === '/borrow' ||
+    normPath === '/borrow/' ||
+    normPath === '/borrow/index.html' ||
+    normPath === '/borrow/dist' ||
+    normPath === '/borrow/dist/' ||
+    normPath === '/borrow/dist/index.html'
+  ) {
+    safePath = path.join(ROOT_DIR, 'Borrow', 'dist', 'index.html');
+  } else if (normPath.startsWith('/borrow/dist/assets/')) {
+    safePath = path.join(ROOT_DIR, 'Borrow', 'dist', pathname.slice('/borrow/dist/'.length));
+  } else if (normPath.startsWith('/borrow/assets/')) {
+    safePath = path.join(ROOT_DIR, 'Borrow', 'dist', pathname.slice('/borrow/'.length));
+  } else if (normPath.startsWith('/assets/')) {
+    const complainAsset = path.join(ROOT_DIR, 'Complain', 'dist', pathname);
+    const borrowAsset = path.join(ROOT_DIR, 'Borrow', 'dist', pathname);
+    if (fs.existsSync(complainAsset)) {
+      safePath = complainAsset;
+    } else if (fs.existsSync(borrowAsset)) {
+      safePath = borrowAsset;
+    }
+  }
+
+  // Fallback to standard path normalization if not matched by dedicated SPA mapping
+  if (!safePath) {
+    safePath = path.normalize(path.join(ROOT_DIR, reqPath));
+  }
+
+  // Prevent directory traversal
   if (!safePath.startsWith(ROOT_DIR)) {
     res.writeHead(403, { 'Content-Type': 'text/plain' });
     return res.end('Access Denied');
