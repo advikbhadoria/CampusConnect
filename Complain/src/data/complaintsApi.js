@@ -17,20 +17,58 @@ const handleError = (action, err) => {
   console.warn(`Notice during ${action} (falling back to local store):`, err);
 };
 
+// Local demo submission tracking: prevents newly filed complaints from leaking to other student laptops
+const LOCAL_SUBMISSIONS_KEY = 'ait_my_submitted_dockets';
+
+export function getMySubmittedDockets() {
+  try {
+    const raw = localStorage.getItem(LOCAL_SUBMISSIONS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function recordLocalSubmission(id) {
+  try {
+    const list = getMySubmittedDockets();
+    if (!list.includes(id)) {
+      list.push(id);
+      localStorage.setItem(LOCAL_SUBMISSIONS_KEY, JSON.stringify(list));
+    }
+  } catch (e) {
+    console.warn('Could not record local submission', e);
+  }
+}
+
 /**
  * Retrieve complaints filtered and redacted for the specified user role.
- * - Students see public complaints plus their own
- * - Authorities see complaints where assigned_roles contains their role
- * - Includes has_voted for the current active student
+ * - Students see public community baseline complaints plus their own filed dockets
+ * - Other student laptops do NOT see demo complaints filed by another laptop
+ * - Joint Director (JD) has apex clearance and sees ALL incoming dockets, private grievances & escalations
  */
-export async function getComplaints(role = 'student', studentId = 'STU-2026-CURRENT') {
-  if (isMock) return mockApi.getComplaints(role);
+export async function getComplaints(role = 'student', studentId = null) {
+  const activeStudentId = studentId || useStore.getState().studentId || 'STU-2026-CURRENT';
+  const myLocalDockets = new Set(getMySubmittedDockets());
+
+  if (isMock) {
+    const mockList = await mockApi.getComplaints(role);
+    if (role === 'student') {
+      return (mockList || []).filter(c => {
+        if (c.visibility === 'private' || c.is_demo_docket) {
+          return c.reporter_id === activeStudentId || myLocalDockets.has(c.id);
+        }
+        return true;
+      });
+    }
+    return mockList;
+  }
 
   try {
     let query = supabase.from('complaints').select('*').order('created_at', { ascending: false });
 
     if (role === 'student') {
-      query = query.or(`visibility.eq.public,reporter_id.eq.${studentId}`);
+      query = query.or(`visibility.eq.public,reporter_id.eq.${activeStudentId}`);
     } else if (role === 'council') {
       // Council sees non-faculty complaints
       query = query.neq('category', 'faculty');
@@ -46,7 +84,7 @@ export async function getComplaints(role = 'student', studentId = 'STU-2026-CURR
     const { data: userVotes } = await supabase
       .from('votes')
       .select('complaint_id')
-      .eq('student_id', studentId);
+      .eq('student_id', activeStudentId);
 
     const votedSet = new Set((userVotes || []).map(v => v.complaint_id));
 
@@ -57,18 +95,45 @@ export async function getComplaints(role = 'student', studentId = 'STU-2026-CURR
           ...c,
           sla_deadline: c.due_at,
           has_voted: hasVoted,
-          upvoted_by: hasVoted ? [studentId] : [],
+          upvoted_by: hasVoted ? [activeStudentId] : [],
         };
       })
-      .filter(c => canRoleAccessComplaint(c, role))
+      .filter(c => {
+        // DEMO PROTOTYPE FILTERING:
+        // Only the laptop where the JD tab is selected should view incoming grievance dockets!
+        // On other laptops with student role, hide private demo dockets unless filed on this laptop.
+        if (role === 'student') {
+          if (c.visibility === 'private' || c.is_demo_docket) {
+            return c.reporter_id === activeStudentId || myLocalDockets.has(c.id);
+          }
+          return c.visibility === 'public';
+        }
+
+        // Joint Director and Director have full clearance to view all incoming dockets
+        if (role === 'jd' || role === 'director') {
+          return true;
+        }
+
+        return canRoleAccessComplaint(c, role);
+      })
       .map(c => applyRoleRedaction(c, role));
 
     return formatted;
   } catch (err) {
     handleError('getComplaints', err);
-    return mockApi.getComplaints(role);
+    const mockList = await mockApi.getComplaints(role);
+    if (role === 'student') {
+      return (mockList || []).filter(c => {
+        if (c.visibility === 'private' || c.is_demo_docket) {
+          return c.reporter_id === activeStudentId || myLocalDockets.has(c.id);
+        }
+        return true;
+      });
+    }
+    return mockList;
   }
 }
+
 
 /**
  * Retrieve a single complaint by ID, including its chronological updates thread.
@@ -147,10 +212,21 @@ export async function getComplaint(id, role = 'student', studentId = 'STU-2026-C
  * Runs router logic, computes SLA due_at and escalation level, inserts into Supabase.
  */
 export async function createComplaint(data) {
-  if (isMock) return mockApi.createComplaint(data);
+  const activeStudentId = data.reporter_id || useStore.getState().studentId || 'STU-2026-CURRENT';
+
+  // Demo prototype routing: ensure Joint Director (JD) is included in assigned roles
+  const routing = determineRouting(data.category, data.about_person);
+  if (!routing.assigned_roles.includes('jd')) {
+    routing.assigned_roles.push('jd');
+  }
+
+  if (isMock) {
+    const res = await mockApi.createComplaint({ ...data, reporter_id: activeStudentId });
+    if (res?.complaint?.id) recordLocalSubmission(res.complaint.id);
+    return res;
+  }
 
   try {
-    const routing = determineRouting(data.category, data.about_person);
     const slaHours = data.severity >= 4 ? 24 : 48;
     const dueAt = new Date(Date.now() + slaHours * 3600 * 1000).toISOString();
 
@@ -159,24 +235,28 @@ export async function createComplaint(data) {
       data.about_person === 'warden' ||
       data.about_person === 'teacher' ||
       data.about_person === 'staff' ||
-      data.category === 'emergency'
+      data.category === 'emergency' ||
+      data.category === 'faculty'
     ) {
       level = 2;
     }
 
+    // DEMO PROTOTYPE PRIVACY:
+    // Newly filed complaints are routed as 'private' grievance dockets to Joint Director (JD)
+    // and filing student, so other student laptops do NOT see them prematurely.
     const payload = {
       title: data.title || 'Untitled Issue',
       body: data.body || '',
       category: data.category || 'hostel',
       severity: Number(data.severity) || 3,
       location: data.location || 'AIT Campus, Dighi Hills',
-      visibility: data.visibility || 'public',
+      visibility: 'private', // Confidential to JD & reporting student
       hide_identity: !!data.hide_identity,
       about_person: data.about_person || null,
       assigned_roles: routing.assigned_roles,
       level,
       status: 'submitted',
-      reporter_id: data.reporter_id || 'STU-2026-CURRENT',
+      reporter_id: activeStudentId,
       upvote_count: 0,
       report_count: 0,
       report_status: 'none',
@@ -190,6 +270,9 @@ export async function createComplaint(data) {
       .single();
 
     if (error) throw error;
+
+    // Track locally so this laptop knows it filed this complaint
+    recordLocalSubmission(newRow.id);
 
     // Log initial system route assignment update
     await supabase.from('updates').insert({
@@ -217,8 +300,12 @@ export async function createComplaint(data) {
     };
   } catch (err) {
     handleError('createComplaint', err);
+    const fallback = await mockApi.createComplaint({ ...data, reporter_id: activeStudentId });
+    if (fallback?.complaint?.id) recordLocalSubmission(fallback.complaint.id);
+    return fallback;
   }
 }
+
 
 /**
  * Toggle upvote for a student using Supabase RPC toggle_vote.

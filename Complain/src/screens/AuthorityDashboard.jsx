@@ -17,15 +17,15 @@ export default function AuthorityDashboard() {
   const [selectedDocket, setSelectedDocket] = useState(null);
   const [simulating, setSimulating] = useState(false);
 
-  const activeOfficer = AUTHORITIES[currentRole] || AUTHORITIES.chief_warden;
+  const activeOfficer = AUTHORITIES[currentRole] || AUTHORITIES.jd;
 
   const loadData = async () => {
     setLoading(true);
     try {
       const data = await getComplaints(currentRole);
-      setComplaints(data);
+      setComplaints(data || []);
       const mod = await getModerationQueue(currentRole);
-      setModerationList(mod);
+      setModerationList(mod || []);
     } catch (err) {
       console.error('Failed to load queue', err);
     } finally {
@@ -77,14 +77,20 @@ export default function AuthorityDashboard() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 mb-8 border-b border-ink-border">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-xs text-yellow font-medium">
+              <span className="text-xs text-yellow font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-yellow/15 border border-yellow/30">
                 {activeOfficer.title}
               </span>
-              <span className="text-xs text-steel">• {activeOfficer.name}</span>
+              <span className="text-xs text-mist/80 font-medium">• {activeOfficer.name}</span>
+              <span className="text-[11px] text-steel hidden sm:inline">• {activeOfficer.department}</span>
             </div>
             <h1 className="font-headline font-medium text-3xl sm:text-4xl text-white tracking-tight">
-              Authority queue
+              {currentRole === 'jd' ? 'Joint Director Review Queue' : 'Authority grievance queue'}
             </h1>
+            <p className="text-xs text-steel mt-1">
+              {currentRole === 'jd' 
+                ? 'Institutional Escalations, Confidential Inquiries & Disciplinary Grievance Dockets' 
+                : 'Campus operational triage, SLA compliance and resolution dispatch'}
+            </p>
           </div>
 
           <div className="flex items-center gap-3">

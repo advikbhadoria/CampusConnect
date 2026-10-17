@@ -40,13 +40,14 @@ export default function PublicBoard() {
 
   const filterPopoverRef = useRef(null);
   const currentRole = useStore(s => s.currentRole);
+  const studentId = useStore(s => s.studentId);
   const realtimeTick = useStore(s => s.realtimeTick);
   const navigate = useStore(s => s.navigate);
 
   const fetchBoardComplaints = async () => {
     setLoading(true);
     try {
-      const data = await getComplaints(currentRole);
+      const data = await getComplaints(currentRole, studentId);
       setComplaints(data || []);
     } catch (err) {
       console.error('Failed to load complaints', err);
@@ -84,10 +85,13 @@ export default function PublicBoard() {
       // Do not show removed
       if (c.report_status === 'removed') return false;
 
-      // Role privacy: private complaints only visible if permitted
-      if (currentRole === 'student' && c.visibility === 'private' && c.reporter_id !== 'STU-2026-CURRENT') {
-        return false;
+      // Role privacy: private complaints or demo dockets only visible if filed by this student
+      if (currentRole === 'student' && (c.visibility === 'private' || c.is_demo_docket)) {
+        if (c.reporter_id !== studentId) {
+          return false;
+        }
       }
+
 
       // Category filter
       if (selectedCategory !== 'all') {

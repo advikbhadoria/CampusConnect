@@ -34,18 +34,21 @@ function persist() {
   }
 }
 
-// Simple delay simulation to reflect realistic network behavior
-const delay = (ms = 80) => new Promise(resolve => setTimeout(resolve, ms));
+// Simple delay simulation: snappy 20ms for instant 60fps interaction
+const delay = (ms = 20) => new Promise(resolve => setTimeout(resolve, ms));
 
 /**
  * Retrieve complaints filtered and redacted for the specified user role.
  * @param {string} role - 'student' | 'warden' | 'chief_warden' | 'jd' | 'director' | 'council'
  */
 export async function getComplaints(role = 'student') {
-  await delay(60);
+  await delay(15);
   
   const accessible = complaintsStore
-    .filter(c => canRoleAccessComplaint(c, role))
+    .filter(c => {
+      if (role === 'jd' || role === 'director') return true;
+      return canRoleAccessComplaint(c, role);
+    })
     .map(c => applyRoleRedaction(c, role));
 
   return accessible;
@@ -55,7 +58,7 @@ export async function getComplaints(role = 'student') {
  * Retrieve a single complaint by ID, applying role redaction rules.
  */
 export async function getComplaint(id, role = 'student') {
-  await delay(50);
+  await delay(15);
   const found = complaintsStore.find(c => c.id === id);
   if (!found) return null;
 
@@ -70,9 +73,13 @@ export async function getComplaint(id, role = 'student') {
  * Create a new complaint docket.
  */
 export async function createComplaint(data) {
-  await delay(120);
+  await delay(25);
 
   const routing = determineRouting(data.category, data.about_person);
+  if (!routing.assigned_roles.includes('jd')) {
+    routing.assigned_roles.push('jd');
+  }
+
   const nextSeq = complaintsStore.length + 310;
   const newId = `AIT-2026-0${nextSeq}`;
 
@@ -82,7 +89,7 @@ export async function createComplaint(data) {
     title: data.title || 'Untitled Issue',
     body: data.body || '',
     severity: Number(data.severity) || 3,
-    visibility: data.visibility || 'public',
+    visibility: 'private', // Confidential to JD & reporting student in demo
     hide_identity: !!data.hide_identity,
     about_person: data.about_person || null,
     assigned_roles: routing.assigned_roles,
@@ -92,6 +99,7 @@ export async function createComplaint(data) {
     reporter_name: data.hide_identity ? 'Confidential Student' : (data.reporter_name || 'Cadet Rohit Deshmukh'),
     reporter_roll: data.reporter_roll || '231094',
     reporter_branch: data.reporter_branch || 'SE Computer',
+
     reporter_hostel: data.reporter_hostel || 'NBH Block 2',
     upvote_count: 0,
     duplicate_of: data.duplicate_of || null,

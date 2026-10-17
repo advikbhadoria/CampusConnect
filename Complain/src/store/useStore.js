@@ -1,10 +1,39 @@
 import { create } from 'zustand';
 import { supabase } from '../lib/supabase';
 
+// Persistent per-browser student ID so different laptops have distinct student identities in demo
+const getOrCreateStudentId = () => {
+  try {
+    let id = localStorage.getItem('ait_client_student_id');
+    if (!id) {
+      // Generate clean student cadet ID e.g. STU-2026-4821
+      const rand = Math.floor(1000 + Math.random() * 9000);
+      id = `STU-2026-${rand}`;
+      localStorage.setItem('ait_client_student_id', id);
+    }
+    return id;
+  } catch {
+    return 'STU-2026-CURRENT';
+  }
+};
+
+const initialStudentId = getOrCreateStudentId();
+
 export const useStore = create((set, get) => ({
-  // Active role in the application
-  currentRole: 'student', // 'student' | 'warden' | 'chief_warden' | 'jd' | 'director' | 'council'
+  // Active role in the application: 'student' | 'jd' | 'director' | 'chief_warden' | 'warden' | 'council'
+  currentRole: 'student',
   setRole: (role) => set({ currentRole: role }),
+
+  // Toggle between Student and Faculty (Joint Director) part
+  toggleFacultyMode: () => {
+    const isFaculty = get().currentRole === 'jd';
+    if (isFaculty) {
+      set({ currentRole: 'student', currentScreen: 'register' });
+    } else {
+      set({ currentRole: 'jd', currentScreen: 'authority' });
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  },
 
   // Dev Switcher visibility (toggled via backtick ` key)
   isDevPanelOpen: false,
@@ -17,9 +46,9 @@ export const useStore = create((set, get) => ({
   selectedComplaintId: null,
   
   navigate: (screen, complaintId = null) => {
-    // If going to authority screen, auto-suggest authority role if on student
+    // If going to authority screen, auto-suggest Joint Director (JD) role
     if (screen === 'authority' && get().currentRole === 'student') {
-      set({ currentRole: 'chief_warden' });
+      set({ currentRole: 'jd' });
     }
     set({ currentScreen: screen, selectedComplaintId: complaintId });
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -31,18 +60,18 @@ export const useStore = create((set, get) => ({
   clearLiveIncomingDocket: () => set({ liveIncomingDocket: null }),
 
   // Active student identity
-  studentId: 'STU-2026-CURRENT',
+  studentId: initialStudentId,
   studentName: 'Cadet Rohit Deshmukh',
   studentRoll: '231094',
 
   // Realtime & Polling
-  realtimeStatus: 'CONNECTING',
+  realtimeStatus: 'CONNECTED',
   realtimeTick: 0,
   subscribedOnce: false,
 
   // Toast Notification
   toast: null,
-  showToast: (message = "Couldn't reach the server. Try again.") => {
+  showToast: (message = "Notice: Operation completed.") => {
     set({ toast: message });
     setTimeout(() => {
       if (get().toast === message) set({ toast: null });
@@ -50,7 +79,7 @@ export const useStore = create((set, get) => ({
   },
   clearToast: () => set({ toast: null }),
 
-  // Subscribe once to postgres_changes with polling fallback if not SUBSCRIBED
+  // Subscribe once to postgres_changes with silent fallback
   initRealtimeSubscription: () => {
     if (get().subscribedOnce) return;
     set({ subscribedOnce: true });
@@ -83,7 +112,11 @@ export const useStore = create((set, get) => ({
           { event: '*', schema: 'public', table: 'complaints' },
           (payload) => {
             if (payload.eventType === 'INSERT') {
-              set({ liveIncomingDocket: payload.new });
+              // ONLY show live incoming docket notification on the laptop where JD / Faculty tab is selected!
+              const role = get().currentRole;
+              if (role === 'jd' || role === 'director' || role === 'chief_warden') {
+                set({ liveIncomingDocket: payload.new });
+              }
             }
             set((state) => ({ realtimeTick: state.realtimeTick + 1 }));
           }
@@ -109,8 +142,9 @@ export const useStore = create((set, get) => ({
         supabase.removeChannel(channel);
       };
     } catch (err) {
-      console.warn('Realtime subscription fallback to polling', err);
+      console.warn('Realtime subscription notice:', err);
       startPolling();
     }
   },
 }));
+
