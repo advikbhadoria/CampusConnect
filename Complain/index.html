@@ -13,8 +13,8 @@
   </head>
   <body class="bg-mist text-ink font-body antialiased selection:bg-yellow selection:text-ink min-h-screen">
     <script>
-      // Automatic seamless forward to pre-built production app when opened statically
-      if (!window.location.port || window.location.port === "8000" || window.location.port === "3000" || window.location.protocol === "file:") {
+      // Automatic seamless forward to pre-built production app when opened directly from source root
+      if (!window.location.pathname.includes('/dist/') && (!window.location.port || window.location.port === "8000" || window.location.port === "3000" || window.location.protocol === "file:")) {
         window.location.replace("./dist/index.html" + window.location.search + window.location.hash);
       }
     </script>
@@ -23,7 +23,7 @@
     </noscript>
     <!-- Top-Left Floating Back Navigation Button -->
     <aside style="position: fixed; top: 14px; left: 16px; z-index: 9999; display: flex; align-items: center; gap: 8px;">
-      <button onclick="if(window.history.length>1){window.history.back();}else{window.location.href='../homepage/homepage.html';}" style="display: inline-flex; align-items: center; gap: 7px; padding: 7px 16px; background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); color: #1e3a8a; border: 1px solid rgba(191, 219, 254, 0.9); border-radius: 9999px; font-size: 13px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.1); transition: all 0.2s;" onmouseover="this.style.background='#eff6ff'; this.style.transform='translateY(-1px)';" onmouseout="this.style.background='rgba(255, 255, 255, 0.96)'; this.style.transform='none';">
+      <button onclick="if(window.history.length>1){window.history.back();}else{window.location.href=window.location.pathname.includes('/dist/')?'../../homepage/homepage.html':'../homepage/homepage.html';}" style="display: inline-flex; align-items: center; gap: 7px; padding: 7px 16px; background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); color: #1e3a8a; border: 1px solid rgba(191, 219, 254, 0.9); border-radius: 9999px; font-size: 13px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.1); transition: all 0.2s;" onmouseover="this.style.background='#eff6ff'; this.style.transform='translateY(-1px)';" onmouseout="this.style.background='rgba(255, 255, 255, 0.96)'; this.style.transform='none';">
         <span style="font-size: 14px;">←</span>
         <span>Back to Campus Connect</span>
       </button>

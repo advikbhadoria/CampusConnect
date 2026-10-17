@@ -36,6 +36,19 @@ const requiredPages = [
 
 let errors = [];
 
+// Pre-flight check: Auto-build Complain if dist or assets are missing
+const complainDist = path.join(ROOT_DIR, 'Complain', 'dist');
+const complainAssets = path.join(complainDist, 'assets');
+if (!fs.existsSync(path.join(complainDist, 'index.html')) || !fs.existsSync(complainAssets)) {
+  console.log('⚡ Complain/dist missing, triggering automated build...');
+  try {
+    const { execSync } = require('child_process');
+    execSync('npm --prefix Complain run build', { stdio: 'inherit', cwd: ROOT_DIR });
+  } catch (err) {
+    console.warn('⚠️ Automated Complain build notice:', err.message);
+  }
+}
+
 // 1. Verify Core Portal HTML Pages
 console.log('🔍 Step 1: Validating all 10 Portal Route Entrypoints...');
 requiredPages.forEach(page => {

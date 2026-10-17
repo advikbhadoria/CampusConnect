@@ -4,6 +4,7 @@
   "description": "Unified Production-Ready Campus Connect Platform for Army Institute of Technology (AIT Pune)",
   "main": "server/server.js",
   "scripts": {
+    "build:complain": "npm --prefix Complain run build",
     "build": "node scripts/build.js",
     "start": "node server/server.js",
     "dev": "node server/server.js",
