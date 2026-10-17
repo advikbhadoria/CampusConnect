@@ -81,6 +81,10 @@ const server = http.createServer(async (req, res) => {
     // Check if appending .html helps
     if (fs.existsSync(safePath + '.html')) {
       safePath = safePath + '.html';
+    } else if (fs.existsSync(path.join(ROOT_DIR, 'Shops', reqPath))) {
+      safePath = path.join(ROOT_DIR, 'Shops', reqPath);
+    } else if (fs.existsSync(path.join(ROOT_DIR, 'Complain/dist', reqPath))) {
+      safePath = path.join(ROOT_DIR, 'Complain/dist', reqPath);
     } else {
       res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
       return res.end(`

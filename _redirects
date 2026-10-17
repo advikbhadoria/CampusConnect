@@ -11,6 +11,11 @@
 /Borrow/*                           /Borrow/dist/:splat                         200
 /Shops                              /Shops/index.html                           200
 /Shops/                             /Shops/index.html                           200
+/Shops/*                            /Shops/:splat                               200
+/shop.css                           /Shops/shop.css                             200
+/shop.js                            /Shops/shop.js                              200
+/shops-data.js                      /Shops/shops-data.js                        200
+/assets/*                           /Complain/dist/assets/:splat                200
 /Aakriti                            /Aakriti/aakriti.html                       200
 /Aakriti/                           /Aakriti/aakriti.html                       200
 /Outpass                            /Outpass/outpass.html                       200

@@ -72,6 +72,10 @@ export const useStore = create((set, get) => ({
     };
 
     try {
+      if (!supabase || typeof supabase.channel !== 'function') {
+        startPolling();
+        return;
+      }
       const channel = supabase
         .channel('complaints-live-channel')
         .on(

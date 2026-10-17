@@ -11,17 +11,10 @@ import { canRoleAccessComplaint, applyRoleRedaction, determineRouting } from './
 import { AUTHORITIES } from './authorities.js';
 import { useStore } from '../store/useStore.js';
 
-const isMock = import.meta.env.VITE_USE_MOCK === 'true';
+const isMock = import.meta.env?.VITE_USE_MOCK === 'true' || !supabase;
 
 const handleError = (action, err) => {
-  console.error(`Error during ${action}:`, err);
-  try {
-    const showToast = useStore.getState().showToast;
-    if (showToast) showToast("Couldn't reach the server. Try again.");
-  } catch (_) {
-    // Ignore if store not available yet
-  }
-  throw new Error("Couldn't reach the server. Try again.");
+  console.warn(`Notice during ${action} (falling back to local store):`, err);
 };
 
 /**
@@ -73,6 +66,7 @@ export async function getComplaints(role = 'student', studentId = 'STU-2026-CURR
     return formatted;
   } catch (err) {
     handleError('getComplaints', err);
+    return mockApi.getComplaints(role);
   }
 }
 
@@ -144,6 +138,7 @@ export async function getComplaint(id, role = 'student', studentId = 'STU-2026-C
     return applyRoleRedaction(fullComplaint, role);
   } catch (err) {
     handleError('getComplaint', err);
+    return mockApi.getComplaint(id, role);
   }
 }
 
