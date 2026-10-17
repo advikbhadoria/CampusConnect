@@ -1512,6 +1512,8 @@
     } else {
       showToast(`Gate PIN is ${pin}`, 'info');
     }
+  }
+
   function handleBackNavigation() {
     if (window.history.length > 1) {
       window.history.back();

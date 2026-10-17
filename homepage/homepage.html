@@ -30,16 +30,23 @@
        ========================================================================== -->
   <header class="site-header">
     <nav class="navbar-glass" aria-label="Main Navigation">
-      <!-- Brand Logo -->
-      <a href="./homepage.html" class="brand-logo">
-        <div class="brand-icon">
-          <i class="fa-solid fa-graduation-cap"></i>
-        </div>
-        <div class="brand-text-wrapper">
-          <span class="brand-title">Campus Connect</span>
-          <span class="brand-subtitle">Army Institute of Technology, Pune</span>
-        </div>
-      </a>
+      <!-- Brand Logo & Back Action -->
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <button onclick="if(window.history.length>1){window.history.back();}else{window.location.reload();}" style="display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; background: rgba(99, 102, 241, 0.08); color: #4f46e5; border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 9999px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.2s; flex-shrink: 0; white-space: nowrap;" onmouseover="this.style.background='rgba(99, 102, 241, 0.16)'" onmouseout="this.style.background='rgba(99, 102, 241, 0.08)'" title="Go back to previous page" aria-label="Back">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Back</span>
+        </button>
+
+        <a href="./homepage.html" class="brand-logo">
+          <div class="brand-icon">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <div class="brand-text-wrapper">
+            <span class="brand-title">Campus Connect</span>
+            <span class="brand-subtitle">Army Institute of Technology, Pune</span>
+          </div>
+        </a>
+      </div>
 
 
       <!-- Nav Actions (Guest status + Sign In options) -->

@@ -185,7 +185,12 @@ function switchProfileTab(tabKey, btnEl) {
   if (targetBtn) targetBtn.classList.add("active");
 
   const targetPanel = document.getElementById("panel-" + tabKey);
-  if (targetPanel) targetPanel.classList.add("active");
+  if (targetPanel) {
+    targetPanel.classList.add("active");
+    if (tabKey === "settings" && !btnEl) {
+      targetPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 
   if (tabKey === "saved") {
     renderSavedPosts();
@@ -576,6 +581,10 @@ function loadSavedProfileData() {
       const d = JSON.parse(saved);
       Object.assign(myProfile, d);
     } catch(e) {}
+  }
+
+  if (myProfile.avatar && document.getElementById("profileAvatarImg")) {
+    document.getElementById("profileAvatarImg").src = myProfile.avatar;
   }
 
   // Populate UI fields
@@ -1107,4 +1116,113 @@ function setupDropzoneEvents() {
     }
   }, false);
 }
+
+/* ─────────────────────────────────────────────────────────
+   EDIT PROFILE MODAL CONTROLLERS
+   ───────────────────────────────────────────────────────── */
+function openEditProfileModal() {
+  const modal = document.getElementById("editProfileModal");
+  const overlay = document.getElementById("editProfileOverlay");
+  if (!modal || !overlay) {
+    switchProfileTab('settings');
+    return;
+  }
+
+  // Pre-fill modal input fields
+  if (document.getElementById("editModalName")) document.getElementById("editModalName").value = myProfile.name || "";
+  if (document.getElementById("editModalYear")) document.getElementById("editModalYear").value = myProfile.year || "";
+  if (document.getElementById("editModalRoll")) document.getElementById("editModalRoll").value = myProfile.roll || "";
+  if (document.getElementById("editModalStatus")) document.getElementById("editModalStatus").value = myProfile.status || "";
+  if (document.getElementById("editModalBio")) document.getElementById("editModalBio").value = myProfile.bio || "";
+  if (document.getElementById("editModalSkills")) document.getElementById("editModalSkills").value = myProfile.skills || "";
+
+  const heroAvatar = document.getElementById("profileAvatarImg");
+  const preview = document.getElementById("editModalAvatarPreview");
+  if (preview && heroAvatar) {
+    preview.src = myProfile.avatar || heroAvatar.src || "user.png";
+  }
+
+  modal.style.display = "flex";
+  modal.classList.add("open");
+  overlay.classList.add("open");
+}
+
+function closeEditProfileModal() {
+  const modal = document.getElementById("editProfileModal");
+  const overlay = document.getElementById("editProfileOverlay");
+  if (modal) {
+    modal.classList.remove("open");
+    modal.style.display = "none";
+  }
+  if (overlay) overlay.classList.remove("open");
+}
+
+function saveEditProfileModal(e) {
+  if (e) e.preventDefault();
+
+  const name   = document.getElementById("editModalName")?.value.trim() || myProfile.name;
+  const year   = document.getElementById("editModalYear")?.value.trim() || myProfile.year;
+  const roll   = document.getElementById("editModalRoll")?.value.trim() || myProfile.roll;
+  const status = document.getElementById("editModalStatus")?.value.trim() || myProfile.status;
+  const bio    = document.getElementById("editModalBio")?.value.trim() || myProfile.bio;
+  const skills = document.getElementById("editModalSkills")?.value.trim() || myProfile.skills;
+
+  myProfile.name = name;
+  myProfile.year = year;
+  myProfile.roll = roll;
+  myProfile.status = status;
+  myProfile.bio = bio;
+  myProfile.skills = skills;
+
+  const preview = document.getElementById("editModalAvatarPreview");
+  if (preview && preview.src) {
+    myProfile.avatar = preview.src;
+    const heroAvatar = document.getElementById("profileAvatarImg");
+    if (heroAvatar) heroAvatar.src = preview.src;
+  }
+
+  // Update Hero UI displays
+  if (document.getElementById("profileNameDisplay")) document.getElementById("profileNameDisplay").textContent = name;
+  if (document.getElementById("profileSubtitleDisplay")) document.getElementById("profileSubtitleDisplay").textContent = year;
+  if (document.getElementById("profileStatusPill")) document.getElementById("profileStatusPill").textContent = status;
+  if (document.getElementById("profileBioDisplay")) document.getElementById("profileBioDisplay").textContent = bio;
+
+  // Keep Settings panel form inputs in sync
+  if (document.getElementById("settingName")) document.getElementById("settingName").value = name;
+  if (document.getElementById("settingYear")) document.getElementById("settingYear").value = year;
+  if (document.getElementById("settingRoll")) document.getElementById("settingRoll").value = roll;
+  if (document.getElementById("settingStatus")) document.getElementById("settingStatus").value = status;
+  if (document.getElementById("settingBio")) document.getElementById("settingBio").value = bio;
+  if (document.getElementById("settingSkills")) document.getElementById("settingSkills").value = skills;
+
+  // Persist updated profile
+  localStorage.setItem("ait_student_profile", JSON.stringify(myProfile));
+
+  closeEditProfileModal();
+  showToast("Profile updated successfully! ✨", "✓");
+}
+
+function previewEditAvatar(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(evt) {
+    const preview = document.getElementById("editModalAvatarPreview");
+    if (preview) preview.src = evt.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function resetEditAvatar() {
+  const preview = document.getElementById("editModalAvatarPreview");
+  if (preview) preview.src = "user.png";
+}
+
+// Make accessible to global scope
+window.openEditProfileModal = openEditProfileModal;
+window.closeEditProfileModal = closeEditProfileModal;
+window.saveEditProfileModal = saveEditProfileModal;
+window.previewEditAvatar = previewEditAvatar;
+window.resetEditAvatar = resetEditAvatar;
+
 

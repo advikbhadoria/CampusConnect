@@ -35,16 +35,23 @@
   <header class="top-navbar">
     <div class="nav-container">
       
-      <!-- Brand Logo -->
-      <a href="../homepage/homepage.html" class="nav-brand" aria-label="Campus Connect Homepage">
-        <div class="brand-badge">
-          <i class="fa-solid fa-graduation-cap"></i>
-        </div>
-        <div class="brand-text">
-          <span class="brand-title">Campus Connect</span>
-          <span class="brand-sub">AIT Pune • Autonomous</span>
-        </div>
-      </a>
+      <!-- Brand Logo & Back Action -->
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <button onclick="if(window.history.length>1){window.history.back();}else{window.location.href='../homepage/homepage.html';}" style="display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; background: rgba(99, 102, 241, 0.08); color: #4f46e5; border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 9999px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.2s; flex-shrink: 0; white-space: nowrap;" onmouseover="this.style.background='rgba(99, 102, 241, 0.16)'" onmouseout="this.style.background='rgba(99, 102, 241, 0.08)'" title="Go back to previous page" aria-label="Back">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Back</span>
+        </button>
+
+        <a href="../homepage/homepage.html" class="nav-brand" aria-label="Campus Connect Homepage">
+          <div class="brand-badge">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">Campus Connect</span>
+            <span class="brand-sub">AIT Pune • Autonomous</span>
+          </div>
+        </a>
+      </div>
 
       <!-- Navigation Links -->
       <nav class="nav-menu" aria-label="Main Navigation">
