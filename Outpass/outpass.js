@@ -215,6 +215,7 @@
    * Load from LocalStorage or seed data
    */
   function loadApplications() {
+    const student = getLoggedInStudent();
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
@@ -226,6 +227,21 @@
     } catch (e) {
       console.warn('Error reading from localStorage, using initial mock data:', e);
       applications = [...INITIAL_APPLICATIONS];
+    }
+
+    if (!student.isGuest && student.fullName) {
+      let updatedUserMeta = false;
+      applications.forEach(app => {
+        if (!app.studentName || app.studentName === 'Snehangshu Das') {
+          app.studentName = student.fullName;
+          updatedUserMeta = true;
+        }
+        if (!app.regNo || app.regNo === '22145') {
+          app.regNo = student.regNo;
+          updatedUserMeta = true;
+        }
+      });
+      if (updatedUserMeta) saveApplications();
     }
 
     // Ensure all approved or completed applications have a gate PIN

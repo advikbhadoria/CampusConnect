@@ -48,7 +48,7 @@ export const Navbar: React.FC = () => {
               <div>
                 <div className="flex items-center gap-1.5">
                   <span className="font-extrabold text-xl tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors">
-                    Campu<span className="text-blue-600">Sync</span>
+                    Campus<span className="text-blue-600">Sync</span>
                   </span>
                   <span className="hidden sm:inline-flex items-center gap-0.5 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-blue-50 text-blue-700 rounded-full border border-blue-200">
                     <ShieldCheck className="w-3 h-3 text-blue-600" /> AIT Pune

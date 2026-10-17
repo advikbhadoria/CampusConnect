@@ -29,12 +29,12 @@ if (isFirebaseConfigured) {
     app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
     auth = getAuth(app);
     db = getFirestore(app);
-    console.info('🔥 CampuSync: Connected to live Firebase backend.');
+    console.info('🔥 CampusSync: Connected to live Firebase backend.');
   } catch (error) {
-    console.warn('⚠️ CampuSync: Firebase initialization failed, running in campus preview mode.', error);
+    console.warn('⚠️ CampusSync: Firebase initialization failed, running in campus preview mode.', error);
   }
 } else {
-  console.info('🚀 CampuSync: Running in Live Campus Preview Mode with AIT Pune seed data. Configure .env with Firebase keys for production database sync.');
+  console.info('🚀 CampusSync: Running in Live Campus Preview Mode with AIT Pune seed data. Configure .env with Firebase keys for production database sync.');
 }
 
 export { app, auth, db };

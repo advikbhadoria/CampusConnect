@@ -38,6 +38,19 @@ const getInitialNavigation = () => {
 
 const initialNav = getInitialNavigation();
 
+const getLoggedInUser = () => {
+  try {
+    const raw = localStorage.getItem('campusConnectUser');
+    if (raw) {
+      const u = JSON.parse(raw);
+      if (u && u.name) return u;
+    }
+  } catch {}
+  return null;
+};
+
+const loggedUser = getLoggedInUser();
+
 export const useStore = create((set, get) => ({
   // Active role in the application: 'student' | 'jd' | 'director' | 'chief_warden' | 'warden' | 'council'
   currentRole: initialNav.role,
@@ -79,9 +92,9 @@ export const useStore = create((set, get) => ({
   clearLiveIncomingDocket: () => set({ liveIncomingDocket: null }),
 
   // Active student identity
-  studentId: initialStudentId,
-  studentName: 'Cadet Rohit Deshmukh',
-  studentRoll: '231094',
+  studentId: loggedUser ? (loggedUser.regNo || initialStudentId) : initialStudentId,
+  studentName: loggedUser ? loggedUser.name : 'Cadet Rohit Deshmukh',
+  studentRoll: loggedUser ? (loggedUser.regNo || '231094') : '231094',
 
   // Realtime & Polling
   realtimeStatus: 'CONNECTED',

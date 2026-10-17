@@ -29,7 +29,7 @@ const requiredPages = [
   { name: 'Aakriti Cultural Championship', path: 'Aakriti/aakriti.html' },
   { name: 'Hostel Outpass & Leaves', path: 'Outpass/outpass.html' },
   { name: 'Complaints Register (Production Bundle)', path: 'Complain/dist/index.html' },
-  { name: 'CampuSync Borrow & Share (Production Bundle)', path: 'Borrow/dist/index.html' },
+  { name: 'CampusSync Borrow & Share (Production Bundle)', path: 'Borrow/dist/index.html' },
   { name: 'Campus Commercial Shops Directory', path: 'Shops/index.html' },
   { name: 'Campus Commercial Order Portal', path: 'Shops/shop.html' }
 ];

@@ -85,7 +85,7 @@ export const MarketplaceProvider: React.FC<{ children: ReactNode }> = ({ childre
 
   // Saved items
   const [savedListingIds, setSavedListingIds] = useState<string[]>(() => {
-    const saved = localStorage.getItem('campusync_saved_ids');
+    const saved = localStorage.getItem('campussync_saved_ids') || localStorage.getItem('campusync_saved_ids');
     return saved ? JSON.parse(saved) : ['listing_01', 'listing_04'];
   });
 
@@ -156,7 +156,7 @@ export const MarketplaceProvider: React.FC<{ children: ReactNode }> = ({ childre
     setSavedListingIds(prev => {
       const exists = prev.includes(listingId);
       const next = exists ? prev.filter(id => id !== listingId) : [...prev, listingId];
-      localStorage.setItem('campusync_saved_ids', JSON.stringify(next));
+      localStorage.setItem('campussync_saved_ids', JSON.stringify(next));
       return next;
     });
   };

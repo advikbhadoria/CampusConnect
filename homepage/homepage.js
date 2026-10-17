@@ -324,6 +324,7 @@ function initLoginModal() {
         let studentEmail = '';
 
         if (role === 'student') {
+          const explicitName = document.getElementById('studentNameInput')?.value.trim() || '';
           const emailInput = document.getElementById('studentEmailInput')?.value.trim() || '';
           studentEmail = emailInput;
 
@@ -339,24 +340,34 @@ function initLoginModal() {
             regId = digitsMatch[0];
           }
 
-          // Extract readable student name from idVal or email
-          const textOnly = idVal ? idVal.replace(/[^a-zA-Z\s]/g, '').trim() : '';
-          if (textOnly.length > 2 && !/^(comp|it|etc|mech|are)$/i.test(textOnly)) {
-            studentName = textOnly;
-          } else if (emailInput) {
-            const prefix = emailInput.split('@')[0];
-            const nameCandidate = prefix.replace(/_\d+$/, '').replace(/\d+/g, '').replace(/[._-]/g, ' ').trim();
-            if (nameCandidate && nameCandidate.length > 1) {
-              studentName = nameCandidate.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+          if (explicitName) {
+            studentName = explicitName;
+          } else {
+            // Extract readable student name from idVal or email
+            const textOnly = idVal ? idVal.replace(/[^a-zA-Z\s]/g, '').trim() : '';
+            if (textOnly.length > 2 && !/^(comp|it|etc|mech|are)$/i.test(textOnly)) {
+              studentName = textOnly;
+            } else if (emailInput) {
+              const prefix = emailInput.split('@')[0];
+              const nameCandidate = prefix.replace(/_\d+$/, '').replace(/\d+/g, '').replace(/[._-]/g, ' ').trim();
+              if (nameCandidate && nameCandidate.length > 1) {
+                studentName = nameCandidate.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+              }
             }
           }
 
           if (!studentName || studentName.toLowerCase() === 'student' || /^\d+$/.test(studentName)) {
-            studentName = 'Snehangshu Das';
+            studentName = explicitName || 'Advik Bhadoria';
           }
           if (!studentEmail) {
             studentEmail = `${studentName.toLowerCase().replace(/\s+/g, '_')}_${regId}@aitpune.edu.in`;
           }
+        } else if (role === 'faculty') {
+          const explicitFacultyName = document.getElementById('facultyNameInput')?.value.trim() || '';
+          if (explicitFacultyName) studentName = explicitFacultyName;
+        } else if (role === 'alumni') {
+          const explicitAlumniName = document.getElementById('alumniNameInput')?.value.trim() || '';
+          if (explicitAlumniName) studentName = explicitAlumniName;
         }
 
         const sessionData = {

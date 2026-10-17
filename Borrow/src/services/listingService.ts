@@ -12,10 +12,10 @@ import { db, isFirebaseConfigured } from '../config/firebase';
 import { Listing, ListingStatus } from '../types';
 import { SEED_LISTINGS } from '../data/seedData';
 
-const LOCAL_STORAGE_LISTINGS_KEY = 'campusync_listings';
+const LOCAL_STORAGE_LISTINGS_KEY = 'campussync_listings';
 
 const getStoredListings = (): Listing[] => {
-  const data = localStorage.getItem(LOCAL_STORAGE_LISTINGS_KEY);
+  const data = localStorage.getItem(LOCAL_STORAGE_LISTINGS_KEY) || localStorage.getItem('campusync_listings');
   if (data) {
     try {
       return JSON.parse(data);

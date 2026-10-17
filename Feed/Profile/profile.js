@@ -492,6 +492,8 @@ function saveProfileSettings(e) {
   const bio    = document.getElementById("settingBio").value.trim();
   const skills = document.getElementById("settingSkills").value.trim();
 
+  const roll   = document.getElementById("settingRoll")?.value.trim() || myProfile.roll || "22045";
+
   // Standard Socials & Visibilities
   const socials = {
     linkedin: {
@@ -556,7 +558,7 @@ function saveProfileSettings(e) {
     }
   });
 
-  myProfile = { name, year, status, bio, skills, socials, customSocials };
+  myProfile = { name, year, roll, status, bio, skills, socials, customSocials };
 
   // Update Hero UI
   document.getElementById("profileNameDisplay").textContent = name;
@@ -566,6 +568,15 @@ function saveProfileSettings(e) {
 
   // Persist
   localStorage.setItem("ait_student_profile", JSON.stringify(myProfile));
+  try {
+    const rawUser = localStorage.getItem('campusConnectUser');
+    if (rawUser) {
+      const u = JSON.parse(rawUser);
+      u.name = name;
+      u.regNo = roll;
+      localStorage.setItem('campusConnectUser', JSON.stringify(u));
+    }
+  } catch(e) {}
 
   // Render newly updated social chips
   renderSocialChips();
@@ -575,10 +586,31 @@ function saveProfileSettings(e) {
 }
 
 function loadSavedProfileData() {
+  const sessionUser = (() => {
+    try {
+      const raw = localStorage.getItem('campusConnectUser');
+      if (raw) return JSON.parse(raw);
+    } catch(e) {}
+    return null;
+  })();
+
+  if (sessionUser && sessionUser.name) {
+    myProfile.name = sessionUser.name;
+    if (sessionUser.regNo) myProfile.roll = sessionUser.regNo;
+    if (sessionUser.branch) {
+      myProfile.year = `B.Tech ${sessionUser.branch} '27 · Army Institute of Technology, Pune`;
+    }
+  }
+
   const saved = localStorage.getItem("ait_student_profile");
   if (saved) {
     try {
       const d = JSON.parse(saved);
+      if (sessionUser && sessionUser.name) {
+        delete d.name;
+        if (sessionUser.regNo) delete d.roll;
+        if (sessionUser.branch) delete d.year;
+      }
       Object.assign(myProfile, d);
     } catch(e) {}
   }
@@ -595,6 +627,9 @@ function loadSavedProfileData() {
   if (myProfile.year) {
     document.getElementById("profileSubtitleDisplay").textContent = myProfile.year;
     if (document.getElementById("settingYear")) document.getElementById("settingYear").value = myProfile.year;
+  }
+  if (myProfile.roll && document.getElementById("settingRoll")) {
+    document.getElementById("settingRoll").value = myProfile.roll;
   }
   if (myProfile.status) {
     document.getElementById("profileStatusPill").textContent = myProfile.status;

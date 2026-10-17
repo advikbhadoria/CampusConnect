@@ -44,7 +44,7 @@ export const VerificationPrompt: React.FC = () => {
         </h2>
 
         <p className="text-xs text-slate-600 leading-relaxed mb-6">
-          To maintain a safe and closed peer-to-peer network, access to CampuSync is restricted until you verify your official college email:
+          To maintain a safe and closed peer-to-peer network, access to CampusSync is restricted until you verify your official college email:
         </p>
 
         {/* Email Pill */}

@@ -208,7 +208,7 @@ export function Navbar() {
             href="../../Borrow/dist/index.html"
             className="block px-3.5 py-2 rounded-xl text-sm font-bold text-blue-700 hover:bg-blue-50 transition-colors no-underline"
           >
-            🤝 Borrow &amp; Share (CampuSync)
+            🤝 Borrow &amp; Share (CampusSync)
           </a>
           <a
             href="../../Feed/Profile/profile.html"

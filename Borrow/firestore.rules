@@ -3,7 +3,7 @@ service cloud.firestore {
   match /databases/{database}/documents {
     
     // ==========================================
-    // HELPER FUNCTIONS FOR CAMPUSYNC SECURITY
+    // HELPER FUNCTIONS FOR CAMPUSSYNC SECURITY
     // ==========================================
     
     // Check if user is authenticated

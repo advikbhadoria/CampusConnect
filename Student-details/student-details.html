@@ -50,61 +50,8 @@
       </div>
     </navbar>
 
-    <!-- ───────────── VIEW MODE SWITCHER ───────────── -->
-    <div class="view-mode-bar">
-      <div class="view-mode-tabs">
-        <button class="view-tab active" id="viewTabDirectory" onclick="switchViewMode('directory')">
-          <span class="v-tab-icon">🎓</span>
-          <span class="v-tab-text">Student Directory</span>
-          <span class="v-tab-count">2,000+ Peers</span>
-        </button>
-        <button class="view-tab" id="viewTabRentals" onclick="switchViewMode('rentals')">
-          <span class="v-tab-icon">🔄</span>
-          <span class="v-tab-text">CampusSync · Peer Rentals</span>
-          <span class="v-tab-badge">8+ Items for Rent</span>
-        </button>
-      </div>
-      <div class="view-mode-quick-actions">
-        <a href="../Borrow/dist/index.html" class="quick-launch-btn" title="Launch Full CampusSync PWA">
-          <span>🚀 Launch Full App</span>
-          <span class="arrow">↗</span>
-        </a>
-      </div>
-    </div>
-
     <!-- ───────────── DIRECTORY VIEW CONTAINER ───────────── -->
     <div id="directoryView" class="main-view-container">
-
-      <!-- ───────────── CAMPUSYNC FEATURE HIGHLIGHT BANNER ───────────── -->
-      <div class="rental-banner-glass">
-        <div class="rb-glow"></div>
-        <div class="rb-content">
-          <div class="rb-tag">
-            <span class="rb-pulse"></span>
-            <span>⚡ NEW STUDENT FEATURE: CAMPUSYNC MARKETPLACE</span>
-          </div>
-          <h2 class="rb-title">Have gear sitting in your hostel room? Give it for rent to fellow students!</h2>
-          <p class="rb-desc">
-            Students can now list engineering mini-drafters, Arduino kits, SPPU books, bicycles, and lab equipment for rent or skill-barter across OBH, NBH, and GH hostels.
-          </p>
-          <div class="rb-chips">
-            <span class="rb-chip">🔌 Arduino &amp; IoT Kits</span>
-            <span class="rb-chip">📐 Mini Drafters &amp; Lab Probes</span>
-            <span class="rb-chip">📚 B.S. Grewal &amp; Exam Notes</span>
-            <span class="rb-chip">🚲 21-Speed Campus Bicycles</span>
-            <span class="rb-chip">🤝 Skill-Barter Mentoring</span>
-          </div>
-        </div>
-        <div class="rb-actions">
-          <button class="rb-btn primary" onclick="switchViewMode('rentals')">
-            <span>Browse Rental Items</span>
-            <span class="rb-arrow">→</span>
-          </button>
-          <a href="./Campus-sync/dist/index.html" class="rb-btn secondary">
-            <span>+ List Item for Rent</span>
-          </a>
-        </div>
-      </div>
 
       <!-- ───────────── HEADER ───────────── -->
       <div class="info">
@@ -116,12 +63,6 @@
           </div>
           <div class="stu-badge-row" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
             <div class="stu-count">🎓 Students (2000)</div>
-            <button class="header-rentals-pill-btn" onclick="switchViewMode('rentals')" title="Explore CampusSync Peer Rentals Marketplace">
-              <span class="hr-dot"></span>
-              <span>🔄 CampusSync Peer Rentals</span>
-              <span class="hr-badge">Active</span>
-              <span class="hr-arrow">→</span>
-            </button>
           </div>
         </div>
 
@@ -183,17 +124,6 @@
             </div>
           </div>
 
-          <!-- Polished CampusSync Peer Rental Button in Sticky Controls -->
-          <button
-            class="sticky-rentals-action-btn"
-            id="stickyRentalsBtn"
-            onclick="switchViewMode('rentals')"
-            title="Browse &amp; List Gear on CampusSync Peer Rentals"
-          >
-            <span class="srb-icon">🔄</span>
-            <span class="srb-label">Peer Rentals</span>
-            <span class="srb-chip">NEW</span>
-          </button>
         </div><!-- /sticky-controls -->
       </div><!-- /info -->
 
@@ -203,117 +133,6 @@
       </div><!-- /cards-grid -->
 
     </div><!-- /directoryView -->
-
-    <!-- ───────────── CAMPUSYNC RENTALS VIEW CONTAINER ───────────── -->
-    <div id="rentalsView" class="main-view-container" style="display: none;">
-
-      <!-- Rentals Hero / Header -->
-      <div class="rentals-header-card">
-        <div class="rh-glow"></div>
-        <div class="rh-top-row">
-          <div class="rh-brand">
-            <div class="rh-icon-box">📦</div>
-            <div>
-              <div class="rh-badge">AIT PUNE CAMPUS GEAR SHARING</div>
-              <h1 class="rh-title">CampusSync · Student Peer Rentals &amp; Exchange</h1>
-              <p class="rh-subtitle">
-                Rent lab equipment, semester books, engineering drafters, and cycles directly from peers across OBH, NBH, and GH hostels.
-              </p>
-            </div>
-          </div>
-          <div class="rh-actions">
-            <a href="./Campus-sync/dist/index.html" class="rh-btn primary" title="Open complete CampusSync app with real-time peer chat">
-              <span>🚀 Launch Full CampusSync App</span>
-              <span class="arrow">↗</span>
-            </a>
-            <button class="rh-btn secondary" onclick="openAddListingPrompt()">
-              <span>+ List Your Item for Rent</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Quick Metrics Row -->
-        <div class="rh-metrics-bar">
-          <div class="rh-metric">
-            <span class="metric-num">8+</span>
-            <span class="metric-lbl">Active Campus Listings</span>
-          </div>
-          <div class="rh-metric">
-            <span class="metric-num">5</span>
-            <span class="metric-lbl">Hostel Blocks (OBH, NBH, GH)</span>
-          </div>
-          <div class="rh-metric">
-            <span class="metric-num">₹0 - ₹180</span>
-            <span class="metric-lbl">Student-Friendly Rental Rates</span>
-          </div>
-          <div class="rh-metric">
-            <span class="metric-num">100%</span>
-            <span class="metric-lbl">Verified @aitpune.edu.in</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Controls: Transaction Filter, Category Tabs, Hostel Dropdown, Search -->
-      <div class="rentals-controls-bar">
-        
-        <!-- Transaction Type Switcher -->
-        <div class="rental-types-group">
-          <button class="rtype-chip active" data-type="all" onclick="filterRentalType('all', this)">All Items (8)</button>
-          <button class="rtype-chip" data-type="Rent" onclick="filterRentalType('Rent', this)">⏳ For Rent</button>
-          <button class="rtype-chip" data-type="Skill-Barter" onclick="filterRentalType('Skill-Barter', this)">🔄 Skill-Barter</button>
-          <button class="rtype-chip" data-type="Sell" onclick="filterRentalType('Sell', this)">🏷️ For Sale</button>
-        </div>
-
-        <!-- Search & Filter Row -->
-        <div class="rental-search-row">
-          <div class="rental-search-box">
-            <span class="search-icon">🔍</span>
-            <input type="search" id="rentalSearchInput" oninput="handleRentalSearch(this.value)" placeholder="Search Arduino kits, drafters, books, cycles, badminton..." />
-          </div>
-
-          <div class="rental-select-group">
-            <select id="rentalCategorySelect" onchange="handleRentalCategory(this.value)" class="rental-select">
-              <option value="all">All Categories</option>
-              <option value="Electronics & IoT">Electronics &amp; IoT</option>
-              <option value="Lab Tools & Drafters">Lab Tools &amp; Drafters</option>
-              <option value="Books & Notes">Books &amp; Notes</option>
-              <option value="Cycles & Mobility">Cycles &amp; Mobility</option>
-              <option value="Hostel Essentials">Hostel Essentials</option>
-              <option value="Sports & Gym">Sports &amp; Gym</option>
-            </select>
-
-            <select id="rentalHostelSelect" onchange="handleRentalHostel(this.value)" class="rental-select">
-              <option value="all">All Hostels</option>
-              <option value="OBH-1">OBH-1 (Seniors)</option>
-              <option value="OBH-2">OBH-2 (Third Year)</option>
-              <option value="NBH-1">NBH-1 (Second Year)</option>
-              <option value="GH-1">GH-1 (Girls Hostel 1)</option>
-              <option value="GH-2">GH-2 (Girls Hostel 2)</option>
-            </select>
-          </div>
-        </div>
-
-      </div><!-- /rentals-controls-bar -->
-
-      <!-- RENTALS CARDS GRID -->
-      <div class="rentals-grid" id="rentalsGrid">
-        <!-- Rendered dynamically via student-details.js -->
-      </div>
-
-      <!-- CampusSync Bottom Callout Banner -->
-      <div class="rentals-bottom-cta">
-        <div class="rbc-icon">💬</div>
-        <div class="rbc-text">
-          <h4>Looking to chat directly with owners, negotiate rent, or barter skills?</h4>
-          <p>The full CampusSync web app includes real-time anonymous peer chat, simulated student wallet, and instant WhatsApp meeting coordination.</p>
-        </div>
-        <a href="./Campus-sync/dist/index.html" class="rbc-btn">
-          <span>Open Full CampusSync App</span>
-          <span class="arrow">→</span>
-        </a>
-      </div>
-
-    </div><!-- /rentalsView -->
 
     <!-- ───────────── MODAL OVERLAY ───────────── -->
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
@@ -376,138 +195,9 @@
             <!-- Dynamic social links rendered via student-details.js -->
           </div>
         </div>
-
-        <!-- ACTIVE RENTAL LISTINGS FROM CAMPUSYNC -->
-        <div class="modal-section" id="modalRentalsSection" style="display:none;">
-          <h2 class="section-title">📦 Active Campus Rental Gear (CampusSync)</h2>
-          <div id="modalRentalsList" class="modal-rentals-grid"></div>
-        </div>
       </div><!-- /tab-about -->
 
     </div><!-- /profile-modal -->
-
-    <!-- ───────────── RENTAL ITEM QUICK DETAIL MODAL ───────────── -->
-    <div class="rental-detail-modal" id="rentalDetailModal" role="dialog" aria-modal="true" style="display:none;">
-      <button class="modal-close" onclick="closeRentalDetailModal()" aria-label="Close">✕</button>
-      <div class="rd-header">
-        <span class="rd-type-badge" id="rdTypeBadge">For Rent</span>
-        <span class="rd-category-badge" id="rdCategoryBadge">Electronics &amp; IoT</span>
-      </div>
-      <div class="rd-body">
-        <div class="rd-img-wrap">
-          <img id="rdImage" src="" alt="Rental Item" />
-        </div>
-        <div class="rd-info">
-          <h2 class="rd-title" id="rdTitle"></h2>
-          <div class="rd-price-row">
-            <span class="rd-price" id="rdPrice"></span>
-            <span class="rd-condition" id="rdCondition"></span>
-          </div>
-          <p class="rd-description" id="rdDescription"></p>
-          <div class="rd-owner-card">
-            <img class="rd-owner-avatar" id="rdOwnerAvatar" src="user.png" alt="" />
-            <div class="rd-owner-details">
-              <strong id="rdOwnerName"></strong>
-              <span id="rdOwnerHostel"></span>
-            </div>
-            <div class="rd-owner-rating" id="rdOwnerRating">⭐ 5.0</div>
-          </div>
-          <div class="rd-actions">
-            <a id="rdOpenInAppBtn" href="./Campus-sync/dist/index.html" class="rd-btn primary">
-              <span>Chat &amp; Rent in CampusSync</span>
-              <span class="arrow">→</span>
-            </a>
-            <button class="rd-btn secondary" onclick="simulateRentChat()">
-              <span>💬 Quick Chat</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ───────────── LIST ITEM MODAL ───────────── -->
-    <div class="list-item-modal" id="listItemModal" role="dialog" aria-modal="true" style="display:none;">
-      <button class="modal-close" onclick="closeListItemModal()" aria-label="Close">✕</button>
-      <div class="lim-header">
-        <div class="lim-icon">📦</div>
-        <div>
-          <h3>List Your Item for Rent</h3>
-          <p>Verified peer-to-peer sharing for AIT Pune students</p>
-        </div>
-      </div>
-      <form id="listItemForm" onsubmit="handleQuickListItem(event)">
-        <div class="lim-field">
-          <label>Item Title</label>
-          <input type="text" id="limTitle" placeholder="e.g. Arduino Mega Kit, Drafter, SPPU Maths Book" required />
-        </div>
-        <div class="lim-row">
-          <div class="lim-field">
-            <label>Category</label>
-            <select id="limCategory">
-              <option value="Electronics & IoT">Electronics &amp; IoT</option>
-              <option value="Lab Tools & Drafters">Lab Tools &amp; Drafters</option>
-              <option value="Books & Notes">Books &amp; Notes</option>
-              <option value="Cycles & Mobility">Cycles &amp; Mobility</option>
-              <option value="Hostel Essentials">Hostel Essentials</option>
-              <option value="Sports & Gym">Sports &amp; Gym</option>
-            </select>
-          </div>
-          <div class="lim-field">
-            <label>Transaction Type</label>
-            <select id="limType" onchange="toggleLimPrice(this.value)">
-              <option value="Rent">⏳ For Rent</option>
-              <option value="Skill-Barter">🔄 Skill-Barter</option>
-              <option value="Sell">🏷️ For Sale</option>
-            </select>
-          </div>
-        </div>
-        <div class="lim-row" id="limPriceRow">
-          <div class="lim-field">
-            <label>Price (₹)</label>
-            <input type="number" id="limPrice" placeholder="45" min="0" />
-          </div>
-          <div class="lim-field">
-            <label>Rental Period</label>
-            <select id="limPeriod">
-              <option value="per week">per week</option>
-              <option value="per day">per day</option>
-              <option value="per semester">per semester</option>
-            </select>
-          </div>
-        </div>
-        <div class="lim-field" id="limBarterRow" style="display:none;">
-          <label>What skill or help do you want in return?</label>
-          <input type="text" id="limBarter" placeholder="e.g. Help debugging Node.js assignment, CAD mentoring" />
-        </div>
-        <div class="lim-row">
-          <div class="lim-field">
-            <label>Your Hostel Block</label>
-            <select id="limHostel">
-              <option value="OBH-1">OBH-1</option>
-              <option value="OBH-2">OBH-2</option>
-              <option value="NBH-1">NBH-1</option>
-              <option value="GH-1">GH-1</option>
-              <option value="GH-2">GH-2</option>
-            </select>
-          </div>
-          <div class="lim-field">
-            <label>Condition</label>
-            <select id="limCondition">
-              <option value="Like New">Like New</option>
-              <option value="Gently Used">Gently Used</option>
-              <option value="Good Condition">Good Condition</option>
-            </select>
-          </div>
-        </div>
-        <div class="lim-field">
-          <label>Description &amp; Handover Location</label>
-          <textarea id="limDesc" rows="3" placeholder="Describe the item, what accessories are included, and when/where to collect in campus..." required></textarea>
-        </div>
-        <div class="lim-actions">
-          <button type="submit" class="lim-submit-btn">🚀 Publish Listing to CampusSync</button>
-        </div>
-      </form>
-    </div>
 
     <!-- ───────────── POSTS PANEL (larger, slides from right) ───────────── -->
     <div class="posts-panel" id="postsPanel">

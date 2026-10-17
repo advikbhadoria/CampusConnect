@@ -12,8 +12,8 @@ import { auth, db, isFirebaseConfigured } from '../config/firebase';
 import { UserProfile, HostelBlock } from '../types';
 import { SEED_USERS } from '../data/seedData';
 
-const LOCAL_STORAGE_USER_KEY = 'campusync_current_user';
-const LOCAL_STORAGE_USERS_KEY = 'campusync_all_users';
+const LOCAL_STORAGE_USER_KEY = 'campussync_current_user';
+const LOCAL_STORAGE_USERS_KEY = 'campussync_all_users';
 
 /**
  * Validates whether an email belongs strictly to the AIT Pune institutional domain.
@@ -40,7 +40,7 @@ export const validateAITDomain = (email: string): { isValid: boolean; error?: st
 
 // Initialize local users storage if needed
 const getLocalUsers = (): UserProfile[] => {
-  const saved = localStorage.getItem(LOCAL_STORAGE_USERS_KEY);
+  const saved = localStorage.getItem(LOCAL_STORAGE_USERS_KEY) || localStorage.getItem('campusync_all_users');
   if (saved) {
     try {
       return JSON.parse(saved);
@@ -226,12 +226,35 @@ export const verifyCurrentEmailLocally = (uid: string): UserProfile | null => {
 };
 
 export const getSavedSessionUser = (): UserProfile | null => {
-  const saved = localStorage.getItem(LOCAL_STORAGE_USER_KEY);
+  const saved = localStorage.getItem(LOCAL_STORAGE_USER_KEY) || localStorage.getItem('campusync_current_user');
   if (saved) {
     try {
       return JSON.parse(saved);
     } catch {
       return null;
+    }
+  }
+  // Seamlessly inherit sign-in data from Campus Connect
+  const ccUserRaw = localStorage.getItem('campusConnectUser');
+  if (ccUserRaw) {
+    try {
+      const ccUser = JSON.parse(ccUserRaw);
+      if (ccUser && (ccUser.name || ccUser.studentName || ccUser.email)) {
+        const displayName = ccUser.name || ccUser.studentName || 'Student';
+        return {
+          uid: 'user_signed_in',
+          name: displayName,
+          email: ccUser.email || 'student@aitpune.edu.in',
+          hostelBlock: 'OBH-1',
+          rating: 5.0,
+          ratingCount: 1,
+          avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(displayName)}`,
+          createdAt: Date.now(),
+          isVerified: true,
+        };
+      }
+    } catch (e) {
+      // ignore JSON parse errors
     }
   }
   return null;

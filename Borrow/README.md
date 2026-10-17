@@ -1,6 +1,6 @@
-# CampuSync — AIT Pune Peer-to-Peer Marketplace & Skill-Barter
+# CampusSync — AIT Pune Peer-to-Peer Marketplace & Skill-Barter
 
-**CampuSync** is a hyper-local peer-to-peer rental, marketplace, and skill-barter web application built strictly for students of **Army Institute of Technology (AIT), Pune** (`@aitpune.edu.in`).
+**CampusSync** is a hyper-local peer-to-peer rental, marketplace, and skill-barter web application built strictly for students of **Army Institute of Technology (AIT), Pune** (`@aitpune.edu.in`).
 
 Students can rent lab equipment, buy/sell semester engineering books and hostel gear, and trade technical skills (e.g. debugging React/Node assignments in exchange for CAD mentoring or exam notes).
 

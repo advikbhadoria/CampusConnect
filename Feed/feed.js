@@ -534,8 +534,18 @@ function onRoleChanged(newRole) {
     currentUser.department = "Director & System Administrator · AIT Pune";
     currentUser.verified = true;
   } else {
-    currentUser.name = "Snehangshu Das";
-    currentUser.department = "B.Tech CSE '26 · AIT Pune";
+    const storedUser = localStorage.getItem("campusConnectUser");
+    let studentName = "Advik Bhadoria";
+    let studentDept = "B.Tech Comp '27 · AIT Pune";
+    if (storedUser) {
+      try {
+        const u = JSON.parse(storedUser);
+        if (u.name) studentName = u.name;
+        if (u.branch) studentDept = `B.Tech ${u.branch} '27 · AIT Pune`;
+      } catch(e) {}
+    }
+    currentUser.name = studentName;
+    currentUser.department = studentDept;
     currentUser.verified = true;
   }
 

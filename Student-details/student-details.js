@@ -163,10 +163,30 @@ let selectedYear = "all";
 let selectedClubs = [];
 let selectedSort = "name-asc";
 
+function syncUserSession() {
+  try {
+    const raw = localStorage.getItem('campusConnectUser');
+    if (raw) {
+      const u = JSON.parse(raw);
+      if (u && u.name) {
+        students[0].name = u.name;
+        if (u.branch) {
+          students[0].branch = u.branch;
+          students[0].year = `B.Tech ${u.branch} · AIT Pune '27`;
+        }
+        if (u.email) {
+          students[0].email = u.email;
+        }
+      }
+    }
+  } catch(e) {}
+}
+
 /* ──────────────────────────────────────
    DOM READY
 ────────────────────────────────────── */
 window.addEventListener("DOMContentLoaded", () => {
+  syncUserSession();
   renderCardsGrid();
   setupSearchAndFilters();
   setupStickyScrollListener();
@@ -729,7 +749,7 @@ function findPost(postId) {
 }
 
 /* ===================================================================
-   CAMPUSYNC — PEER RENTAL & GEAR EXCHANGE INTEGRATION MODULE
+   CAMPUSSYNC — PEER RENTAL & GEAR EXCHANGE INTEGRATION MODULE
    =================================================================== */
 
 const DEFAULT_CAMPUS_LISTINGS = [
@@ -887,7 +907,7 @@ const DEFAULT_CAMPUS_LISTINGS = [
 
 function getCampusListings() {
   try {
-    const raw = localStorage.getItem('campusync_listings');
+    const raw = localStorage.getItem('campussync_listings') || localStorage.getItem('campusync_listings');
     if (raw) {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed) && parsed.length > 0) return parsed;
@@ -895,13 +915,13 @@ function getCampusListings() {
   } catch (e) {
     console.warn('Error reading from localStorage:', e);
   }
-  localStorage.setItem('campusync_listings', JSON.stringify(DEFAULT_CAMPUS_LISTINGS));
+  localStorage.setItem('campussync_listings', JSON.stringify(DEFAULT_CAMPUS_LISTINGS));
   return DEFAULT_CAMPUS_LISTINGS;
 }
 
 function saveCampusListings(listings) {
   try {
-    localStorage.setItem('campusync_listings', JSON.stringify(listings));
+    localStorage.setItem('campussync_listings', JSON.stringify(listings));
   } catch (e) {
     console.error('Error saving listings:', e);
   }
@@ -957,8 +977,9 @@ function switchViewMode(mode) {
   const tabRent = document.getElementById('viewTabRentals');
 
   if (mode === 'rentals') {
+    if (!rentView) return;
     if (dirView) dirView.style.display = 'none';
-    if (rentView) rentView.style.display = 'block';
+    rentView.style.display = 'block';
     if (tabDir) tabDir.classList.remove('active');
     if (tabRent) tabRent.classList.add('active');
     renderRentalCards();
@@ -1238,7 +1259,7 @@ function handleQuickListItem(e) {
 
 // Check on load if URL requests rentals
 window.addEventListener('DOMContentLoaded', () => {
-  if (window.location.hash === '#rentals' || window.location.search.includes('tab=rentals')) {
+  if (document.getElementById('rentalsView') && (window.location.hash === '#rentals' || window.location.search.includes('tab=rentals'))) {
     switchViewMode('rentals');
   }
 });

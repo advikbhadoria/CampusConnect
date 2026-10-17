@@ -105,7 +105,7 @@ export const AuthModal: React.FC = () => {
           </div>
 
           <h3 className="text-xl font-extrabold tracking-tight">
-            {authModalMode === 'login' ? 'Welcome Back to CampuSync' : 'Create Verified Student Account'}
+            {authModalMode === 'login' ? 'Welcome Back to CampusSync' : 'Create Verified Student Account'}
           </h3>
           <p className="text-xs text-blue-100 mt-1">
             {authModalMode === 'login' 

@@ -13,7 +13,7 @@ export const Footer: React.FC = () => {
               <div className="w-6 h-6 rounded-lg bg-blue-600 flex items-center justify-center text-white">
                 <Building2 className="w-3.5 h-3.5" />
               </div>
-              CampuSync
+              CampusSync
             </div>
             <p className="text-slate-400 text-xs leading-relaxed mb-3">
               The official hyper-local peer-to-peer rental, marketplace and skill barter platform for Army Institute of Technology, Pune.
@@ -64,7 +64,7 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-500">
-          <p>© {new Date().getFullYear()} CampuSync. Built strictly for Army Institute of Technology, Pune students.</p>
+          <p>© {new Date().getFullYear()} CampusSync. Built strictly for Army Institute of Technology, Pune students.</p>
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1 text-slate-400">
               Made with <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" /> for AIT DTI

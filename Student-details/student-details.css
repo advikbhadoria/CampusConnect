@@ -367,7 +367,7 @@ navbar {
 @media (max-width: 640px)  { .cards-grid { grid-template-columns: 1fr; } }
 
 /* ===================================================================
-   POLISHED CAMPUSYNC PEER RENTALS BUTTONS (STUDENT SECTION)
+   POLISHED CAMPUSSYNC PEER RENTALS BUTTONS (STUDENT SECTION)
    =================================================================== */
 .stu-badge-row {
   display: flex;
@@ -1276,7 +1276,7 @@ navbar {
 }
 
 /* ===================================================================
-   CAMPUSYNC — PEER RENTAL & GEAR EXCHANGE DESIGN SYSTEM
+   CAMPUSSYNC — PEER RENTAL & GEAR EXCHANGE DESIGN SYSTEM
    =================================================================== */
 
 .nav-rentals-link {

@@ -11,8 +11,8 @@ import {
 import { db, isFirebaseConfigured } from '../config/firebase';
 import { ChatConversation, ChatMessage, Listing, UserProfile } from '../types';
 
-const LOCAL_STORAGE_CHATS_KEY = 'campusync_chats';
-const LOCAL_STORAGE_MESSAGES_KEY = 'campusync_messages';
+const LOCAL_STORAGE_CHATS_KEY = 'campussync_chats';
+const LOCAL_STORAGE_MESSAGES_KEY = 'campussync_messages';
 
 // Initial pre-seeded mock conversations so chat feels active right away
 const INITIAL_CONVERSATIONS: ChatConversation[] = [
@@ -76,7 +76,7 @@ const INITIAL_MESSAGES: Record<string, ChatMessage[]> = {
 };
 
 const getStoredConversations = (): ChatConversation[] => {
-  const data = localStorage.getItem(LOCAL_STORAGE_CHATS_KEY);
+  const data = localStorage.getItem(LOCAL_STORAGE_CHATS_KEY) || localStorage.getItem('campusync_chats');
   if (data) {
     try {
       return JSON.parse(data);
@@ -93,7 +93,7 @@ const saveStoredConversations = (conversations: ChatConversation[]) => {
 };
 
 const getStoredMessages = (): Record<string, ChatMessage[]> => {
-  const data = localStorage.getItem(LOCAL_STORAGE_MESSAGES_KEY);
+  const data = localStorage.getItem(LOCAL_STORAGE_MESSAGES_KEY) || localStorage.getItem('campusync_messages');
   if (data) {
     try {
       return JSON.parse(data);

@@ -21,7 +21,7 @@
       lightBg: '#eff6ff',
       badgeClass: 'badge-comp',
       motto: 'Code. Concur. Conquer.',
-      reigningShieldRank: 1
+      reigningShieldRank: 2
     },
     'IT': {
       code: 'IT',
@@ -30,7 +30,7 @@
       lightBg: '#f0f9ff',
       badgeClass: 'badge-it',
       motto: 'Innovate. Transform. Triumph.',
-      reigningShieldRank: 2
+      reigningShieldRank: 4
     },
     'E&TC': {
       code: 'E&TC',
@@ -39,7 +39,7 @@
       lightBg: '#fffbeb',
       badgeClass: 'badge-etc',
       motto: 'Signal. System. Supremacy.',
-      reigningShieldRank: 4
+      reigningShieldRank: 1
     },
     'Mech-ARE': {
       code: 'Mech-ARE',
@@ -55,29 +55,29 @@
   const REIGNING_CHAMPIONS = {
     'overview': {
       tagline: 'DEFENDING ANNUAL SHIELD CHAMPIONS • PREVIOUS YEAR OVERALL WINNER',
-      branch: 'COMP',
-      branchFull: 'Computer Engineering',
-      points: '1,500 Pts',
-      medals: '26 Gold 🥇 • 12 Silver 🥈',
-      margin: '+160 Pts ahead of IT (Runner-up)',
+      branch: 'E&TC',
+      branchFull: 'Electronics & Telecommunication',
+      points: '1,505 Pts',
+      medals: '24 Gold 🥇 • 17 Silver 🥈',
+      margin: '+225 Pts ahead of Comp (Runner-up)',
       heroTrophy: './images/trophy_gold.jpg'
     },
     'sports': {
       tagline: 'DEFENDING SPORTS CHAMPIONS • PREVIOUS YEAR WINNER',
-      branch: 'COMP',
-      branchFull: 'Computer Engineering',
-      points: '480 Pts',
-      medals: '8 Gold 🥇 • 5 Silver 🥈',
-      margin: '+45 Pts ahead of Mech-ARE',
+      branch: 'E&TC',
+      branchFull: 'Electronics & Telecommunication',
+      points: '510 Pts',
+      medals: '9 Gold 🥇 • 5 Silver 🥈',
+      margin: '+60 Pts ahead of IT (Runner-up)',
       heroTrophy: './images/trophy_gold.jpg'
     },
     'cultural': {
       tagline: 'DEFENDING CULTURAL CHAMPIONS • PREVIOUS YEAR WINNER',
-      branch: 'IT',
-      branchFull: 'Information Technology',
-      points: '510 Pts',
-      medals: '9 Gold 🥇 • 4 Silver 🥈',
-      margin: '+30 Pts ahead of Comp',
+      branch: 'E&TC',
+      branchFull: 'Electronics & Telecommunication',
+      points: '520 Pts',
+      medals: '9 Gold 🥇 • 6 Silver 🥈',
+      margin: '+60 Pts ahead of Mech-ARE (Runner-up)',
       heroTrophy: './images/trophy_gold.jpg'
     },
     'technical': {
@@ -85,7 +85,7 @@
       branch: 'COMP',
       branchFull: 'Computer Engineering',
       points: '540 Pts',
-      medals: '10 Gold 🥇 • 3 Silver 🥈',
+      medals: '10 Gold 🥇 • 4 Silver 🥈',
       margin: '+65 Pts ahead of E&TC',
       heroTrophy: './images/trophy_gold.jpg'
     }
@@ -94,27 +94,27 @@
   // Live Standings Data across Comp, IT, E&TC, Mech-ARE
   const STANDINGS_DATA = {
     'overview': [
-      { branch: 'Comp', name: 'Computer Engineering', points: 1500, gold: 26, silver: 12, bronze: 8, rank: 1 },
-      { branch: 'IT', name: 'Information Technology', points: 1340, gold: 18, silver: 14, bronze: 10, rank: 2 },
-      { branch: 'Mech-ARE', name: 'Mechanical & Auto Robotics', points: 1185, gold: 12, silver: 15, bronze: 14, rank: 3 },
-      { branch: 'E&TC', name: 'Electronics & Telecomm.', points: 1105, gold: 10, silver: 11, bronze: 16, rank: 4 }
+      { branch: 'E&TC', name: 'Electronics & Telecomm.', points: 1505, gold: 24, silver: 17, bronze: 10, rank: 1 },
+      { branch: 'Comp', name: 'Computer Engineering', points: 1280, gold: 18, silver: 14, bronze: 13, rank: 2 },
+      { branch: 'Mech-ARE', name: 'Mechanical & Auto Robotics', points: 1240, gold: 15, silver: 14, bronze: 14, rank: 3 },
+      { branch: 'IT', name: 'Information Technology', points: 1230, gold: 14, silver: 16, bronze: 16, rank: 4 }
     ],
     'sports': [
-      { branch: 'Comp', name: 'Computer Engineering', points: 480, gold: 8, silver: 5, bronze: 3, rank: 1 },
-      { branch: 'Mech-ARE', name: 'Mechanical & Auto Robotics', points: 435, gold: 6, silver: 7, bronze: 4, rank: 2 },
-      { branch: 'IT', name: 'Information Technology', points: 390, gold: 5, silver: 4, bronze: 6, rank: 3 },
-      { branch: 'E&TC', name: 'Electronics & Telecomm.', points: 310, gold: 3, silver: 4, bronze: 7, rank: 4 }
+      { branch: 'E&TC', name: 'Electronics & Telecomm.', points: 510, gold: 9, silver: 5, bronze: 3, rank: 1 },
+      { branch: 'IT', name: 'Information Technology', points: 450, gold: 6, silver: 7, bronze: 4, rank: 2 },
+      { branch: 'Mech-ARE', name: 'Mechanical & Auto Robotics', points: 400, gold: 5, silver: 5, bronze: 5, rank: 3 },
+      { branch: 'Comp', name: 'Computer Engineering', points: 330, gold: 3, silver: 4, bronze: 6, rank: 4 }
     ],
     'cultural': [
-      { branch: 'IT', name: 'Information Technology', points: 510, gold: 9, silver: 4, bronze: 2, rank: 1 },
-      { branch: 'Comp', name: 'Computer Engineering', points: 480, gold: 8, silver: 5, bronze: 4, rank: 2 },
-      { branch: 'Mech-ARE', name: 'Mechanical & Auto Robotics', points: 370, gold: 3, silver: 4, bronze: 6, rank: 3 },
-      { branch: 'E&TC', name: 'Electronics & Telecomm.', points: 320, gold: 2, silver: 5, bronze: 5, rank: 4 }
+      { branch: 'E&TC', name: 'Electronics & Telecomm.', points: 520, gold: 9, silver: 6, bronze: 3, rank: 1 },
+      { branch: 'Mech-ARE', name: 'Mechanical & Auto Robotics', points: 460, gold: 7, silver: 5, bronze: 4, rank: 2 },
+      { branch: 'Comp', name: 'Computer Engineering', points: 410, gold: 5, silver: 6, bronze: 5, rank: 3 },
+      { branch: 'IT', name: 'Information Technology', points: 340, gold: 3, silver: 4, bronze: 7, rank: 4 }
     ],
     'technical': [
-      { branch: 'Comp', name: 'Computer Engineering', points: 540, gold: 10, silver: 3, bronze: 2, rank: 1 },
-      { branch: 'E&TC', name: 'Electronics & Telecomm.', points: 475, gold: 5, silver: 6, bronze: 4, rank: 2 },
-      { branch: 'IT', name: 'Information Technology', points: 440, gold: 4, silver: 5, bronze: 5, rank: 3 },
+      { branch: 'Comp', name: 'Computer Engineering', points: 540, gold: 10, silver: 4, bronze: 2, rank: 1 },
+      { branch: 'E&TC', name: 'Electronics & Telecomm.', points: 475, gold: 6, silver: 6, bronze: 4, rank: 2 },
+      { branch: 'IT', name: 'Information Technology', points: 440, gold: 5, silver: 5, bronze: 5, rank: 3 },
       { branch: 'Mech-ARE', name: 'Mechanical & Auto Robotics', points: 380, gold: 3, silver: 4, bronze: 4, rank: 4 }
     ]
   };
